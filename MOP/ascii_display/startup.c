@@ -1,5 +1,5 @@
 /*
- * 	startup.c
+ * 	startup.c ASCII DISPLAY
  *
  */
 void startup(void) __attribute__((naked)) __attribute__((section (".start_section")) );
@@ -35,29 +35,31 @@ __asm volatile(
 
 void init_app(void)
 {
-	*GPIO_MODER = 0x55555555;
+	*GPIO_MODER = 0x5555;
+	*(GPIO_MODER + 1) = 0x5555;
+	*GPIO_OTYPER = 0x00000000;
 }
 
 void ascii_ctrl_bit_set(unsigned char x)
 {
 	unsigned char c;
-	c = *GPIO_IDR_LOW;
+	c = *GPIO_ODR_LOW;
 	c |= ( B_SELECT | x ); //Varför ettställa B_select?
-	*GPIO_IDR_LOW = c;
+	*GPIO_ODR_LOW = c;
 }
 
 void ascii_ctrl_bit_clear(unsigned char x)
 {
 	unsigned char c;
-	c = *GPIO_IDR_LOW;
+	c = *GPIO_ODR_LOW;
 	c &= (B_SELECT | ~x); //~ bildar 1-komplement
-	*GPIO_IDR_LOW = c;
+	*GPIO_ODR_LOW = c;
 }
 
 void ascii_write_controller(unsigned char byte)
 {
 	ascii_ctrl_bit_set( B_E );
-	*GPIO_IDR_HIGH = byte;
+	*GPIO_ODR_HIGH = byte;
 	delay_250ns();
 	ascii_ctrl_bit_clear(B_E);	//Ska delay vara före eller efter detta?
 }
@@ -94,28 +96,28 @@ void ascii_write_data(unsigned char data)
 unsigned char ascii_read_status(void)
 {
 	unsigned char rv;
-	*GPIO_MODER &= 0x1101;
-	ascii_ctrl_bit_clear(B_RS);
+	*GPIO_MODER &= 0x00005555;
 	ascii_ctrl_bit_set(B_RW);
+	ascii_ctrl_bit_clear(B_RS);
 	rv = ascii_read_controller();
-	*GPIO_MODER |= 0x0050;
+	*GPIO_MODER |= 0x55555555;
 	return rv;
 }
 
 unsigned char ascii_read_data(void)
 {
 	unsigned char rv;
-	*GPIO_MODER &= 0x1101;
+	*GPIO_MODER &= 0x00005555;
 	ascii_ctrl_bit_set(B_RS);
 	ascii_ctrl_bit_set(B_RW);
 	rv = ascii_read_controller();
-	*GPIO_MODER |= 0x0050;
+	*GPIO_MODER |= 0x55555555;
 	return rv;
 }
 
 void delay_milli(int ms)
 {
-	delay_micro(10);
+	delay_micro(1000);
 }
 
 void delay_micro(int us)
@@ -166,12 +168,12 @@ void ascii_init(void)
 {
 	while((ascii_read_status() & 0x80) == 0x80){}
 	delay_micro(8);
-	ascii_write_cmd(00111000);
+	ascii_write_cmd(0x38); //00111000
 	delay_micro(40);
 	
 	while((ascii_read_status() & 0x80) == 0x80){}
 	delay_micro(8);
-	ascii_write_cmd(00001110);
+	ascii_write_cmd(0x0D); //00001110
 	delay_micro(40);
 	
 	while((ascii_read_status() & 0x80) == 0x80){}
@@ -181,15 +183,17 @@ void ascii_init(void)
 	
 	while((ascii_read_status() & 0x80) == 0x80){}
 	delay_micro(8);
-	ascii_write_cmd(00000100); //Rätt? Increment?
+	ascii_write_cmd(0x04); //Rätt? Increment? 00000100
 	delay_micro(39);
 }
 
 int main(int argc, char **argv)
 {
+	
+	//ascii_ctrl_bit_set(0x01)
 	char *s;
-	char test1[] = "Alfanumerisk ";
-	char test2[] = "Display - test";
+	char test1[] = "If you can dream it";
+	char test2[] = "You can do it!";
 	
 	init_app();
 	ascii_init();

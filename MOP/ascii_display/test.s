@@ -23,7 +23,7 @@
   24              	.LFB0:
   25              		.file 1 "C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display/startup.c"
    1:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** /*
-   2:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c ****  * 	startup.c
+   2:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c ****  * 	startup.c ASCII DISPLAY
    3:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c ****  *
    4:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c ****  */
    5:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void startup(void) __attribute__((naked)) __attribute__((section (".start_section")) );
@@ -98,1118 +98,1136 @@
   64              		.cfi_offset 14, -4
   65 0002 00AF     		add	r7, sp, #0
   66              		.cfi_def_cfa_register 7
-  38:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_MODER = 0x55555555;
+  38:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_MODER = 0x5555;
   67              		.loc 1 38 0
-  68 0004 024B     		ldr	r3, .L3
-  69 0006 034A     		ldr	r2, .L3+4
+  68 0004 054B     		ldr	r3, .L3
+  69 0006 064A     		ldr	r2, .L3+4
   70 0008 1A60     		str	r2, [r3]
-  39:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+  39:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*(GPIO_MODER + 1) = 0x5555;
   71              		.loc 1 39 0
-  72 000a C046     		nop
-  73 000c BD46     		mov	sp, r7
-  74              		@ sp needed
-  75 000e 80BD     		pop	{r7, pc}
-  76              	.L4:
-  77              		.align	2
-  78              	.L3:
-  79 0010 00100240 		.word	1073876992
-  80 0014 55555555 		.word	1431655765
-  81              		.cfi_endproc
-  82              	.LFE1:
-  84              		.align	1
-  85              		.global	ascii_ctrl_bit_set
-  86              		.syntax unified
-  87              		.code	16
-  88              		.thumb_func
-  89              		.fpu softvfp
-  91              	ascii_ctrl_bit_set:
-  92              	.LFB2:
-  40:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
-  41:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_ctrl_bit_set(unsigned char x)
-  42:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
-  93              		.loc 1 42 0
-  94              		.cfi_startproc
-  95              		@ args = 0, pretend = 0, frame = 16
-  96              		@ frame_needed = 1, uses_anonymous_args = 0
-  97 0018 80B5     		push	{r7, lr}
-  98              		.cfi_def_cfa_offset 8
-  99              		.cfi_offset 7, -8
- 100              		.cfi_offset 14, -4
- 101 001a 84B0     		sub	sp, sp, #16
- 102              		.cfi_def_cfa_offset 24
- 103 001c 00AF     		add	r7, sp, #0
- 104              		.cfi_def_cfa_register 7
- 105 001e 0200     		movs	r2, r0
- 106 0020 FB1D     		adds	r3, r7, #7
- 107 0022 1A70     		strb	r2, [r3]
-  43:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	unsigned char c;
-  44:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	c = *GPIO_IDR_LOW;
- 108              		.loc 1 44 0
- 109 0024 0C4A     		ldr	r2, .L6
- 110 0026 0F21     		movs	r1, #15
- 111 0028 7B18     		adds	r3, r7, r1
- 112 002a 1278     		ldrb	r2, [r2]
- 113 002c 1A70     		strb	r2, [r3]
-  45:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	c |= ( B_SELECT | x ); //Varför ettställa B_select?
- 114              		.loc 1 45 0
- 115 002e FA1D     		adds	r2, r7, #7
- 116 0030 7B18     		adds	r3, r7, r1
- 117 0032 1278     		ldrb	r2, [r2]
- 118 0034 1B78     		ldrb	r3, [r3]
- 119 0036 1343     		orrs	r3, r2
- 120 0038 DAB2     		uxtb	r2, r3
- 121 003a 0800     		movs	r0, r1
- 122 003c 7B18     		adds	r3, r7, r1
- 123 003e 0421     		movs	r1, #4
- 124 0040 0A43     		orrs	r2, r1
- 125 0042 1A70     		strb	r2, [r3]
-  46:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_IDR_LOW = c;
- 126              		.loc 1 46 0
- 127 0044 044A     		ldr	r2, .L6
- 128 0046 0100     		movs	r1, r0
- 129 0048 7B18     		adds	r3, r7, r1
- 130 004a 1B78     		ldrb	r3, [r3]
- 131 004c 1370     		strb	r3, [r2]
-  47:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
- 132              		.loc 1 47 0
- 133 004e C046     		nop
- 134 0050 BD46     		mov	sp, r7
- 135 0052 04B0     		add	sp, sp, #16
- 136              		@ sp needed
- 137 0054 80BD     		pop	{r7, pc}
- 138              	.L7:
- 139 0056 C046     		.align	2
- 140              	.L6:
- 141 0058 10100240 		.word	1073877008
- 142              		.cfi_endproc
- 143              	.LFE2:
- 145              		.align	1
- 146              		.global	ascii_ctrl_bit_clear
- 147              		.syntax unified
- 148              		.code	16
- 149              		.thumb_func
- 150              		.fpu softvfp
- 152              	ascii_ctrl_bit_clear:
- 153              	.LFB3:
-  48:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
-  49:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_ctrl_bit_clear(unsigned char x)
-  50:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
- 154              		.loc 1 50 0
- 155              		.cfi_startproc
- 156              		@ args = 0, pretend = 0, frame = 16
- 157              		@ frame_needed = 1, uses_anonymous_args = 0
- 158 005c 80B5     		push	{r7, lr}
- 159              		.cfi_def_cfa_offset 8
- 160              		.cfi_offset 7, -8
- 161              		.cfi_offset 14, -4
- 162 005e 84B0     		sub	sp, sp, #16
- 163              		.cfi_def_cfa_offset 24
- 164 0060 00AF     		add	r7, sp, #0
- 165              		.cfi_def_cfa_register 7
- 166 0062 0200     		movs	r2, r0
- 167 0064 FB1D     		adds	r3, r7, #7
- 168 0066 1A70     		strb	r2, [r3]
-  51:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	unsigned char c;
-  52:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	c = *GPIO_IDR_LOW;
- 169              		.loc 1 52 0
- 170 0068 0D4A     		ldr	r2, .L9
- 171 006a 0F21     		movs	r1, #15
- 172 006c 7B18     		adds	r3, r7, r1
- 173 006e 1278     		ldrb	r2, [r2]
- 174 0070 1A70     		strb	r2, [r3]
-  53:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	c &= (B_SELECT | ~x); //~ bildar 1-komplement
- 175              		.loc 1 53 0
- 176 0072 FB1D     		adds	r3, r7, #7
- 177 0074 1B78     		ldrb	r3, [r3]
- 178 0076 5BB2     		sxtb	r3, r3
- 179 0078 DB43     		mvns	r3, r3
- 180 007a 5BB2     		sxtb	r3, r3
- 181 007c 0422     		movs	r2, #4
- 182 007e 1343     		orrs	r3, r2
- 183 0080 5BB2     		sxtb	r3, r3
- 184 0082 7A18     		adds	r2, r7, r1
- 185 0084 1278     		ldrb	r2, [r2]
- 186 0086 52B2     		sxtb	r2, r2
- 187 0088 1340     		ands	r3, r2
- 188 008a 5AB2     		sxtb	r2, r3
- 189 008c 7B18     		adds	r3, r7, r1
- 190 008e 1A70     		strb	r2, [r3]
-  54:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_IDR_LOW = c;
- 191              		.loc 1 54 0
- 192 0090 034A     		ldr	r2, .L9
- 193 0092 7B18     		adds	r3, r7, r1
- 194 0094 1B78     		ldrb	r3, [r3]
- 195 0096 1370     		strb	r3, [r2]
-  55:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
- 196              		.loc 1 55 0
- 197 0098 C046     		nop
- 198 009a BD46     		mov	sp, r7
- 199 009c 04B0     		add	sp, sp, #16
- 200              		@ sp needed
- 201 009e 80BD     		pop	{r7, pc}
- 202              	.L10:
- 203              		.align	2
- 204              	.L9:
- 205 00a0 10100240 		.word	1073877008
- 206              		.cfi_endproc
- 207              	.LFE3:
- 209              		.align	1
- 210              		.global	ascii_write_controller
- 211              		.syntax unified
- 212              		.code	16
- 213              		.thumb_func
- 214              		.fpu softvfp
- 216              	ascii_write_controller:
- 217              	.LFB4:
-  56:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
-  57:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_write_controller(unsigned char byte)
-  58:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
- 218              		.loc 1 58 0
- 219              		.cfi_startproc
- 220              		@ args = 0, pretend = 0, frame = 8
- 221              		@ frame_needed = 1, uses_anonymous_args = 0
- 222 00a4 80B5     		push	{r7, lr}
- 223              		.cfi_def_cfa_offset 8
- 224              		.cfi_offset 7, -8
- 225              		.cfi_offset 14, -4
- 226 00a6 82B0     		sub	sp, sp, #8
- 227              		.cfi_def_cfa_offset 16
- 228 00a8 00AF     		add	r7, sp, #0
- 229              		.cfi_def_cfa_register 7
- 230 00aa 0200     		movs	r2, r0
- 231 00ac FB1D     		adds	r3, r7, #7
- 232 00ae 1A70     		strb	r2, [r3]
-  59:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_set( B_E );
- 233              		.loc 1 59 0
- 234 00b0 4020     		movs	r0, #64
- 235 00b2 FFF7FEFF 		bl	ascii_ctrl_bit_set
-  60:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_IDR_HIGH = byte;
- 236              		.loc 1 60 0
- 237 00b6 064A     		ldr	r2, .L12
- 238 00b8 FB1D     		adds	r3, r7, #7
- 239 00ba 1B78     		ldrb	r3, [r3]
- 240 00bc 1370     		strb	r3, [r2]
-  61:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_250ns();
- 241              		.loc 1 61 0
- 242 00be FFF7FEFF 		bl	delay_250ns
-  62:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_clear(B_E);	//Ska delay vara före eller efter detta?
- 243              		.loc 1 62 0
- 244 00c2 4020     		movs	r0, #64
- 245 00c4 FFF7FEFF 		bl	ascii_ctrl_bit_clear
-  63:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
- 246              		.loc 1 63 0
- 247 00c8 C046     		nop
- 248 00ca BD46     		mov	sp, r7
- 249 00cc 02B0     		add	sp, sp, #8
- 250              		@ sp needed
- 251 00ce 80BD     		pop	{r7, pc}
- 252              	.L13:
- 253              		.align	2
- 254              	.L12:
- 255 00d0 11100240 		.word	1073877009
- 256              		.cfi_endproc
- 257              	.LFE4:
- 259              		.align	1
- 260              		.global	ascii_read_controller
- 261              		.syntax unified
- 262              		.code	16
- 263              		.thumb_func
- 264              		.fpu softvfp
- 266              	ascii_read_controller:
- 267              	.LFB5:
-  64:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
-  65:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** unsigned char ascii_read_controller(void)
-  66:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
- 268              		.loc 1 66 0
- 269              		.cfi_startproc
- 270              		@ args = 0, pretend = 0, frame = 8
- 271              		@ frame_needed = 1, uses_anonymous_args = 0
- 272 00d4 80B5     		push	{r7, lr}
- 273              		.cfi_def_cfa_offset 8
- 274              		.cfi_offset 7, -8
- 275              		.cfi_offset 14, -4
- 276 00d6 82B0     		sub	sp, sp, #8
- 277              		.cfi_def_cfa_offset 16
- 278 00d8 00AF     		add	r7, sp, #0
- 279              		.cfi_def_cfa_register 7
-  67:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	unsigned char rv;
-  68:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_set( B_E );
- 280              		.loc 1 68 0
- 281 00da 4020     		movs	r0, #64
- 282 00dc FFF7FEFF 		bl	ascii_ctrl_bit_set
-  69:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_250ns();
- 283              		.loc 1 69 0
- 284 00e0 FFF7FEFF 		bl	delay_250ns
-  70:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_250ns();
- 285              		.loc 1 70 0
- 286 00e4 FFF7FEFF 		bl	delay_250ns
-  71:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	rv = *GPIO_IDR_HIGH;
- 287              		.loc 1 71 0
- 288 00e8 064A     		ldr	r2, .L16
- 289 00ea FB1D     		adds	r3, r7, #7
- 290 00ec 1278     		ldrb	r2, [r2]
- 291 00ee 1A70     		strb	r2, [r3]
-  72:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_clear( B_E );
- 292              		.loc 1 72 0
- 293 00f0 4020     		movs	r0, #64
- 294 00f2 FFF7FEFF 		bl	ascii_ctrl_bit_clear
-  73:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	return rv;
- 295              		.loc 1 73 0
- 296 00f6 FB1D     		adds	r3, r7, #7
- 297 00f8 1B78     		ldrb	r3, [r3]
-  74:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
-  75:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
- 298              		.loc 1 75 0
- 299 00fa 1800     		movs	r0, r3
- 300 00fc BD46     		mov	sp, r7
- 301 00fe 02B0     		add	sp, sp, #8
- 302              		@ sp needed
- 303 0100 80BD     		pop	{r7, pc}
- 304              	.L17:
- 305 0102 C046     		.align	2
- 306              	.L16:
- 307 0104 11100240 		.word	1073877009
- 308              		.cfi_endproc
- 309              	.LFE5:
- 311              		.align	1
- 312              		.global	ascii_write_cmd
- 313              		.syntax unified
- 314              		.code	16
- 315              		.thumb_func
- 316              		.fpu softvfp
- 318              	ascii_write_cmd:
- 319              	.LFB6:
-  76:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
-  77:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_write_cmd(unsigned char command)
-  78:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
- 320              		.loc 1 78 0
- 321              		.cfi_startproc
- 322              		@ args = 0, pretend = 0, frame = 8
- 323              		@ frame_needed = 1, uses_anonymous_args = 0
- 324 0108 80B5     		push	{r7, lr}
- 325              		.cfi_def_cfa_offset 8
- 326              		.cfi_offset 7, -8
- 327              		.cfi_offset 14, -4
- 328 010a 82B0     		sub	sp, sp, #8
- 329              		.cfi_def_cfa_offset 16
- 330 010c 00AF     		add	r7, sp, #0
- 331              		.cfi_def_cfa_register 7
- 332 010e 0200     		movs	r2, r0
- 333 0110 FB1D     		adds	r3, r7, #7
- 334 0112 1A70     		strb	r2, [r3]
-  79:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_clear(B_RS);
- 335              		.loc 1 79 0
- 336 0114 0120     		movs	r0, #1
- 337 0116 FFF7FEFF 		bl	ascii_ctrl_bit_clear
-  80:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_clear(B_RW);
- 338              		.loc 1 80 0
- 339 011a 0220     		movs	r0, #2
- 340 011c FFF7FEFF 		bl	ascii_ctrl_bit_clear
-  81:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_controller(command);
- 341              		.loc 1 81 0
+  72 000a 064B     		ldr	r3, .L3+8
+  73 000c 044A     		ldr	r2, .L3+4
+  74 000e 1A60     		str	r2, [r3]
+  40:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_OTYPER = 0x00000000;
+  75              		.loc 1 40 0
+  76 0010 044B     		ldr	r3, .L3+8
+  77 0012 0022     		movs	r2, #0
+  78 0014 1A80     		strh	r2, [r3]
+  41:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+  79              		.loc 1 41 0
+  80 0016 C046     		nop
+  81 0018 BD46     		mov	sp, r7
+  82              		@ sp needed
+  83 001a 80BD     		pop	{r7, pc}
+  84              	.L4:
+  85              		.align	2
+  86              	.L3:
+  87 001c 00100240 		.word	1073876992
+  88 0020 55550000 		.word	21845
+  89 0024 04100240 		.word	1073876996
+  90              		.cfi_endproc
+  91              	.LFE1:
+  93              		.align	1
+  94              		.global	ascii_ctrl_bit_set
+  95              		.syntax unified
+  96              		.code	16
+  97              		.thumb_func
+  98              		.fpu softvfp
+ 100              	ascii_ctrl_bit_set:
+ 101              	.LFB2:
+  42:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+  43:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_ctrl_bit_set(unsigned char x)
+  44:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
+ 102              		.loc 1 44 0
+ 103              		.cfi_startproc
+ 104              		@ args = 0, pretend = 0, frame = 16
+ 105              		@ frame_needed = 1, uses_anonymous_args = 0
+ 106 0028 80B5     		push	{r7, lr}
+ 107              		.cfi_def_cfa_offset 8
+ 108              		.cfi_offset 7, -8
+ 109              		.cfi_offset 14, -4
+ 110 002a 84B0     		sub	sp, sp, #16
+ 111              		.cfi_def_cfa_offset 24
+ 112 002c 00AF     		add	r7, sp, #0
+ 113              		.cfi_def_cfa_register 7
+ 114 002e 0200     		movs	r2, r0
+ 115 0030 FB1D     		adds	r3, r7, #7
+ 116 0032 1A70     		strb	r2, [r3]
+  45:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	unsigned char c;
+  46:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	c = *GPIO_ODR_LOW;
+ 117              		.loc 1 46 0
+ 118 0034 0C4A     		ldr	r2, .L6
+ 119 0036 0F21     		movs	r1, #15
+ 120 0038 7B18     		adds	r3, r7, r1
+ 121 003a 1278     		ldrb	r2, [r2]
+ 122 003c 1A70     		strb	r2, [r3]
+  47:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	c |= ( B_SELECT | x ); //Varför ettställa B_select?
+ 123              		.loc 1 47 0
+ 124 003e FA1D     		adds	r2, r7, #7
+ 125 0040 7B18     		adds	r3, r7, r1
+ 126 0042 1278     		ldrb	r2, [r2]
+ 127 0044 1B78     		ldrb	r3, [r3]
+ 128 0046 1343     		orrs	r3, r2
+ 129 0048 DAB2     		uxtb	r2, r3
+ 130 004a 0800     		movs	r0, r1
+ 131 004c 7B18     		adds	r3, r7, r1
+ 132 004e 0421     		movs	r1, #4
+ 133 0050 0A43     		orrs	r2, r1
+ 134 0052 1A70     		strb	r2, [r3]
+  48:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_ODR_LOW = c;
+ 135              		.loc 1 48 0
+ 136 0054 044A     		ldr	r2, .L6
+ 137 0056 0100     		movs	r1, r0
+ 138 0058 7B18     		adds	r3, r7, r1
+ 139 005a 1B78     		ldrb	r3, [r3]
+ 140 005c 1370     		strb	r3, [r2]
+  49:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 141              		.loc 1 49 0
+ 142 005e C046     		nop
+ 143 0060 BD46     		mov	sp, r7
+ 144 0062 04B0     		add	sp, sp, #16
+ 145              		@ sp needed
+ 146 0064 80BD     		pop	{r7, pc}
+ 147              	.L7:
+ 148 0066 C046     		.align	2
+ 149              	.L6:
+ 150 0068 14100240 		.word	1073877012
+ 151              		.cfi_endproc
+ 152              	.LFE2:
+ 154              		.align	1
+ 155              		.global	ascii_ctrl_bit_clear
+ 156              		.syntax unified
+ 157              		.code	16
+ 158              		.thumb_func
+ 159              		.fpu softvfp
+ 161              	ascii_ctrl_bit_clear:
+ 162              	.LFB3:
+  50:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+  51:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_ctrl_bit_clear(unsigned char x)
+  52:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
+ 163              		.loc 1 52 0
+ 164              		.cfi_startproc
+ 165              		@ args = 0, pretend = 0, frame = 16
+ 166              		@ frame_needed = 1, uses_anonymous_args = 0
+ 167 006c 80B5     		push	{r7, lr}
+ 168              		.cfi_def_cfa_offset 8
+ 169              		.cfi_offset 7, -8
+ 170              		.cfi_offset 14, -4
+ 171 006e 84B0     		sub	sp, sp, #16
+ 172              		.cfi_def_cfa_offset 24
+ 173 0070 00AF     		add	r7, sp, #0
+ 174              		.cfi_def_cfa_register 7
+ 175 0072 0200     		movs	r2, r0
+ 176 0074 FB1D     		adds	r3, r7, #7
+ 177 0076 1A70     		strb	r2, [r3]
+  53:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	unsigned char c;
+  54:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	c = *GPIO_ODR_LOW;
+ 178              		.loc 1 54 0
+ 179 0078 0D4A     		ldr	r2, .L9
+ 180 007a 0F21     		movs	r1, #15
+ 181 007c 7B18     		adds	r3, r7, r1
+ 182 007e 1278     		ldrb	r2, [r2]
+ 183 0080 1A70     		strb	r2, [r3]
+  55:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	c &= (B_SELECT | ~x); //~ bildar 1-komplement
+ 184              		.loc 1 55 0
+ 185 0082 FB1D     		adds	r3, r7, #7
+ 186 0084 1B78     		ldrb	r3, [r3]
+ 187 0086 5BB2     		sxtb	r3, r3
+ 188 0088 DB43     		mvns	r3, r3
+ 189 008a 5BB2     		sxtb	r3, r3
+ 190 008c 0422     		movs	r2, #4
+ 191 008e 1343     		orrs	r3, r2
+ 192 0090 5BB2     		sxtb	r3, r3
+ 193 0092 7A18     		adds	r2, r7, r1
+ 194 0094 1278     		ldrb	r2, [r2]
+ 195 0096 52B2     		sxtb	r2, r2
+ 196 0098 1340     		ands	r3, r2
+ 197 009a 5AB2     		sxtb	r2, r3
+ 198 009c 7B18     		adds	r3, r7, r1
+ 199 009e 1A70     		strb	r2, [r3]
+  56:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_ODR_LOW = c;
+ 200              		.loc 1 56 0
+ 201 00a0 034A     		ldr	r2, .L9
+ 202 00a2 7B18     		adds	r3, r7, r1
+ 203 00a4 1B78     		ldrb	r3, [r3]
+ 204 00a6 1370     		strb	r3, [r2]
+  57:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 205              		.loc 1 57 0
+ 206 00a8 C046     		nop
+ 207 00aa BD46     		mov	sp, r7
+ 208 00ac 04B0     		add	sp, sp, #16
+ 209              		@ sp needed
+ 210 00ae 80BD     		pop	{r7, pc}
+ 211              	.L10:
+ 212              		.align	2
+ 213              	.L9:
+ 214 00b0 14100240 		.word	1073877012
+ 215              		.cfi_endproc
+ 216              	.LFE3:
+ 218              		.align	1
+ 219              		.global	ascii_write_controller
+ 220              		.syntax unified
+ 221              		.code	16
+ 222              		.thumb_func
+ 223              		.fpu softvfp
+ 225              	ascii_write_controller:
+ 226              	.LFB4:
+  58:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+  59:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_write_controller(unsigned char byte)
+  60:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
+ 227              		.loc 1 60 0
+ 228              		.cfi_startproc
+ 229              		@ args = 0, pretend = 0, frame = 8
+ 230              		@ frame_needed = 1, uses_anonymous_args = 0
+ 231 00b4 80B5     		push	{r7, lr}
+ 232              		.cfi_def_cfa_offset 8
+ 233              		.cfi_offset 7, -8
+ 234              		.cfi_offset 14, -4
+ 235 00b6 82B0     		sub	sp, sp, #8
+ 236              		.cfi_def_cfa_offset 16
+ 237 00b8 00AF     		add	r7, sp, #0
+ 238              		.cfi_def_cfa_register 7
+ 239 00ba 0200     		movs	r2, r0
+ 240 00bc FB1D     		adds	r3, r7, #7
+ 241 00be 1A70     		strb	r2, [r3]
+  61:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_set( B_E );
+ 242              		.loc 1 61 0
+ 243 00c0 4020     		movs	r0, #64
+ 244 00c2 FFF7FEFF 		bl	ascii_ctrl_bit_set
+  62:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_ODR_HIGH = byte;
+ 245              		.loc 1 62 0
+ 246 00c6 064A     		ldr	r2, .L12
+ 247 00c8 FB1D     		adds	r3, r7, #7
+ 248 00ca 1B78     		ldrb	r3, [r3]
+ 249 00cc 1370     		strb	r3, [r2]
+  63:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_250ns();
+ 250              		.loc 1 63 0
+ 251 00ce FFF7FEFF 		bl	delay_250ns
+  64:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_clear(B_E);	//Ska delay vara före eller efter detta?
+ 252              		.loc 1 64 0
+ 253 00d2 4020     		movs	r0, #64
+ 254 00d4 FFF7FEFF 		bl	ascii_ctrl_bit_clear
+  65:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 255              		.loc 1 65 0
+ 256 00d8 C046     		nop
+ 257 00da BD46     		mov	sp, r7
+ 258 00dc 02B0     		add	sp, sp, #8
+ 259              		@ sp needed
+ 260 00de 80BD     		pop	{r7, pc}
+ 261              	.L13:
+ 262              		.align	2
+ 263              	.L12:
+ 264 00e0 15100240 		.word	1073877013
+ 265              		.cfi_endproc
+ 266              	.LFE4:
+ 268              		.align	1
+ 269              		.global	ascii_read_controller
+ 270              		.syntax unified
+ 271              		.code	16
+ 272              		.thumb_func
+ 273              		.fpu softvfp
+ 275              	ascii_read_controller:
+ 276              	.LFB5:
+  66:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+  67:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** unsigned char ascii_read_controller(void)
+  68:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
+ 277              		.loc 1 68 0
+ 278              		.cfi_startproc
+ 279              		@ args = 0, pretend = 0, frame = 8
+ 280              		@ frame_needed = 1, uses_anonymous_args = 0
+ 281 00e4 80B5     		push	{r7, lr}
+ 282              		.cfi_def_cfa_offset 8
+ 283              		.cfi_offset 7, -8
+ 284              		.cfi_offset 14, -4
+ 285 00e6 82B0     		sub	sp, sp, #8
+ 286              		.cfi_def_cfa_offset 16
+ 287 00e8 00AF     		add	r7, sp, #0
+ 288              		.cfi_def_cfa_register 7
+  69:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	unsigned char rv;
+  70:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_set( B_E );
+ 289              		.loc 1 70 0
+ 290 00ea 4020     		movs	r0, #64
+ 291 00ec FFF7FEFF 		bl	ascii_ctrl_bit_set
+  71:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_250ns();
+ 292              		.loc 1 71 0
+ 293 00f0 FFF7FEFF 		bl	delay_250ns
+  72:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_250ns();
+ 294              		.loc 1 72 0
+ 295 00f4 FFF7FEFF 		bl	delay_250ns
+  73:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	rv = *GPIO_IDR_HIGH;
+ 296              		.loc 1 73 0
+ 297 00f8 064A     		ldr	r2, .L16
+ 298 00fa FB1D     		adds	r3, r7, #7
+ 299 00fc 1278     		ldrb	r2, [r2]
+ 300 00fe 1A70     		strb	r2, [r3]
+  74:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_clear( B_E );
+ 301              		.loc 1 74 0
+ 302 0100 4020     		movs	r0, #64
+ 303 0102 FFF7FEFF 		bl	ascii_ctrl_bit_clear
+  75:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	return rv;
+ 304              		.loc 1 75 0
+ 305 0106 FB1D     		adds	r3, r7, #7
+ 306 0108 1B78     		ldrb	r3, [r3]
+  76:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
+  77:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 307              		.loc 1 77 0
+ 308 010a 1800     		movs	r0, r3
+ 309 010c BD46     		mov	sp, r7
+ 310 010e 02B0     		add	sp, sp, #8
+ 311              		@ sp needed
+ 312 0110 80BD     		pop	{r7, pc}
+ 313              	.L17:
+ 314 0112 C046     		.align	2
+ 315              	.L16:
+ 316 0114 11100240 		.word	1073877009
+ 317              		.cfi_endproc
+ 318              	.LFE5:
+ 320              		.align	1
+ 321              		.global	ascii_write_cmd
+ 322              		.syntax unified
+ 323              		.code	16
+ 324              		.thumb_func
+ 325              		.fpu softvfp
+ 327              	ascii_write_cmd:
+ 328              	.LFB6:
+  78:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+  79:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_write_cmd(unsigned char command)
+  80:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
+ 329              		.loc 1 80 0
+ 330              		.cfi_startproc
+ 331              		@ args = 0, pretend = 0, frame = 8
+ 332              		@ frame_needed = 1, uses_anonymous_args = 0
+ 333 0118 80B5     		push	{r7, lr}
+ 334              		.cfi_def_cfa_offset 8
+ 335              		.cfi_offset 7, -8
+ 336              		.cfi_offset 14, -4
+ 337 011a 82B0     		sub	sp, sp, #8
+ 338              		.cfi_def_cfa_offset 16
+ 339 011c 00AF     		add	r7, sp, #0
+ 340              		.cfi_def_cfa_register 7
+ 341 011e 0200     		movs	r2, r0
  342 0120 FB1D     		adds	r3, r7, #7
- 343 0122 1B78     		ldrb	r3, [r3]
- 344 0124 1800     		movs	r0, r3
- 345 0126 FFF7FEFF 		bl	ascii_write_controller
-  82:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
-  83:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
- 346              		.loc 1 83 0
- 347 012a C046     		nop
- 348 012c BD46     		mov	sp, r7
- 349 012e 02B0     		add	sp, sp, #8
- 350              		@ sp needed
- 351 0130 80BD     		pop	{r7, pc}
- 352              		.cfi_endproc
- 353              	.LFE6:
- 355              		.align	1
- 356              		.global	ascii_write_data
- 357              		.syntax unified
- 358              		.code	16
- 359              		.thumb_func
- 360              		.fpu softvfp
- 362              	ascii_write_data:
- 363              	.LFB7:
-  84:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
-  85:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_write_data(unsigned char data)
-  86:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
- 364              		.loc 1 86 0
- 365              		.cfi_startproc
- 366              		@ args = 0, pretend = 0, frame = 8
- 367              		@ frame_needed = 1, uses_anonymous_args = 0
- 368 0132 80B5     		push	{r7, lr}
- 369              		.cfi_def_cfa_offset 8
- 370              		.cfi_offset 7, -8
- 371              		.cfi_offset 14, -4
- 372 0134 82B0     		sub	sp, sp, #8
- 373              		.cfi_def_cfa_offset 16
- 374 0136 00AF     		add	r7, sp, #0
- 375              		.cfi_def_cfa_register 7
- 376 0138 0200     		movs	r2, r0
- 377 013a FB1D     		adds	r3, r7, #7
- 378 013c 1A70     		strb	r2, [r3]
-  87:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_set(B_RS);
- 379              		.loc 1 87 0
- 380 013e 0120     		movs	r0, #1
- 381 0140 FFF7FEFF 		bl	ascii_ctrl_bit_set
-  88:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_clear(B_RW);
- 382              		.loc 1 88 0
- 383 0144 0220     		movs	r0, #2
- 384 0146 FFF7FEFF 		bl	ascii_ctrl_bit_clear
-  89:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_controller(data);
- 385              		.loc 1 89 0
+ 343 0122 1A70     		strb	r2, [r3]
+  81:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_clear(B_RS);
+ 344              		.loc 1 81 0
+ 345 0124 0120     		movs	r0, #1
+ 346 0126 FFF7FEFF 		bl	ascii_ctrl_bit_clear
+  82:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_clear(B_RW);
+ 347              		.loc 1 82 0
+ 348 012a 0220     		movs	r0, #2
+ 349 012c FFF7FEFF 		bl	ascii_ctrl_bit_clear
+  83:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_controller(command);
+ 350              		.loc 1 83 0
+ 351 0130 FB1D     		adds	r3, r7, #7
+ 352 0132 1B78     		ldrb	r3, [r3]
+ 353 0134 1800     		movs	r0, r3
+ 354 0136 FFF7FEFF 		bl	ascii_write_controller
+  84:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
+  85:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 355              		.loc 1 85 0
+ 356 013a C046     		nop
+ 357 013c BD46     		mov	sp, r7
+ 358 013e 02B0     		add	sp, sp, #8
+ 359              		@ sp needed
+ 360 0140 80BD     		pop	{r7, pc}
+ 361              		.cfi_endproc
+ 362              	.LFE6:
+ 364              		.align	1
+ 365              		.global	ascii_write_data
+ 366              		.syntax unified
+ 367              		.code	16
+ 368              		.thumb_func
+ 369              		.fpu softvfp
+ 371              	ascii_write_data:
+ 372              	.LFB7:
+  86:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+  87:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_write_data(unsigned char data)
+  88:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
+ 373              		.loc 1 88 0
+ 374              		.cfi_startproc
+ 375              		@ args = 0, pretend = 0, frame = 8
+ 376              		@ frame_needed = 1, uses_anonymous_args = 0
+ 377 0142 80B5     		push	{r7, lr}
+ 378              		.cfi_def_cfa_offset 8
+ 379              		.cfi_offset 7, -8
+ 380              		.cfi_offset 14, -4
+ 381 0144 82B0     		sub	sp, sp, #8
+ 382              		.cfi_def_cfa_offset 16
+ 383 0146 00AF     		add	r7, sp, #0
+ 384              		.cfi_def_cfa_register 7
+ 385 0148 0200     		movs	r2, r0
  386 014a FB1D     		adds	r3, r7, #7
- 387 014c 1B78     		ldrb	r3, [r3]
- 388 014e 1800     		movs	r0, r3
- 389 0150 FFF7FEFF 		bl	ascii_write_controller
-  90:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
- 390              		.loc 1 90 0
- 391 0154 C046     		nop
- 392 0156 BD46     		mov	sp, r7
- 393 0158 02B0     		add	sp, sp, #8
- 394              		@ sp needed
- 395 015a 80BD     		pop	{r7, pc}
- 396              		.cfi_endproc
- 397              	.LFE7:
- 399              		.align	1
- 400              		.global	ascii_read_status
- 401              		.syntax unified
- 402              		.code	16
- 403              		.thumb_func
- 404              		.fpu softvfp
- 406              	ascii_read_status:
- 407              	.LFB8:
-  91:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
-  92:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+ 387 014c 1A70     		strb	r2, [r3]
+  89:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_set(B_RS);
+ 388              		.loc 1 89 0
+ 389 014e 0120     		movs	r0, #1
+ 390 0150 FFF7FEFF 		bl	ascii_ctrl_bit_set
+  90:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_clear(B_RW);
+ 391              		.loc 1 90 0
+ 392 0154 0220     		movs	r0, #2
+ 393 0156 FFF7FEFF 		bl	ascii_ctrl_bit_clear
+  91:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_controller(data);
+ 394              		.loc 1 91 0
+ 395 015a FB1D     		adds	r3, r7, #7
+ 396 015c 1B78     		ldrb	r3, [r3]
+ 397 015e 1800     		movs	r0, r3
+ 398 0160 FFF7FEFF 		bl	ascii_write_controller
+  92:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 399              		.loc 1 92 0
+ 400 0164 C046     		nop
+ 401 0166 BD46     		mov	sp, r7
+ 402 0168 02B0     		add	sp, sp, #8
+ 403              		@ sp needed
+ 404 016a 80BD     		pop	{r7, pc}
+ 405              		.cfi_endproc
+ 406              	.LFE7:
+ 408              		.align	1
+ 409              		.global	ascii_read_status
+ 410              		.syntax unified
+ 411              		.code	16
+ 412              		.thumb_func
+ 413              		.fpu softvfp
+ 415              	ascii_read_status:
+ 416              	.LFB8:
   93:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
-  94:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** unsigned char ascii_read_status(void)
-  95:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
- 408              		.loc 1 95 0
- 409              		.cfi_startproc
- 410              		@ args = 0, pretend = 0, frame = 8
- 411              		@ frame_needed = 1, uses_anonymous_args = 0
- 412 015c 90B5     		push	{r4, r7, lr}
- 413              		.cfi_def_cfa_offset 12
- 414              		.cfi_offset 4, -12
- 415              		.cfi_offset 7, -8
- 416              		.cfi_offset 14, -4
- 417 015e 83B0     		sub	sp, sp, #12
- 418              		.cfi_def_cfa_offset 24
- 419 0160 00AF     		add	r7, sp, #0
- 420              		.cfi_def_cfa_register 7
-  96:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	unsigned char rv;
-  97:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_MODER &= 0x1101;
- 421              		.loc 1 97 0
- 422 0162 0E4B     		ldr	r3, .L22
- 423 0164 1A68     		ldr	r2, [r3]
- 424 0166 0D4B     		ldr	r3, .L22
- 425 0168 0D49     		ldr	r1, .L22+4
- 426 016a 0A40     		ands	r2, r1
- 427 016c 1A60     		str	r2, [r3]
-  98:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_clear(B_RS);
- 428              		.loc 1 98 0
- 429 016e 0120     		movs	r0, #1
- 430 0170 FFF7FEFF 		bl	ascii_ctrl_bit_clear
-  99:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_set(B_RW);
- 431              		.loc 1 99 0
- 432 0174 0220     		movs	r0, #2
- 433 0176 FFF7FEFF 		bl	ascii_ctrl_bit_set
- 100:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	rv = ascii_read_controller();
- 434              		.loc 1 100 0
- 435 017a FC1D     		adds	r4, r7, #7
- 436 017c FFF7FEFF 		bl	ascii_read_controller
- 437 0180 0300     		movs	r3, r0
- 438 0182 2370     		strb	r3, [r4]
- 101:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_MODER |= 0x0050;
- 439              		.loc 1 101 0
- 440 0184 054B     		ldr	r3, .L22
- 441 0186 1A68     		ldr	r2, [r3]
- 442 0188 044B     		ldr	r3, .L22
- 443 018a 5021     		movs	r1, #80
- 444 018c 0A43     		orrs	r2, r1
- 445 018e 1A60     		str	r2, [r3]
- 102:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	return rv;
- 446              		.loc 1 102 0
- 447 0190 FB1D     		adds	r3, r7, #7
- 448 0192 1B78     		ldrb	r3, [r3]
- 103:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
- 449              		.loc 1 103 0
- 450 0194 1800     		movs	r0, r3
- 451 0196 BD46     		mov	sp, r7
- 452 0198 03B0     		add	sp, sp, #12
- 453              		@ sp needed
- 454 019a 90BD     		pop	{r4, r7, pc}
- 455              	.L23:
- 456              		.align	2
- 457              	.L22:
- 458 019c 00100240 		.word	1073876992
- 459 01a0 01110000 		.word	4353
- 460              		.cfi_endproc
- 461              	.LFE8:
- 463              		.align	1
- 464              		.global	ascii_read_data
- 465              		.syntax unified
- 466              		.code	16
- 467              		.thumb_func
- 468              		.fpu softvfp
- 470              	ascii_read_data:
- 471              	.LFB9:
- 104:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
- 105:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** unsigned char ascii_read_data(void)
- 106:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
- 472              		.loc 1 106 0
- 473              		.cfi_startproc
- 474              		@ args = 0, pretend = 0, frame = 8
- 475              		@ frame_needed = 1, uses_anonymous_args = 0
- 476 01a4 90B5     		push	{r4, r7, lr}
- 477              		.cfi_def_cfa_offset 12
- 478              		.cfi_offset 4, -12
- 479              		.cfi_offset 7, -8
- 480              		.cfi_offset 14, -4
- 481 01a6 83B0     		sub	sp, sp, #12
- 482              		.cfi_def_cfa_offset 24
- 483 01a8 00AF     		add	r7, sp, #0
- 484              		.cfi_def_cfa_register 7
- 107:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	unsigned char rv;
- 108:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_MODER &= 0x1101;
- 485              		.loc 1 108 0
- 486 01aa 0E4B     		ldr	r3, .L26
- 487 01ac 1A68     		ldr	r2, [r3]
- 488 01ae 0D4B     		ldr	r3, .L26
- 489 01b0 0D49     		ldr	r1, .L26+4
- 490 01b2 0A40     		ands	r2, r1
- 491 01b4 1A60     		str	r2, [r3]
- 109:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_set(B_RS);
- 492              		.loc 1 109 0
- 493 01b6 0120     		movs	r0, #1
- 494 01b8 FFF7FEFF 		bl	ascii_ctrl_bit_set
- 110:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_set(B_RW);
+  94:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+  95:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+  96:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** unsigned char ascii_read_status(void)
+  97:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
+ 417              		.loc 1 97 0
+ 418              		.cfi_startproc
+ 419              		@ args = 0, pretend = 0, frame = 8
+ 420              		@ frame_needed = 1, uses_anonymous_args = 0
+ 421 016c 90B5     		push	{r4, r7, lr}
+ 422              		.cfi_def_cfa_offset 12
+ 423              		.cfi_offset 4, -12
+ 424              		.cfi_offset 7, -8
+ 425              		.cfi_offset 14, -4
+ 426 016e 83B0     		sub	sp, sp, #12
+ 427              		.cfi_def_cfa_offset 24
+ 428 0170 00AF     		add	r7, sp, #0
+ 429              		.cfi_def_cfa_register 7
+  98:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	unsigned char rv;
+  99:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_MODER &= 0x00005555;
+ 430              		.loc 1 99 0
+ 431 0172 0E4B     		ldr	r3, .L22
+ 432 0174 1A68     		ldr	r2, [r3]
+ 433 0176 0D4B     		ldr	r3, .L22
+ 434 0178 0D49     		ldr	r1, .L22+4
+ 435 017a 0A40     		ands	r2, r1
+ 436 017c 1A60     		str	r2, [r3]
+ 100:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_set(B_RW);
+ 437              		.loc 1 100 0
+ 438 017e 0220     		movs	r0, #2
+ 439 0180 FFF7FEFF 		bl	ascii_ctrl_bit_set
+ 101:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_clear(B_RS);
+ 440              		.loc 1 101 0
+ 441 0184 0120     		movs	r0, #1
+ 442 0186 FFF7FEFF 		bl	ascii_ctrl_bit_clear
+ 102:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	rv = ascii_read_controller();
+ 443              		.loc 1 102 0
+ 444 018a FC1D     		adds	r4, r7, #7
+ 445 018c FFF7FEFF 		bl	ascii_read_controller
+ 446 0190 0300     		movs	r3, r0
+ 447 0192 2370     		strb	r3, [r4]
+ 103:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_MODER |= 0x55555555;
+ 448              		.loc 1 103 0
+ 449 0194 054B     		ldr	r3, .L22
+ 450 0196 1A68     		ldr	r2, [r3]
+ 451 0198 044B     		ldr	r3, .L22
+ 452 019a 0649     		ldr	r1, .L22+8
+ 453 019c 0A43     		orrs	r2, r1
+ 454 019e 1A60     		str	r2, [r3]
+ 104:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	return rv;
+ 455              		.loc 1 104 0
+ 456 01a0 FB1D     		adds	r3, r7, #7
+ 457 01a2 1B78     		ldrb	r3, [r3]
+ 105:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 458              		.loc 1 105 0
+ 459 01a4 1800     		movs	r0, r3
+ 460 01a6 BD46     		mov	sp, r7
+ 461 01a8 03B0     		add	sp, sp, #12
+ 462              		@ sp needed
+ 463 01aa 90BD     		pop	{r4, r7, pc}
+ 464              	.L23:
+ 465              		.align	2
+ 466              	.L22:
+ 467 01ac 00100240 		.word	1073876992
+ 468 01b0 55550000 		.word	21845
+ 469 01b4 55555555 		.word	1431655765
+ 470              		.cfi_endproc
+ 471              	.LFE8:
+ 473              		.align	1
+ 474              		.global	ascii_read_data
+ 475              		.syntax unified
+ 476              		.code	16
+ 477              		.thumb_func
+ 478              		.fpu softvfp
+ 480              	ascii_read_data:
+ 481              	.LFB9:
+ 106:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+ 107:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** unsigned char ascii_read_data(void)
+ 108:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
+ 482              		.loc 1 108 0
+ 483              		.cfi_startproc
+ 484              		@ args = 0, pretend = 0, frame = 8
+ 485              		@ frame_needed = 1, uses_anonymous_args = 0
+ 486 01b8 90B5     		push	{r4, r7, lr}
+ 487              		.cfi_def_cfa_offset 12
+ 488              		.cfi_offset 4, -12
+ 489              		.cfi_offset 7, -8
+ 490              		.cfi_offset 14, -4
+ 491 01ba 83B0     		sub	sp, sp, #12
+ 492              		.cfi_def_cfa_offset 24
+ 493 01bc 00AF     		add	r7, sp, #0
+ 494              		.cfi_def_cfa_register 7
+ 109:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	unsigned char rv;
+ 110:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_MODER &= 0x00005555;
  495              		.loc 1 110 0
- 496 01bc 0220     		movs	r0, #2
- 497 01be FFF7FEFF 		bl	ascii_ctrl_bit_set
- 111:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	rv = ascii_read_controller();
- 498              		.loc 1 111 0
- 499 01c2 FC1D     		adds	r4, r7, #7
- 500 01c4 FFF7FEFF 		bl	ascii_read_controller
- 501 01c8 0300     		movs	r3, r0
- 502 01ca 2370     		strb	r3, [r4]
- 112:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_MODER |= 0x0050;
- 503              		.loc 1 112 0
- 504 01cc 054B     		ldr	r3, .L26
- 505 01ce 1A68     		ldr	r2, [r3]
- 506 01d0 044B     		ldr	r3, .L26
- 507 01d2 5021     		movs	r1, #80
- 508 01d4 0A43     		orrs	r2, r1
- 509 01d6 1A60     		str	r2, [r3]
- 113:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	return rv;
- 510              		.loc 1 113 0
- 511 01d8 FB1D     		adds	r3, r7, #7
- 512 01da 1B78     		ldrb	r3, [r3]
- 114:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 496 01be 0E4B     		ldr	r3, .L26
+ 497 01c0 1A68     		ldr	r2, [r3]
+ 498 01c2 0D4B     		ldr	r3, .L26
+ 499 01c4 0D49     		ldr	r1, .L26+4
+ 500 01c6 0A40     		ands	r2, r1
+ 501 01c8 1A60     		str	r2, [r3]
+ 111:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_set(B_RS);
+ 502              		.loc 1 111 0
+ 503 01ca 0120     		movs	r0, #1
+ 504 01cc FFF7FEFF 		bl	ascii_ctrl_bit_set
+ 112:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_ctrl_bit_set(B_RW);
+ 505              		.loc 1 112 0
+ 506 01d0 0220     		movs	r0, #2
+ 507 01d2 FFF7FEFF 		bl	ascii_ctrl_bit_set
+ 113:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	rv = ascii_read_controller();
+ 508              		.loc 1 113 0
+ 509 01d6 FC1D     		adds	r4, r7, #7
+ 510 01d8 FFF7FEFF 		bl	ascii_read_controller
+ 511 01dc 0300     		movs	r3, r0
+ 512 01de 2370     		strb	r3, [r4]
+ 114:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*GPIO_MODER |= 0x55555555;
  513              		.loc 1 114 0
- 514 01dc 1800     		movs	r0, r3
- 515 01de BD46     		mov	sp, r7
- 516 01e0 03B0     		add	sp, sp, #12
- 517              		@ sp needed
- 518 01e2 90BD     		pop	{r4, r7, pc}
- 519              	.L27:
- 520              		.align	2
- 521              	.L26:
- 522 01e4 00100240 		.word	1073876992
- 523 01e8 01110000 		.word	4353
- 524              		.cfi_endproc
- 525              	.LFE9:
- 527              		.align	1
- 528              		.global	delay_milli
- 529              		.syntax unified
- 530              		.code	16
- 531              		.thumb_func
- 532              		.fpu softvfp
- 534              	delay_milli:
- 535              	.LFB10:
- 115:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
- 116:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void delay_milli(int ms)
- 117:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
- 536              		.loc 1 117 0
- 537              		.cfi_startproc
- 538              		@ args = 0, pretend = 0, frame = 8
- 539              		@ frame_needed = 1, uses_anonymous_args = 0
- 540 01ec 80B5     		push	{r7, lr}
- 541              		.cfi_def_cfa_offset 8
- 542              		.cfi_offset 7, -8
- 543              		.cfi_offset 14, -4
- 544 01ee 82B0     		sub	sp, sp, #8
- 545              		.cfi_def_cfa_offset 16
- 546 01f0 00AF     		add	r7, sp, #0
- 547              		.cfi_def_cfa_register 7
- 548 01f2 7860     		str	r0, [r7, #4]
- 118:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(10);
- 549              		.loc 1 118 0
- 550 01f4 0A20     		movs	r0, #10
- 551 01f6 FFF7FEFF 		bl	delay_micro
- 119:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
- 552              		.loc 1 119 0
- 553 01fa C046     		nop
- 554 01fc BD46     		mov	sp, r7
- 555 01fe 02B0     		add	sp, sp, #8
- 556              		@ sp needed
- 557 0200 80BD     		pop	{r7, pc}
- 558              		.cfi_endproc
- 559              	.LFE10:
- 561              		.global	__aeabi_idiv
- 562              		.align	1
- 563              		.global	delay_micro
- 564              		.syntax unified
- 565              		.code	16
- 566              		.thumb_func
- 567              		.fpu softvfp
- 569              	delay_micro:
- 570              	.LFB11:
- 120:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
- 121:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void delay_micro(int us)
- 122:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
- 571              		.loc 1 122 0
- 572              		.cfi_startproc
- 573              		@ args = 0, pretend = 0, frame = 8
- 574              		@ frame_needed = 1, uses_anonymous_args = 0
- 575 0202 80B5     		push	{r7, lr}
- 576              		.cfi_def_cfa_offset 8
- 577              		.cfi_offset 7, -8
- 578              		.cfi_offset 14, -4
- 579 0204 82B0     		sub	sp, sp, #8
- 580              		.cfi_def_cfa_offset 16
- 581 0206 00AF     		add	r7, sp, #0
- 582              		.cfi_def_cfa_register 7
- 583 0208 7860     		str	r0, [r7, #4]
- 123:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	us = us/10;
- 584              		.loc 1 123 0
- 585 020a 7B68     		ldr	r3, [r7, #4]
- 586 020c 0A21     		movs	r1, #10
- 587 020e 1800     		movs	r0, r3
- 588 0210 FFF7FEFF 		bl	__aeabi_idiv
- 589              	.LVL0:
- 590 0214 0300     		movs	r3, r0
- 591 0216 7B60     		str	r3, [r7, #4]
- 124:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while(us > 0)
- 592              		.loc 1 124 0
- 593 0218 0AE0     		b	.L30
- 594              	.L31:
- 595              	.LBB2:
- 125:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	{
- 126:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_250ns();
- 596              		.loc 1 126 0
- 597 021a FFF7FEFF 		bl	delay_250ns
- 127:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_250ns();
- 598              		.loc 1 127 0
- 599 021e FFF7FEFF 		bl	delay_250ns
+ 514 01e0 054B     		ldr	r3, .L26
+ 515 01e2 1A68     		ldr	r2, [r3]
+ 516 01e4 044B     		ldr	r3, .L26
+ 517 01e6 0649     		ldr	r1, .L26+8
+ 518 01e8 0A43     		orrs	r2, r1
+ 519 01ea 1A60     		str	r2, [r3]
+ 115:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	return rv;
+ 520              		.loc 1 115 0
+ 521 01ec FB1D     		adds	r3, r7, #7
+ 522 01ee 1B78     		ldrb	r3, [r3]
+ 116:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 523              		.loc 1 116 0
+ 524 01f0 1800     		movs	r0, r3
+ 525 01f2 BD46     		mov	sp, r7
+ 526 01f4 03B0     		add	sp, sp, #12
+ 527              		@ sp needed
+ 528 01f6 90BD     		pop	{r4, r7, pc}
+ 529              	.L27:
+ 530              		.align	2
+ 531              	.L26:
+ 532 01f8 00100240 		.word	1073876992
+ 533 01fc 55550000 		.word	21845
+ 534 0200 55555555 		.word	1431655765
+ 535              		.cfi_endproc
+ 536              	.LFE9:
+ 538              		.align	1
+ 539              		.global	delay_milli
+ 540              		.syntax unified
+ 541              		.code	16
+ 542              		.thumb_func
+ 543              		.fpu softvfp
+ 545              	delay_milli:
+ 546              	.LFB10:
+ 117:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+ 118:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void delay_milli(int ms)
+ 119:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
+ 547              		.loc 1 119 0
+ 548              		.cfi_startproc
+ 549              		@ args = 0, pretend = 0, frame = 8
+ 550              		@ frame_needed = 1, uses_anonymous_args = 0
+ 551 0204 80B5     		push	{r7, lr}
+ 552              		.cfi_def_cfa_offset 8
+ 553              		.cfi_offset 7, -8
+ 554              		.cfi_offset 14, -4
+ 555 0206 82B0     		sub	sp, sp, #8
+ 556              		.cfi_def_cfa_offset 16
+ 557 0208 00AF     		add	r7, sp, #0
+ 558              		.cfi_def_cfa_register 7
+ 559 020a 7860     		str	r0, [r7, #4]
+ 120:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(1000);
+ 560              		.loc 1 120 0
+ 561 020c FA23     		movs	r3, #250
+ 562 020e 9B00     		lsls	r3, r3, #2
+ 563 0210 1800     		movs	r0, r3
+ 564 0212 FFF7FEFF 		bl	delay_micro
+ 121:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 565              		.loc 1 121 0
+ 566 0216 C046     		nop
+ 567 0218 BD46     		mov	sp, r7
+ 568 021a 02B0     		add	sp, sp, #8
+ 569              		@ sp needed
+ 570 021c 80BD     		pop	{r7, pc}
+ 571              		.cfi_endproc
+ 572              	.LFE10:
+ 574              		.global	__aeabi_idiv
+ 575              		.align	1
+ 576              		.global	delay_micro
+ 577              		.syntax unified
+ 578              		.code	16
+ 579              		.thumb_func
+ 580              		.fpu softvfp
+ 582              	delay_micro:
+ 583              	.LFB11:
+ 122:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+ 123:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void delay_micro(int us)
+ 124:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
+ 584              		.loc 1 124 0
+ 585              		.cfi_startproc
+ 586              		@ args = 0, pretend = 0, frame = 8
+ 587              		@ frame_needed = 1, uses_anonymous_args = 0
+ 588 021e 80B5     		push	{r7, lr}
+ 589              		.cfi_def_cfa_offset 8
+ 590              		.cfi_offset 7, -8
+ 591              		.cfi_offset 14, -4
+ 592 0220 82B0     		sub	sp, sp, #8
+ 593              		.cfi_def_cfa_offset 16
+ 594 0222 00AF     		add	r7, sp, #0
+ 595              		.cfi_def_cfa_register 7
+ 596 0224 7860     		str	r0, [r7, #4]
+ 125:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	us = us/10;
+ 597              		.loc 1 125 0
+ 598 0226 7B68     		ldr	r3, [r7, #4]
+ 599 0228 0A21     		movs	r1, #10
+ 600 022a 1800     		movs	r0, r3
+ 601 022c FFF7FEFF 		bl	__aeabi_idiv
+ 602              	.LVL0:
+ 603 0230 0300     		movs	r3, r0
+ 604 0232 7B60     		str	r3, [r7, #4]
+ 126:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while(us > 0)
+ 605              		.loc 1 126 0
+ 606 0234 0AE0     		b	.L30
+ 607              	.L31:
+ 608              	.LBB2:
+ 127:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	{
  128:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_250ns();
- 600              		.loc 1 128 0
- 601 0222 FFF7FEFF 		bl	delay_250ns
+ 609              		.loc 1 128 0
+ 610 0236 FFF7FEFF 		bl	delay_250ns
  129:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_250ns();
- 602              		.loc 1 129 0
- 603 0226 FFF7FEFF 		bl	delay_250ns
- 130:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	us--;
- 604              		.loc 1 130 0
- 605 022a 7B68     		ldr	r3, [r7, #4]
- 606 022c 013B     		subs	r3, r3, #1
- 607 022e 7B60     		str	r3, [r7, #4]
- 608              	.L30:
- 609              	.LBE2:
- 124:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	{
- 610              		.loc 1 124 0
- 611 0230 7B68     		ldr	r3, [r7, #4]
- 612 0232 002B     		cmp	r3, #0
- 613 0234 F1DC     		bgt	.L31
- 131:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	}
- 132:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
- 614              		.loc 1 132 0
- 615 0236 C046     		nop
- 616 0238 BD46     		mov	sp, r7
- 617 023a 02B0     		add	sp, sp, #8
- 618              		@ sp needed
- 619 023c 80BD     		pop	{r7, pc}
- 620              		.cfi_endproc
- 621              	.LFE11:
- 623              		.align	1
- 624              		.global	delay_250ns
- 625              		.syntax unified
- 626              		.code	16
- 627              		.thumb_func
- 628              		.fpu softvfp
- 630              	delay_250ns:
- 631              	.LFB12:
- 133:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
- 134:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void delay_250ns(void)
- 135:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
- 632              		.loc 1 135 0
- 633              		.cfi_startproc
- 634              		@ args = 0, pretend = 0, frame = 8
- 635              		@ frame_needed = 1, uses_anonymous_args = 0
- 636 023e 80B5     		push	{r7, lr}
- 637              		.cfi_def_cfa_offset 8
- 638              		.cfi_offset 7, -8
- 639              		.cfi_offset 14, -4
- 640 0240 82B0     		sub	sp, sp, #8
- 641              		.cfi_def_cfa_offset 16
- 642 0242 00AF     		add	r7, sp, #0
- 643              		.cfi_def_cfa_register 7
- 136:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*STK_CTRL = 0;
- 644              		.loc 1 136 0
- 645 0244 0F4B     		ldr	r3, .L34
- 646 0246 0022     		movs	r2, #0
- 647 0248 1A60     		str	r2, [r3]
- 137:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*STK_LOAD = 0x29; //0x2A - 1
- 648              		.loc 1 137 0
- 649 024a 0F4B     		ldr	r3, .L34+4
- 650 024c 2922     		movs	r2, #41
- 651 024e 1A60     		str	r2, [r3]
- 138:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*STK_VAL = 0x0;
- 652              		.loc 1 138 0
- 653 0250 0E4B     		ldr	r3, .L34+8
- 654 0252 0022     		movs	r2, #0
- 655 0254 1A60     		str	r2, [r3]
- 139:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*STK_CTRL = 5;
- 656              		.loc 1 139 0
- 657 0256 0B4B     		ldr	r3, .L34
- 658 0258 0522     		movs	r2, #5
- 659 025a 1A60     		str	r2, [r3]
- 140:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	unsigned int ctrl = *STK_CTRL & 0x10000;
- 660              		.loc 1 140 0
- 661 025c 094B     		ldr	r3, .L34
- 662 025e 1A68     		ldr	r2, [r3]
- 663 0260 8023     		movs	r3, #128
- 664 0262 5B02     		lsls	r3, r3, #9
- 665 0264 1340     		ands	r3, r2
- 666 0266 7B60     		str	r3, [r7, #4]
- 141:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while((*STK_CTRL & 0x10000) == 0);
- 667              		.loc 1 141 0
- 668 0268 C046     		nop
- 669              	.L33:
- 670              		.loc 1 141 0 is_stmt 0 discriminator 1
- 671 026a 064B     		ldr	r3, .L34
- 672 026c 1A68     		ldr	r2, [r3]
- 673 026e 8023     		movs	r3, #128
- 674 0270 5B02     		lsls	r3, r3, #9
- 675 0272 1340     		ands	r3, r2
- 676 0274 F9D0     		beq	.L33
- 142:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*STK_CTRL= 0;
- 677              		.loc 1 142 0 is_stmt 1
- 678 0276 034B     		ldr	r3, .L34
- 679 0278 0022     		movs	r2, #0
- 680 027a 1A60     		str	r2, [r3]
- 143:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
- 144:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
- 681              		.loc 1 144 0
- 682 027c C046     		nop
- 683 027e BD46     		mov	sp, r7
- 684 0280 02B0     		add	sp, sp, #8
- 685              		@ sp needed
- 686 0282 80BD     		pop	{r7, pc}
- 687              	.L35:
- 688              		.align	2
- 689              	.L34:
- 690 0284 10E000E0 		.word	-536813552
- 691 0288 14E000E0 		.word	-536813548
- 692 028c 18E000E0 		.word	-536813544
- 693              		.cfi_endproc
- 694              	.LFE12:
- 696              		.align	1
- 697              		.global	ascii_write_char
- 698              		.syntax unified
- 699              		.code	16
- 700              		.thumb_func
- 701              		.fpu softvfp
- 703              	ascii_write_char:
- 704              	.LFB13:
- 145:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
- 146:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_write_char(unsigned char c)
- 147:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
- 705              		.loc 1 147 0
- 706              		.cfi_startproc
- 707              		@ args = 0, pretend = 0, frame = 8
- 708              		@ frame_needed = 1, uses_anonymous_args = 0
- 709 0290 80B5     		push	{r7, lr}
- 710              		.cfi_def_cfa_offset 8
- 711              		.cfi_offset 7, -8
- 712              		.cfi_offset 14, -4
- 713 0292 82B0     		sub	sp, sp, #8
- 714              		.cfi_def_cfa_offset 16
- 715 0294 00AF     		add	r7, sp, #0
- 716              		.cfi_def_cfa_register 7
- 717 0296 0200     		movs	r2, r0
- 718 0298 FB1D     		adds	r3, r7, #7
- 719 029a 1A70     		strb	r2, [r3]
- 148:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while((ascii_read_status() & 0x80) == 0x80){}
- 720              		.loc 1 148 0
- 721 029c C046     		nop
- 722              	.L37:
- 723              		.loc 1 148 0 is_stmt 0 discriminator 1
- 724 029e FFF7FEFF 		bl	ascii_read_status
- 725 02a2 0300     		movs	r3, r0
- 726 02a4 1A00     		movs	r2, r3
- 727 02a6 8023     		movs	r3, #128
- 728 02a8 1340     		ands	r3, r2
- 729 02aa 802B     		cmp	r3, #128
- 730 02ac F7D0     		beq	.L37
- 149:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(8);
- 731              		.loc 1 149 0 is_stmt 1
- 732 02ae 0820     		movs	r0, #8
- 733 02b0 FFF7FEFF 		bl	delay_micro
- 150:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_data(c);
- 734              		.loc 1 150 0
- 735 02b4 FB1D     		adds	r3, r7, #7
- 736 02b6 1B78     		ldrb	r3, [r3]
- 737 02b8 1800     		movs	r0, r3
- 738 02ba FFF7FEFF 		bl	ascii_write_data
- 151:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(45);
- 739              		.loc 1 151 0
- 740 02be 2D20     		movs	r0, #45
- 741 02c0 FFF7FEFF 		bl	delay_micro
- 152:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
- 742              		.loc 1 152 0
- 743 02c4 C046     		nop
- 744 02c6 BD46     		mov	sp, r7
- 745 02c8 02B0     		add	sp, sp, #8
- 746              		@ sp needed
- 747 02ca 80BD     		pop	{r7, pc}
- 748              		.cfi_endproc
- 749              	.LFE13:
- 751              		.align	1
- 752              		.global	ascii_gotoxy
- 753              		.syntax unified
- 754              		.code	16
- 755              		.thumb_func
- 756              		.fpu softvfp
- 758              	ascii_gotoxy:
- 759              	.LFB14:
- 153:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
- 154:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_gotoxy(int row, int col)
- 155:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
- 760              		.loc 1 155 0
- 761              		.cfi_startproc
- 762              		@ args = 0, pretend = 0, frame = 16
- 763              		@ frame_needed = 1, uses_anonymous_args = 0
- 764 02cc 80B5     		push	{r7, lr}
- 765              		.cfi_def_cfa_offset 8
- 766              		.cfi_offset 7, -8
- 767              		.cfi_offset 14, -4
- 768 02ce 84B0     		sub	sp, sp, #16
- 769              		.cfi_def_cfa_offset 24
- 770 02d0 00AF     		add	r7, sp, #0
- 771              		.cfi_def_cfa_register 7
- 772 02d2 7860     		str	r0, [r7, #4]
- 773 02d4 3960     		str	r1, [r7]
- 156:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	unsigned int adress;
- 157:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	adress = row -1;
- 774              		.loc 1 157 0
- 775 02d6 7B68     		ldr	r3, [r7, #4]
- 776 02d8 013B     		subs	r3, r3, #1
- 777 02da FB60     		str	r3, [r7, #12]
- 158:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	if(col == 2)
- 778              		.loc 1 158 0
- 779 02dc 3B68     		ldr	r3, [r7]
- 780 02de 022B     		cmp	r3, #2
- 781 02e0 02D1     		bne	.L39
- 159:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	{
- 160:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 		adress = adress + 0x40;
- 782              		.loc 1 160 0
- 783 02e2 FB68     		ldr	r3, [r7, #12]
- 784 02e4 4033     		adds	r3, r3, #64
- 785 02e6 FB60     		str	r3, [r7, #12]
- 786              	.L39:
- 161:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	}
- 162:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_cmd(0x80|adress);
- 787              		.loc 1 162 0
- 788 02e8 FB68     		ldr	r3, [r7, #12]
- 789 02ea DBB2     		uxtb	r3, r3
- 790 02ec 8022     		movs	r2, #128
- 791 02ee 5242     		rsbs	r2, r2, #0
- 792 02f0 1343     		orrs	r3, r2
- 793 02f2 DBB2     		uxtb	r3, r3
- 794 02f4 1800     		movs	r0, r3
- 795 02f6 FFF7FEFF 		bl	ascii_write_cmd
- 163:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
- 796              		.loc 1 163 0
- 797 02fa C046     		nop
- 798 02fc BD46     		mov	sp, r7
- 799 02fe 04B0     		add	sp, sp, #16
- 800              		@ sp needed
- 801 0300 80BD     		pop	{r7, pc}
- 802              		.cfi_endproc
- 803              	.LFE14:
- 805              		.align	1
- 806              		.global	ascii_init
- 807              		.syntax unified
- 808              		.code	16
- 809              		.thumb_func
- 810              		.fpu softvfp
- 812              	ascii_init:
- 813              	.LFB15:
- 164:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
- 165:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_init(void)
- 166:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
- 814              		.loc 1 166 0
- 815              		.cfi_startproc
- 816              		@ args = 0, pretend = 0, frame = 0
- 817              		@ frame_needed = 1, uses_anonymous_args = 0
- 818 0302 80B5     		push	{r7, lr}
- 819              		.cfi_def_cfa_offset 8
- 820              		.cfi_offset 7, -8
- 821              		.cfi_offset 14, -4
- 822 0304 00AF     		add	r7, sp, #0
- 823              		.cfi_def_cfa_register 7
- 167:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while((ascii_read_status() & 0x80) == 0x80){}
- 824              		.loc 1 167 0
- 825 0306 C046     		nop
- 826              	.L41:
- 827              		.loc 1 167 0 is_stmt 0 discriminator 1
- 828 0308 FFF7FEFF 		bl	ascii_read_status
- 829 030c 0300     		movs	r3, r0
- 830 030e 1A00     		movs	r2, r3
- 831 0310 8023     		movs	r3, #128
- 832 0312 1340     		ands	r3, r2
- 833 0314 802B     		cmp	r3, #128
- 834 0316 F7D0     		beq	.L41
- 168:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(8);
- 835              		.loc 1 168 0 is_stmt 1
- 836 0318 0820     		movs	r0, #8
- 837 031a FFF7FEFF 		bl	delay_micro
- 169:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_cmd(00111000);
- 838              		.loc 1 169 0
- 839 031e 0020     		movs	r0, #0
- 840 0320 FFF7FEFF 		bl	ascii_write_cmd
- 170:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(40);
- 841              		.loc 1 170 0
- 842 0324 2820     		movs	r0, #40
- 843 0326 FFF7FEFF 		bl	delay_micro
- 171:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
- 172:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while((ascii_read_status() & 0x80) == 0x80){}
- 844              		.loc 1 172 0
- 845 032a C046     		nop
- 846              	.L42:
- 847              		.loc 1 172 0 is_stmt 0 discriminator 1
- 848 032c FFF7FEFF 		bl	ascii_read_status
- 849 0330 0300     		movs	r3, r0
- 850 0332 1A00     		movs	r2, r3
- 851 0334 8023     		movs	r3, #128
- 852 0336 1340     		ands	r3, r2
- 853 0338 802B     		cmp	r3, #128
- 854 033a F7D0     		beq	.L42
- 173:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(8);
- 855              		.loc 1 173 0 is_stmt 1
- 856 033c 0820     		movs	r0, #8
- 857 033e FFF7FEFF 		bl	delay_micro
- 174:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_cmd(00001110);
- 858              		.loc 1 174 0
- 859 0342 4820     		movs	r0, #72
- 860 0344 FFF7FEFF 		bl	ascii_write_cmd
- 175:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(40);
- 861              		.loc 1 175 0
- 862 0348 2820     		movs	r0, #40
- 863 034a FFF7FEFF 		bl	delay_micro
- 176:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
- 177:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while((ascii_read_status() & 0x80) == 0x80){}
- 864              		.loc 1 177 0
- 865 034e C046     		nop
- 866              	.L43:
- 867              		.loc 1 177 0 is_stmt 0 discriminator 1
- 868 0350 FFF7FEFF 		bl	ascii_read_status
- 869 0354 0300     		movs	r3, r0
- 870 0356 1A00     		movs	r2, r3
- 871 0358 8023     		movs	r3, #128
- 872 035a 1340     		ands	r3, r2
- 873 035c 802B     		cmp	r3, #128
- 874 035e F7D0     		beq	.L43
- 178:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(8);
- 875              		.loc 1 178 0 is_stmt 1
- 876 0360 0820     		movs	r0, #8
- 877 0362 FFF7FEFF 		bl	delay_micro
- 179:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_cmd(1);
- 878              		.loc 1 179 0
- 879 0366 0120     		movs	r0, #1
- 880 0368 FFF7FEFF 		bl	ascii_write_cmd
- 180:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_milli(2);
- 881              		.loc 1 180 0
- 882 036c 0220     		movs	r0, #2
- 883 036e FFF7FEFF 		bl	delay_milli
- 181:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
- 182:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while((ascii_read_status() & 0x80) == 0x80){}
- 884              		.loc 1 182 0
- 885 0372 C046     		nop
- 886              	.L44:
- 887              		.loc 1 182 0 is_stmt 0 discriminator 1
- 888 0374 FFF7FEFF 		bl	ascii_read_status
- 889 0378 0300     		movs	r3, r0
- 890 037a 1A00     		movs	r2, r3
- 891 037c 8023     		movs	r3, #128
- 892 037e 1340     		ands	r3, r2
- 893 0380 802B     		cmp	r3, #128
- 894 0382 F7D0     		beq	.L44
- 183:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(8);
- 895              		.loc 1 183 0 is_stmt 1
- 896 0384 0820     		movs	r0, #8
- 897 0386 FFF7FEFF 		bl	delay_micro
- 184:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_cmd(00000100); //Rätt? Increment?
- 898              		.loc 1 184 0
- 899 038a 4020     		movs	r0, #64
- 900 038c FFF7FEFF 		bl	ascii_write_cmd
- 185:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(39);
- 901              		.loc 1 185 0
- 902 0390 2720     		movs	r0, #39
- 903 0392 FFF7FEFF 		bl	delay_micro
- 186:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
- 904              		.loc 1 186 0
- 905 0396 C046     		nop
- 906 0398 BD46     		mov	sp, r7
- 907              		@ sp needed
- 908 039a 80BD     		pop	{r7, pc}
- 909              		.cfi_endproc
- 910              	.LFE15:
- 912              		.section	.rodata
- 913              		.align	2
- 914              	.LC0:
- 915 0000 416C6661 		.ascii	"Alfanumerisk \000"
- 915      6E756D65 
- 915      7269736B 
- 915      2000
- 916 000e 0000     		.align	2
- 917              	.LC2:
- 918 0010 44697370 		.ascii	"Display - test\000"
- 918      6C617920 
- 918      2D207465 
- 918      737400
- 919              		.text
- 920              		.align	1
- 921              		.global	main
- 922              		.syntax unified
- 923              		.code	16
- 924              		.thumb_func
- 925              		.fpu softvfp
- 927              	main:
- 928              	.LFB16:
- 187:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
- 188:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** int main(int argc, char **argv)
- 189:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
- 929              		.loc 1 189 0
- 930              		.cfi_startproc
- 931              		@ args = 0, pretend = 0, frame = 48
- 932              		@ frame_needed = 1, uses_anonymous_args = 0
- 933 039c B0B5     		push	{r4, r5, r7, lr}
- 934              		.cfi_def_cfa_offset 16
- 935              		.cfi_offset 4, -16
- 936              		.cfi_offset 5, -12
- 937              		.cfi_offset 7, -8
- 938              		.cfi_offset 14, -4
- 939 039e 8CB0     		sub	sp, sp, #48
- 940              		.cfi_def_cfa_offset 64
- 941 03a0 00AF     		add	r7, sp, #0
- 942              		.cfi_def_cfa_register 7
- 943 03a2 7860     		str	r0, [r7, #4]
- 944 03a4 3960     		str	r1, [r7]
- 190:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	char *s;
- 191:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	char test1[] = "Alfanumerisk ";
- 945              		.loc 1 191 0
- 946 03a6 1C24     		movs	r4, #28
- 947 03a8 3B19     		adds	r3, r7, r4
- 948 03aa 1E4A     		ldr	r2, .L51
- 949 03ac 23CA     		ldmia	r2!, {r0, r1, r5}
- 950 03ae 23C3     		stmia	r3!, {r0, r1, r5}
- 951 03b0 1288     		ldrh	r2, [r2]
- 952 03b2 1A80     		strh	r2, [r3]
- 192:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	char test2[] = "Display - test";
- 953              		.loc 1 192 0
- 954 03b4 0C23     		movs	r3, #12
- 955 03b6 FB18     		adds	r3, r7, r3
- 956 03b8 1B4A     		ldr	r2, .L51+4
- 957 03ba 23CA     		ldmia	r2!, {r0, r1, r5}
- 958 03bc 23C3     		stmia	r3!, {r0, r1, r5}
- 959 03be 1188     		ldrh	r1, [r2]
- 960 03c0 1980     		strh	r1, [r3]
- 961 03c2 9278     		ldrb	r2, [r2, #2]
- 962 03c4 9A70     		strb	r2, [r3, #2]
- 193:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
- 194:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	init_app();
- 963              		.loc 1 194 0
- 964 03c6 FFF7FEFF 		bl	init_app
- 195:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_init();
- 965              		.loc 1 195 0
- 966 03ca FFF7FEFF 		bl	ascii_init
- 196:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_gotoxy(1,1);
- 967              		.loc 1 196 0
- 968 03ce 0121     		movs	r1, #1
- 969 03d0 0120     		movs	r0, #1
- 970 03d2 FFF7FEFF 		bl	ascii_gotoxy
- 197:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	s = test1;
- 971              		.loc 1 197 0
- 972 03d6 3B19     		adds	r3, r7, r4
- 973 03d8 FB62     		str	r3, [r7, #44]
- 198:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while(*s)
- 974              		.loc 1 198 0
- 975 03da 06E0     		b	.L46
- 976              	.L47:
- 199:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	{
- 200:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 		ascii_write_char(*s++);
- 977              		.loc 1 200 0
- 978 03dc FB6A     		ldr	r3, [r7, #44]
- 979 03de 5A1C     		adds	r2, r3, #1
- 980 03e0 FA62     		str	r2, [r7, #44]
- 981 03e2 1B78     		ldrb	r3, [r3]
- 982 03e4 1800     		movs	r0, r3
- 983 03e6 FFF7FEFF 		bl	ascii_write_char
- 984              	.L46:
- 198:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while(*s)
- 985              		.loc 1 198 0
- 986 03ea FB6A     		ldr	r3, [r7, #44]
- 987 03ec 1B78     		ldrb	r3, [r3]
- 988 03ee 002B     		cmp	r3, #0
- 989 03f0 F4D1     		bne	.L47
- 201:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	}
- 202:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_gotoxy(1,2);
- 990              		.loc 1 202 0
- 991 03f2 0221     		movs	r1, #2
- 992 03f4 0120     		movs	r0, #1
- 993 03f6 FFF7FEFF 		bl	ascii_gotoxy
- 203:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	s = test2;
- 994              		.loc 1 203 0
- 995 03fa 0C23     		movs	r3, #12
- 996 03fc FB18     		adds	r3, r7, r3
- 997 03fe FB62     		str	r3, [r7, #44]
- 204:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while(*s)
- 998              		.loc 1 204 0
- 999 0400 06E0     		b	.L48
- 1000              	.L49:
- 205:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	{
- 206:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 		ascii_write_char(*s++);
- 1001              		.loc 1 206 0
- 1002 0402 FB6A     		ldr	r3, [r7, #44]
- 1003 0404 5A1C     		adds	r2, r3, #1
- 1004 0406 FA62     		str	r2, [r7, #44]
- 1005 0408 1B78     		ldrb	r3, [r3]
- 1006 040a 1800     		movs	r0, r3
- 1007 040c FFF7FEFF 		bl	ascii_write_char
- 1008              	.L48:
- 204:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while(*s)
- 1009              		.loc 1 204 0
- 1010 0410 FB6A     		ldr	r3, [r7, #44]
- 1011 0412 1B78     		ldrb	r3, [r3]
- 1012 0414 002B     		cmp	r3, #0
- 1013 0416 F4D1     		bne	.L49
- 207:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	}
- 208:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	return 0;
- 1014              		.loc 1 208 0
- 1015 0418 0023     		movs	r3, #0
- 209:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
- 210:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
- 1016              		.loc 1 210 0
- 1017 041a 1800     		movs	r0, r3
- 1018 041c BD46     		mov	sp, r7
- 1019 041e 0CB0     		add	sp, sp, #48
- 1020              		@ sp needed
- 1021 0420 B0BD     		pop	{r4, r5, r7, pc}
- 1022              	.L52:
- 1023 0422 C046     		.align	2
- 1024              	.L51:
- 1025 0424 00000000 		.word	.LC0
- 1026 0428 10000000 		.word	.LC2
- 1027              		.cfi_endproc
- 1028              	.LFE16:
- 1030              	.Letext0:
+ 611              		.loc 1 129 0
+ 612 023a FFF7FEFF 		bl	delay_250ns
+ 130:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_250ns();
+ 613              		.loc 1 130 0
+ 614 023e FFF7FEFF 		bl	delay_250ns
+ 131:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_250ns();
+ 615              		.loc 1 131 0
+ 616 0242 FFF7FEFF 		bl	delay_250ns
+ 132:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	us--;
+ 617              		.loc 1 132 0
+ 618 0246 7B68     		ldr	r3, [r7, #4]
+ 619 0248 013B     		subs	r3, r3, #1
+ 620 024a 7B60     		str	r3, [r7, #4]
+ 621              	.L30:
+ 622              	.LBE2:
+ 126:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	{
+ 623              		.loc 1 126 0
+ 624 024c 7B68     		ldr	r3, [r7, #4]
+ 625 024e 002B     		cmp	r3, #0
+ 626 0250 F1DC     		bgt	.L31
+ 133:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	}
+ 134:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 627              		.loc 1 134 0
+ 628 0252 C046     		nop
+ 629 0254 BD46     		mov	sp, r7
+ 630 0256 02B0     		add	sp, sp, #8
+ 631              		@ sp needed
+ 632 0258 80BD     		pop	{r7, pc}
+ 633              		.cfi_endproc
+ 634              	.LFE11:
+ 636              		.align	1
+ 637              		.global	delay_250ns
+ 638              		.syntax unified
+ 639              		.code	16
+ 640              		.thumb_func
+ 641              		.fpu softvfp
+ 643              	delay_250ns:
+ 644              	.LFB12:
+ 135:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+ 136:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void delay_250ns(void)
+ 137:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
+ 645              		.loc 1 137 0
+ 646              		.cfi_startproc
+ 647              		@ args = 0, pretend = 0, frame = 8
+ 648              		@ frame_needed = 1, uses_anonymous_args = 0
+ 649 025a 80B5     		push	{r7, lr}
+ 650              		.cfi_def_cfa_offset 8
+ 651              		.cfi_offset 7, -8
+ 652              		.cfi_offset 14, -4
+ 653 025c 82B0     		sub	sp, sp, #8
+ 654              		.cfi_def_cfa_offset 16
+ 655 025e 00AF     		add	r7, sp, #0
+ 656              		.cfi_def_cfa_register 7
+ 138:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*STK_CTRL = 0;
+ 657              		.loc 1 138 0
+ 658 0260 0F4B     		ldr	r3, .L34
+ 659 0262 0022     		movs	r2, #0
+ 660 0264 1A60     		str	r2, [r3]
+ 139:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*STK_LOAD = 0x29; //0x2A - 1
+ 661              		.loc 1 139 0
+ 662 0266 0F4B     		ldr	r3, .L34+4
+ 663 0268 2922     		movs	r2, #41
+ 664 026a 1A60     		str	r2, [r3]
+ 140:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*STK_VAL = 0x0;
+ 665              		.loc 1 140 0
+ 666 026c 0E4B     		ldr	r3, .L34+8
+ 667 026e 0022     		movs	r2, #0
+ 668 0270 1A60     		str	r2, [r3]
+ 141:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*STK_CTRL = 5;
+ 669              		.loc 1 141 0
+ 670 0272 0B4B     		ldr	r3, .L34
+ 671 0274 0522     		movs	r2, #5
+ 672 0276 1A60     		str	r2, [r3]
+ 142:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	unsigned int ctrl = *STK_CTRL & 0x10000;
+ 673              		.loc 1 142 0
+ 674 0278 094B     		ldr	r3, .L34
+ 675 027a 1A68     		ldr	r2, [r3]
+ 676 027c 8023     		movs	r3, #128
+ 677 027e 5B02     		lsls	r3, r3, #9
+ 678 0280 1340     		ands	r3, r2
+ 679 0282 7B60     		str	r3, [r7, #4]
+ 143:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while((*STK_CTRL & 0x10000) == 0);
+ 680              		.loc 1 143 0
+ 681 0284 C046     		nop
+ 682              	.L33:
+ 683              		.loc 1 143 0 is_stmt 0 discriminator 1
+ 684 0286 064B     		ldr	r3, .L34
+ 685 0288 1A68     		ldr	r2, [r3]
+ 686 028a 8023     		movs	r3, #128
+ 687 028c 5B02     		lsls	r3, r3, #9
+ 688 028e 1340     		ands	r3, r2
+ 689 0290 F9D0     		beq	.L33
+ 144:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	*STK_CTRL= 0;
+ 690              		.loc 1 144 0 is_stmt 1
+ 691 0292 034B     		ldr	r3, .L34
+ 692 0294 0022     		movs	r2, #0
+ 693 0296 1A60     		str	r2, [r3]
+ 145:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
+ 146:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 694              		.loc 1 146 0
+ 695 0298 C046     		nop
+ 696 029a BD46     		mov	sp, r7
+ 697 029c 02B0     		add	sp, sp, #8
+ 698              		@ sp needed
+ 699 029e 80BD     		pop	{r7, pc}
+ 700              	.L35:
+ 701              		.align	2
+ 702              	.L34:
+ 703 02a0 10E000E0 		.word	-536813552
+ 704 02a4 14E000E0 		.word	-536813548
+ 705 02a8 18E000E0 		.word	-536813544
+ 706              		.cfi_endproc
+ 707              	.LFE12:
+ 709              		.align	1
+ 710              		.global	ascii_write_char
+ 711              		.syntax unified
+ 712              		.code	16
+ 713              		.thumb_func
+ 714              		.fpu softvfp
+ 716              	ascii_write_char:
+ 717              	.LFB13:
+ 147:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+ 148:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_write_char(unsigned char c)
+ 149:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
+ 718              		.loc 1 149 0
+ 719              		.cfi_startproc
+ 720              		@ args = 0, pretend = 0, frame = 8
+ 721              		@ frame_needed = 1, uses_anonymous_args = 0
+ 722 02ac 80B5     		push	{r7, lr}
+ 723              		.cfi_def_cfa_offset 8
+ 724              		.cfi_offset 7, -8
+ 725              		.cfi_offset 14, -4
+ 726 02ae 82B0     		sub	sp, sp, #8
+ 727              		.cfi_def_cfa_offset 16
+ 728 02b0 00AF     		add	r7, sp, #0
+ 729              		.cfi_def_cfa_register 7
+ 730 02b2 0200     		movs	r2, r0
+ 731 02b4 FB1D     		adds	r3, r7, #7
+ 732 02b6 1A70     		strb	r2, [r3]
+ 150:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while((ascii_read_status() & 0x80) == 0x80){}
+ 733              		.loc 1 150 0
+ 734 02b8 C046     		nop
+ 735              	.L37:
+ 736              		.loc 1 150 0 is_stmt 0 discriminator 1
+ 737 02ba FFF7FEFF 		bl	ascii_read_status
+ 738 02be 0300     		movs	r3, r0
+ 739 02c0 1A00     		movs	r2, r3
+ 740 02c2 8023     		movs	r3, #128
+ 741 02c4 1340     		ands	r3, r2
+ 742 02c6 802B     		cmp	r3, #128
+ 743 02c8 F7D0     		beq	.L37
+ 151:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(8);
+ 744              		.loc 1 151 0 is_stmt 1
+ 745 02ca 0820     		movs	r0, #8
+ 746 02cc FFF7FEFF 		bl	delay_micro
+ 152:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_data(c);
+ 747              		.loc 1 152 0
+ 748 02d0 FB1D     		adds	r3, r7, #7
+ 749 02d2 1B78     		ldrb	r3, [r3]
+ 750 02d4 1800     		movs	r0, r3
+ 751 02d6 FFF7FEFF 		bl	ascii_write_data
+ 153:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(45);
+ 752              		.loc 1 153 0
+ 753 02da 2D20     		movs	r0, #45
+ 754 02dc FFF7FEFF 		bl	delay_micro
+ 154:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 755              		.loc 1 154 0
+ 756 02e0 C046     		nop
+ 757 02e2 BD46     		mov	sp, r7
+ 758 02e4 02B0     		add	sp, sp, #8
+ 759              		@ sp needed
+ 760 02e6 80BD     		pop	{r7, pc}
+ 761              		.cfi_endproc
+ 762              	.LFE13:
+ 764              		.align	1
+ 765              		.global	ascii_gotoxy
+ 766              		.syntax unified
+ 767              		.code	16
+ 768              		.thumb_func
+ 769              		.fpu softvfp
+ 771              	ascii_gotoxy:
+ 772              	.LFB14:
+ 155:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+ 156:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_gotoxy(int row, int col)
+ 157:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
+ 773              		.loc 1 157 0
+ 774              		.cfi_startproc
+ 775              		@ args = 0, pretend = 0, frame = 16
+ 776              		@ frame_needed = 1, uses_anonymous_args = 0
+ 777 02e8 80B5     		push	{r7, lr}
+ 778              		.cfi_def_cfa_offset 8
+ 779              		.cfi_offset 7, -8
+ 780              		.cfi_offset 14, -4
+ 781 02ea 84B0     		sub	sp, sp, #16
+ 782              		.cfi_def_cfa_offset 24
+ 783 02ec 00AF     		add	r7, sp, #0
+ 784              		.cfi_def_cfa_register 7
+ 785 02ee 7860     		str	r0, [r7, #4]
+ 786 02f0 3960     		str	r1, [r7]
+ 158:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	unsigned int adress;
+ 159:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	adress = row -1;
+ 787              		.loc 1 159 0
+ 788 02f2 7B68     		ldr	r3, [r7, #4]
+ 789 02f4 013B     		subs	r3, r3, #1
+ 790 02f6 FB60     		str	r3, [r7, #12]
+ 160:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	if(col == 2)
+ 791              		.loc 1 160 0
+ 792 02f8 3B68     		ldr	r3, [r7]
+ 793 02fa 022B     		cmp	r3, #2
+ 794 02fc 02D1     		bne	.L39
+ 161:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	{
+ 162:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 		adress = adress + 0x40;
+ 795              		.loc 1 162 0
+ 796 02fe FB68     		ldr	r3, [r7, #12]
+ 797 0300 4033     		adds	r3, r3, #64
+ 798 0302 FB60     		str	r3, [r7, #12]
+ 799              	.L39:
+ 163:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	}
+ 164:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_cmd(0x80|adress);
+ 800              		.loc 1 164 0
+ 801 0304 FB68     		ldr	r3, [r7, #12]
+ 802 0306 DBB2     		uxtb	r3, r3
+ 803 0308 8022     		movs	r2, #128
+ 804 030a 5242     		rsbs	r2, r2, #0
+ 805 030c 1343     		orrs	r3, r2
+ 806 030e DBB2     		uxtb	r3, r3
+ 807 0310 1800     		movs	r0, r3
+ 808 0312 FFF7FEFF 		bl	ascii_write_cmd
+ 165:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 809              		.loc 1 165 0
+ 810 0316 C046     		nop
+ 811 0318 BD46     		mov	sp, r7
+ 812 031a 04B0     		add	sp, sp, #16
+ 813              		@ sp needed
+ 814 031c 80BD     		pop	{r7, pc}
+ 815              		.cfi_endproc
+ 816              	.LFE14:
+ 818              		.align	1
+ 819              		.global	ascii_init
+ 820              		.syntax unified
+ 821              		.code	16
+ 822              		.thumb_func
+ 823              		.fpu softvfp
+ 825              	ascii_init:
+ 826              	.LFB15:
+ 166:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+ 167:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** void ascii_init(void)
+ 168:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
+ 827              		.loc 1 168 0
+ 828              		.cfi_startproc
+ 829              		@ args = 0, pretend = 0, frame = 0
+ 830              		@ frame_needed = 1, uses_anonymous_args = 0
+ 831 031e 80B5     		push	{r7, lr}
+ 832              		.cfi_def_cfa_offset 8
+ 833              		.cfi_offset 7, -8
+ 834              		.cfi_offset 14, -4
+ 835 0320 00AF     		add	r7, sp, #0
+ 836              		.cfi_def_cfa_register 7
+ 169:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while((ascii_read_status() & 0x80) == 0x80){}
+ 837              		.loc 1 169 0
+ 838 0322 C046     		nop
+ 839              	.L41:
+ 840              		.loc 1 169 0 is_stmt 0 discriminator 1
+ 841 0324 FFF7FEFF 		bl	ascii_read_status
+ 842 0328 0300     		movs	r3, r0
+ 843 032a 1A00     		movs	r2, r3
+ 844 032c 8023     		movs	r3, #128
+ 845 032e 1340     		ands	r3, r2
+ 846 0330 802B     		cmp	r3, #128
+ 847 0332 F7D0     		beq	.L41
+ 170:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(8);
+ 848              		.loc 1 170 0 is_stmt 1
+ 849 0334 0820     		movs	r0, #8
+ 850 0336 FFF7FEFF 		bl	delay_micro
+ 171:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_cmd(0x38); //00111000
+ 851              		.loc 1 171 0
+ 852 033a 3820     		movs	r0, #56
+ 853 033c FFF7FEFF 		bl	ascii_write_cmd
+ 172:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(40);
+ 854              		.loc 1 172 0
+ 855 0340 2820     		movs	r0, #40
+ 856 0342 FFF7FEFF 		bl	delay_micro
+ 173:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
+ 174:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while((ascii_read_status() & 0x80) == 0x80){}
+ 857              		.loc 1 174 0
+ 858 0346 C046     		nop
+ 859              	.L42:
+ 860              		.loc 1 174 0 is_stmt 0 discriminator 1
+ 861 0348 FFF7FEFF 		bl	ascii_read_status
+ 862 034c 0300     		movs	r3, r0
+ 863 034e 1A00     		movs	r2, r3
+ 864 0350 8023     		movs	r3, #128
+ 865 0352 1340     		ands	r3, r2
+ 866 0354 802B     		cmp	r3, #128
+ 867 0356 F7D0     		beq	.L42
+ 175:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(8);
+ 868              		.loc 1 175 0 is_stmt 1
+ 869 0358 0820     		movs	r0, #8
+ 870 035a FFF7FEFF 		bl	delay_micro
+ 176:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_cmd(0x0D); //00001110
+ 871              		.loc 1 176 0
+ 872 035e 0D20     		movs	r0, #13
+ 873 0360 FFF7FEFF 		bl	ascii_write_cmd
+ 177:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(40);
+ 874              		.loc 1 177 0
+ 875 0364 2820     		movs	r0, #40
+ 876 0366 FFF7FEFF 		bl	delay_micro
+ 178:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
+ 179:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while((ascii_read_status() & 0x80) == 0x80){}
+ 877              		.loc 1 179 0
+ 878 036a C046     		nop
+ 879              	.L43:
+ 880              		.loc 1 179 0 is_stmt 0 discriminator 1
+ 881 036c FFF7FEFF 		bl	ascii_read_status
+ 882 0370 0300     		movs	r3, r0
+ 883 0372 1A00     		movs	r2, r3
+ 884 0374 8023     		movs	r3, #128
+ 885 0376 1340     		ands	r3, r2
+ 886 0378 802B     		cmp	r3, #128
+ 887 037a F7D0     		beq	.L43
+ 180:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(8);
+ 888              		.loc 1 180 0 is_stmt 1
+ 889 037c 0820     		movs	r0, #8
+ 890 037e FFF7FEFF 		bl	delay_micro
+ 181:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_cmd(1);
+ 891              		.loc 1 181 0
+ 892 0382 0120     		movs	r0, #1
+ 893 0384 FFF7FEFF 		bl	ascii_write_cmd
+ 182:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_milli(2);
+ 894              		.loc 1 182 0
+ 895 0388 0220     		movs	r0, #2
+ 896 038a FFF7FEFF 		bl	delay_milli
+ 183:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
+ 184:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while((ascii_read_status() & 0x80) == 0x80){}
+ 897              		.loc 1 184 0
+ 898 038e C046     		nop
+ 899              	.L44:
+ 900              		.loc 1 184 0 is_stmt 0 discriminator 1
+ 901 0390 FFF7FEFF 		bl	ascii_read_status
+ 902 0394 0300     		movs	r3, r0
+ 903 0396 1A00     		movs	r2, r3
+ 904 0398 8023     		movs	r3, #128
+ 905 039a 1340     		ands	r3, r2
+ 906 039c 802B     		cmp	r3, #128
+ 907 039e F7D0     		beq	.L44
+ 185:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(8);
+ 908              		.loc 1 185 0 is_stmt 1
+ 909 03a0 0820     		movs	r0, #8
+ 910 03a2 FFF7FEFF 		bl	delay_micro
+ 186:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_write_cmd(0x04); //Rätt? Increment? 00000100
+ 911              		.loc 1 186 0
+ 912 03a6 0420     		movs	r0, #4
+ 913 03a8 FFF7FEFF 		bl	ascii_write_cmd
+ 187:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	delay_micro(39);
+ 914              		.loc 1 187 0
+ 915 03ac 2720     		movs	r0, #39
+ 916 03ae FFF7FEFF 		bl	delay_micro
+ 188:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 917              		.loc 1 188 0
+ 918 03b2 C046     		nop
+ 919 03b4 BD46     		mov	sp, r7
+ 920              		@ sp needed
+ 921 03b6 80BD     		pop	{r7, pc}
+ 922              		.cfi_endproc
+ 923              	.LFE15:
+ 925              		.section	.rodata
+ 926              		.align	2
+ 927              	.LC0:
+ 928 0000 49662079 		.ascii	"If you can dream it\000"
+ 928      6F752063 
+ 928      616E2064 
+ 928      7265616D 
+ 928      20697400 
+ 929              		.align	2
+ 930              	.LC2:
+ 931 0014 596F7520 		.ascii	"You can do it!\000"
+ 931      63616E20 
+ 931      646F2069 
+ 931      742100
+ 932              		.text
+ 933              		.align	1
+ 934              		.global	main
+ 935              		.syntax unified
+ 936              		.code	16
+ 937              		.thumb_func
+ 938              		.fpu softvfp
+ 940              	main:
+ 941              	.LFB16:
+ 189:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 
+ 190:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** int main(int argc, char **argv)
+ 191:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** {
+ 942              		.loc 1 191 0
+ 943              		.cfi_startproc
+ 944              		@ args = 0, pretend = 0, frame = 48
+ 945              		@ frame_needed = 1, uses_anonymous_args = 0
+ 946 03b8 B0B5     		push	{r4, r5, r7, lr}
+ 947              		.cfi_def_cfa_offset 16
+ 948              		.cfi_offset 4, -16
+ 949              		.cfi_offset 5, -12
+ 950              		.cfi_offset 7, -8
+ 951              		.cfi_offset 14, -4
+ 952 03ba 8CB0     		sub	sp, sp, #48
+ 953              		.cfi_def_cfa_offset 64
+ 954 03bc 00AF     		add	r7, sp, #0
+ 955              		.cfi_def_cfa_register 7
+ 956 03be 7860     		str	r0, [r7, #4]
+ 957 03c0 3960     		str	r1, [r7]
+ 192:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
+ 193:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	//ascii_ctrl_bit_set(0x01)
+ 194:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	char *s;
+ 195:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	char test1[] = "If you can dream it";
+ 958              		.loc 1 195 0
+ 959 03c2 1824     		movs	r4, #24
+ 960 03c4 3B19     		adds	r3, r7, r4
+ 961 03c6 1E4A     		ldr	r2, .L51
+ 962 03c8 23CA     		ldmia	r2!, {r0, r1, r5}
+ 963 03ca 23C3     		stmia	r3!, {r0, r1, r5}
+ 964 03cc 03CA     		ldmia	r2!, {r0, r1}
+ 965 03ce 03C3     		stmia	r3!, {r0, r1}
+ 196:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	char test2[] = "You can do it!";
+ 966              		.loc 1 196 0
+ 967 03d0 0823     		movs	r3, #8
+ 968 03d2 FB18     		adds	r3, r7, r3
+ 969 03d4 1B4A     		ldr	r2, .L51+4
+ 970 03d6 23CA     		ldmia	r2!, {r0, r1, r5}
+ 971 03d8 23C3     		stmia	r3!, {r0, r1, r5}
+ 972 03da 1188     		ldrh	r1, [r2]
+ 973 03dc 1980     		strh	r1, [r3]
+ 974 03de 9278     		ldrb	r2, [r2, #2]
+ 975 03e0 9A70     		strb	r2, [r3, #2]
+ 197:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
+ 198:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	init_app();
+ 976              		.loc 1 198 0
+ 977 03e2 FFF7FEFF 		bl	init_app
+ 199:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_init();
+ 978              		.loc 1 199 0
+ 979 03e6 FFF7FEFF 		bl	ascii_init
+ 200:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_gotoxy(1,1);
+ 980              		.loc 1 200 0
+ 981 03ea 0121     		movs	r1, #1
+ 982 03ec 0120     		movs	r0, #1
+ 983 03ee FFF7FEFF 		bl	ascii_gotoxy
+ 201:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	s = test1;
+ 984              		.loc 1 201 0
+ 985 03f2 3B19     		adds	r3, r7, r4
+ 986 03f4 FB62     		str	r3, [r7, #44]
+ 202:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while(*s)
+ 987              		.loc 1 202 0
+ 988 03f6 06E0     		b	.L46
+ 989              	.L47:
+ 203:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	{
+ 204:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 		ascii_write_char(*s++);
+ 990              		.loc 1 204 0
+ 991 03f8 FB6A     		ldr	r3, [r7, #44]
+ 992 03fa 5A1C     		adds	r2, r3, #1
+ 993 03fc FA62     		str	r2, [r7, #44]
+ 994 03fe 1B78     		ldrb	r3, [r3]
+ 995 0400 1800     		movs	r0, r3
+ 996 0402 FFF7FEFF 		bl	ascii_write_char
+ 997              	.L46:
+ 202:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while(*s)
+ 998              		.loc 1 202 0
+ 999 0406 FB6A     		ldr	r3, [r7, #44]
+ 1000 0408 1B78     		ldrb	r3, [r3]
+ 1001 040a 002B     		cmp	r3, #0
+ 1002 040c F4D1     		bne	.L47
+ 205:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	}
+ 206:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	ascii_gotoxy(1,2);
+ 1003              		.loc 1 206 0
+ 1004 040e 0221     		movs	r1, #2
+ 1005 0410 0120     		movs	r0, #1
+ 1006 0412 FFF7FEFF 		bl	ascii_gotoxy
+ 207:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	s = test2;
+ 1007              		.loc 1 207 0
+ 1008 0416 0823     		movs	r3, #8
+ 1009 0418 FB18     		adds	r3, r7, r3
+ 1010 041a FB62     		str	r3, [r7, #44]
+ 208:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while(*s)
+ 1011              		.loc 1 208 0
+ 1012 041c 06E0     		b	.L48
+ 1013              	.L49:
+ 209:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	{
+ 210:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 		ascii_write_char(*s++);
+ 1014              		.loc 1 210 0
+ 1015 041e FB6A     		ldr	r3, [r7, #44]
+ 1016 0420 5A1C     		adds	r2, r3, #1
+ 1017 0422 FA62     		str	r2, [r7, #44]
+ 1018 0424 1B78     		ldrb	r3, [r3]
+ 1019 0426 1800     		movs	r0, r3
+ 1020 0428 FFF7FEFF 		bl	ascii_write_char
+ 1021              	.L48:
+ 208:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	while(*s)
+ 1022              		.loc 1 208 0
+ 1023 042c FB6A     		ldr	r3, [r7, #44]
+ 1024 042e 1B78     		ldrb	r3, [r3]
+ 1025 0430 002B     		cmp	r3, #0
+ 1026 0432 F4D1     		bne	.L49
+ 211:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	}
+ 212:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	return 0;
+ 1027              		.loc 1 212 0
+ 1028 0434 0023     		movs	r3, #0
+ 213:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** 	
+ 214:C:/Users/Maria/Documents/IT/MOP/MOP/ascii_display\startup.c **** }
+ 1029              		.loc 1 214 0
+ 1030 0436 1800     		movs	r0, r3
+ 1031 0438 BD46     		mov	sp, r7
+ 1032 043a 0CB0     		add	sp, sp, #48
+ 1033              		@ sp needed
+ 1034 043c B0BD     		pop	{r4, r5, r7, pc}
+ 1035              	.L52:
+ 1036 043e C046     		.align	2
+ 1037              	.L51:
+ 1038 0440 00000000 		.word	.LC0
+ 1039 0444 14000000 		.word	.LC2
+ 1040              		.cfi_endproc
+ 1041              	.LFE16:
+ 1043              	.Letext0:

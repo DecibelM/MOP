@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Session Name="C:\Users\Maria\Documents\IT\MOP\MOP\MOP.workspace">
-  <int Value="2" Name="m_selectedTab"/>
+  <int Value="0" Name="m_selectedTab"/>
   <wxString Value="C:\Users\Maria\Documents\IT\MOP\MOP\MOP.workspace" Name="m_workspaceName"/>
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
-      <wxString Value="C:\Users\Maria\Documents\IT\MOP\MOP\keypad\startup.c" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="5" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="C:\Users\Maria\Documents\IT\MOP\MOP\basic_io\startup.c" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="4" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
-    </TabInfo>
-    <TabInfo>
       <wxString Value="C:\Users\Maria\Documents\IT\MOP\MOP\ascii_display\startup.c" Name="FileName"/>
-      <int Value="188" Name="FirstVisibleLine"/>
-      <int Value="201" Name="CurrentLine"/>
+      <int Value="92" Name="FirstVisibleLine"/>
+      <int Value="194" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds"/>
+      <IntVector Name="CollapsedFolds">
+        <IntVectorItem Value="59"/>
+        <IntVectorItem Value="67"/>
+        <IntVectorItem Value="79"/>
+        <IntVectorItem Value="87"/>
+        <IntVectorItem Value="96"/>
+        <IntVectorItem Value="107"/>
+        <IntVectorItem Value="118"/>
+        <IntVectorItem Value="123"/>
+        <IntVectorItem Value="136"/>
+        <IntVectorItem Value="148"/>
+        <IntVectorItem Value="156"/>
+        <IntVectorItem Value="167"/>
+      </IntVector>
     </TabInfo>
   </TabInfoArray>
   <SerializedObject Name="m_breakpoints">

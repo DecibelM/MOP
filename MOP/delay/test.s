@@ -129,237 +129,235 @@
  105 001e 7860     		str	r0, [r7, #4]
   30:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	while(ms > 0)
  106              		.loc 1 30 0
- 107 0020 07E0     		b	.L6
+ 107 0020 05E0     		b	.L6
  108              	.L7:
  109              	.LBB2:
   31:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	{
-  32:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	delay_micro(1000);
+  32:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	delay_micro(100);
  110              		.loc 1 32 0
- 111 0022 FA23     		movs	r3, #250
- 112 0024 9B00     		lsls	r3, r3, #2
- 113 0026 1800     		movs	r0, r3
- 114 0028 FFF7FEFF 		bl	delay_micro
+ 111 0022 6420     		movs	r0, #100
+ 112 0024 FFF7FEFF 		bl	delay_micro
   33:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	ms--;
- 115              		.loc 1 33 0
- 116 002c 7B68     		ldr	r3, [r7, #4]
- 117 002e 013B     		subs	r3, r3, #1
- 118 0030 7B60     		str	r3, [r7, #4]
- 119              	.L6:
- 120              	.LBE2:
+ 113              		.loc 1 33 0
+ 114 0028 7B68     		ldr	r3, [r7, #4]
+ 115 002a 013B     		subs	r3, r3, #1
+ 116 002c 7B60     		str	r3, [r7, #4]
+ 117              	.L6:
+ 118              	.LBE2:
   30:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	while(ms > 0)
- 121              		.loc 1 30 0
- 122 0032 7B68     		ldr	r3, [r7, #4]
- 123 0034 002B     		cmp	r3, #0
- 124 0036 F4DC     		bgt	.L7
+ 119              		.loc 1 30 0
+ 120 002e 7B68     		ldr	r3, [r7, #4]
+ 121 0030 002B     		cmp	r3, #0
+ 122 0032 F6DC     		bgt	.L7
   34:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	}
   35:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** }
- 125              		.loc 1 35 0
- 126 0038 C046     		nop
- 127 003a BD46     		mov	sp, r7
- 128 003c 02B0     		add	sp, sp, #8
- 129              		@ sp needed
- 130 003e 80BD     		pop	{r7, pc}
- 131              		.cfi_endproc
- 132              	.LFE2:
- 134              		.align	1
- 135              		.global	delay_micro
- 136              		.syntax unified
- 137              		.code	16
- 138              		.thumb_func
- 139              		.fpu softvfp
- 141              	delay_micro:
- 142              	.LFB3:
+ 123              		.loc 1 35 0
+ 124 0034 C046     		nop
+ 125 0036 BD46     		mov	sp, r7
+ 126 0038 02B0     		add	sp, sp, #8
+ 127              		@ sp needed
+ 128 003a 80BD     		pop	{r7, pc}
+ 129              		.cfi_endproc
+ 130              	.LFE2:
+ 132              		.align	1
+ 133              		.global	delay_micro
+ 134              		.syntax unified
+ 135              		.code	16
+ 136              		.thumb_func
+ 137              		.fpu softvfp
+ 139              	delay_micro:
+ 140              	.LFB3:
   36:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 
   37:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** void delay_micro(int us)
   38:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** {
- 143              		.loc 1 38 0
- 144              		.cfi_startproc
- 145              		@ args = 0, pretend = 0, frame = 8
- 146              		@ frame_needed = 1, uses_anonymous_args = 0
- 147 0040 80B5     		push	{r7, lr}
- 148              		.cfi_def_cfa_offset 8
- 149              		.cfi_offset 7, -8
- 150              		.cfi_offset 14, -4
- 151 0042 82B0     		sub	sp, sp, #8
- 152              		.cfi_def_cfa_offset 16
- 153 0044 00AF     		add	r7, sp, #0
- 154              		.cfi_def_cfa_register 7
- 155 0046 7860     		str	r0, [r7, #4]
+ 141              		.loc 1 38 0
+ 142              		.cfi_startproc
+ 143              		@ args = 0, pretend = 0, frame = 8
+ 144              		@ frame_needed = 1, uses_anonymous_args = 0
+ 145 003c 80B5     		push	{r7, lr}
+ 146              		.cfi_def_cfa_offset 8
+ 147              		.cfi_offset 7, -8
+ 148              		.cfi_offset 14, -4
+ 149 003e 82B0     		sub	sp, sp, #8
+ 150              		.cfi_def_cfa_offset 16
+ 151 0040 00AF     		add	r7, sp, #0
+ 152              		.cfi_def_cfa_register 7
+ 153 0042 7860     		str	r0, [r7, #4]
   39:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	while(us > 0)
- 156              		.loc 1 39 0
- 157 0048 0AE0     		b	.L9
- 158              	.L10:
- 159              	.LBB3:
+ 154              		.loc 1 39 0
+ 155 0044 0AE0     		b	.L9
+ 156              	.L10:
+ 157              	.LBB3:
   40:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	{
   41:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	delay_250ns();
- 160              		.loc 1 41 0
- 161 004a FFF7FEFF 		bl	delay_250ns
+ 158              		.loc 1 41 0
+ 159 0046 FFF7FEFF 		bl	delay_250ns
   42:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	delay_250ns();
- 162              		.loc 1 42 0
- 163 004e FFF7FEFF 		bl	delay_250ns
+ 160              		.loc 1 42 0
+ 161 004a FFF7FEFF 		bl	delay_250ns
   43:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	delay_250ns();
- 164              		.loc 1 43 0
- 165 0052 FFF7FEFF 		bl	delay_250ns
+ 162              		.loc 1 43 0
+ 163 004e FFF7FEFF 		bl	delay_250ns
   44:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	delay_250ns();
- 166              		.loc 1 44 0
- 167 0056 FFF7FEFF 		bl	delay_250ns
+ 164              		.loc 1 44 0
+ 165 0052 FFF7FEFF 		bl	delay_250ns
   45:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	us--;
- 168              		.loc 1 45 0
- 169 005a 7B68     		ldr	r3, [r7, #4]
- 170 005c 013B     		subs	r3, r3, #1
- 171 005e 7B60     		str	r3, [r7, #4]
- 172              	.L9:
- 173              	.LBE3:
+ 166              		.loc 1 45 0
+ 167 0056 7B68     		ldr	r3, [r7, #4]
+ 168 0058 013B     		subs	r3, r3, #1
+ 169 005a 7B60     		str	r3, [r7, #4]
+ 170              	.L9:
+ 171              	.LBE3:
   39:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	{
- 174              		.loc 1 39 0
- 175 0060 7B68     		ldr	r3, [r7, #4]
- 176 0062 002B     		cmp	r3, #0
- 177 0064 F1DC     		bgt	.L10
+ 172              		.loc 1 39 0
+ 173 005c 7B68     		ldr	r3, [r7, #4]
+ 174 005e 002B     		cmp	r3, #0
+ 175 0060 F1DC     		bgt	.L10
   46:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	}
   47:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** }
- 178              		.loc 1 47 0
- 179 0066 C046     		nop
- 180 0068 BD46     		mov	sp, r7
- 181 006a 02B0     		add	sp, sp, #8
- 182              		@ sp needed
- 183 006c 80BD     		pop	{r7, pc}
- 184              		.cfi_endproc
- 185              	.LFE3:
- 187              		.align	1
- 188              		.global	delay_250ns
- 189              		.syntax unified
- 190              		.code	16
- 191              		.thumb_func
- 192              		.fpu softvfp
- 194              	delay_250ns:
- 195              	.LFB4:
+ 176              		.loc 1 47 0
+ 177 0062 C046     		nop
+ 178 0064 BD46     		mov	sp, r7
+ 179 0066 02B0     		add	sp, sp, #8
+ 180              		@ sp needed
+ 181 0068 80BD     		pop	{r7, pc}
+ 182              		.cfi_endproc
+ 183              	.LFE3:
+ 185              		.align	1
+ 186              		.global	delay_250ns
+ 187              		.syntax unified
+ 188              		.code	16
+ 189              		.thumb_func
+ 190              		.fpu softvfp
+ 192              	delay_250ns:
+ 193              	.LFB4:
   48:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 
   49:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** void delay_250ns(void)
   50:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** {
- 196              		.loc 1 50 0
- 197              		.cfi_startproc
- 198              		@ args = 0, pretend = 0, frame = 8
- 199              		@ frame_needed = 1, uses_anonymous_args = 0
- 200 006e 80B5     		push	{r7, lr}
- 201              		.cfi_def_cfa_offset 8
- 202              		.cfi_offset 7, -8
- 203              		.cfi_offset 14, -4
- 204 0070 82B0     		sub	sp, sp, #8
- 205              		.cfi_def_cfa_offset 16
- 206 0072 00AF     		add	r7, sp, #0
- 207              		.cfi_def_cfa_register 7
+ 194              		.loc 1 50 0
+ 195              		.cfi_startproc
+ 196              		@ args = 0, pretend = 0, frame = 8
+ 197              		@ frame_needed = 1, uses_anonymous_args = 0
+ 198 006a 80B5     		push	{r7, lr}
+ 199              		.cfi_def_cfa_offset 8
+ 200              		.cfi_offset 7, -8
+ 201              		.cfi_offset 14, -4
+ 202 006c 82B0     		sub	sp, sp, #8
+ 203              		.cfi_def_cfa_offset 16
+ 204 006e 00AF     		add	r7, sp, #0
+ 205              		.cfi_def_cfa_register 7
   51:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	*STK_CTRL = 0;
- 208              		.loc 1 51 0
- 209 0074 0F4B     		ldr	r3, .L13
- 210 0076 0022     		movs	r2, #0
- 211 0078 1A60     		str	r2, [r3]
+ 206              		.loc 1 51 0
+ 207 0070 0F4B     		ldr	r3, .L13
+ 208 0072 0022     		movs	r2, #0
+ 209 0074 1A60     		str	r2, [r3]
   52:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	*STK_LOAD = 0x29; //0x2A - 1
- 212              		.loc 1 52 0
- 213 007a 0F4B     		ldr	r3, .L13+4
- 214 007c 2922     		movs	r2, #41
- 215 007e 1A60     		str	r2, [r3]
+ 210              		.loc 1 52 0
+ 211 0076 0F4B     		ldr	r3, .L13+4
+ 212 0078 2922     		movs	r2, #41
+ 213 007a 1A60     		str	r2, [r3]
   53:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	*STK_VAL = 0x0;
- 216              		.loc 1 53 0
- 217 0080 0E4B     		ldr	r3, .L13+8
- 218 0082 0022     		movs	r2, #0
- 219 0084 1A60     		str	r2, [r3]
+ 214              		.loc 1 53 0
+ 215 007c 0E4B     		ldr	r3, .L13+8
+ 216 007e 0022     		movs	r2, #0
+ 217 0080 1A60     		str	r2, [r3]
   54:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	*STK_CTRL = 5;
- 220              		.loc 1 54 0
- 221 0086 0B4B     		ldr	r3, .L13
- 222 0088 0522     		movs	r2, #5
- 223 008a 1A60     		str	r2, [r3]
+ 218              		.loc 1 54 0
+ 219 0082 0B4B     		ldr	r3, .L13
+ 220 0084 0522     		movs	r2, #5
+ 221 0086 1A60     		str	r2, [r3]
   55:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	unsigned int ctrl = *STK_CTRL & 0x10000;
- 224              		.loc 1 55 0
- 225 008c 094B     		ldr	r3, .L13
- 226 008e 1A68     		ldr	r2, [r3]
- 227 0090 8023     		movs	r3, #128
- 228 0092 5B02     		lsls	r3, r3, #9
- 229 0094 1340     		ands	r3, r2
- 230 0096 7B60     		str	r3, [r7, #4]
+ 222              		.loc 1 55 0
+ 223 0088 094B     		ldr	r3, .L13
+ 224 008a 1A68     		ldr	r2, [r3]
+ 225 008c 8023     		movs	r3, #128
+ 226 008e 5B02     		lsls	r3, r3, #9
+ 227 0090 1340     		ands	r3, r2
+ 228 0092 7B60     		str	r3, [r7, #4]
   56:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	while((*STK_CTRL & 0x10000) == 0);
- 231              		.loc 1 56 0
- 232 0098 C046     		nop
- 233              	.L12:
- 234              		.loc 1 56 0 is_stmt 0 discriminator 1
- 235 009a 064B     		ldr	r3, .L13
- 236 009c 1A68     		ldr	r2, [r3]
- 237 009e 8023     		movs	r3, #128
- 238 00a0 5B02     		lsls	r3, r3, #9
- 239 00a2 1340     		ands	r3, r2
- 240 00a4 F9D0     		beq	.L12
+ 229              		.loc 1 56 0
+ 230 0094 C046     		nop
+ 231              	.L12:
+ 232              		.loc 1 56 0 is_stmt 0 discriminator 1
+ 233 0096 064B     		ldr	r3, .L13
+ 234 0098 1A68     		ldr	r2, [r3]
+ 235 009a 8023     		movs	r3, #128
+ 236 009c 5B02     		lsls	r3, r3, #9
+ 237 009e 1340     		ands	r3, r2
+ 238 00a0 F9D0     		beq	.L12
   57:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	*STK_CTRL= 0;
- 241              		.loc 1 57 0 is_stmt 1
- 242 00a6 034B     		ldr	r3, .L13
- 243 00a8 0022     		movs	r2, #0
- 244 00aa 1A60     		str	r2, [r3]
+ 239              		.loc 1 57 0 is_stmt 1
+ 240 00a2 034B     		ldr	r3, .L13
+ 241 00a4 0022     		movs	r2, #0
+ 242 00a6 1A60     		str	r2, [r3]
   58:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	
   59:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** }
- 245              		.loc 1 59 0
- 246 00ac C046     		nop
- 247 00ae BD46     		mov	sp, r7
- 248 00b0 02B0     		add	sp, sp, #8
- 249              		@ sp needed
- 250 00b2 80BD     		pop	{r7, pc}
- 251              	.L14:
- 252              		.align	2
- 253              	.L13:
- 254 00b4 10E000E0 		.word	-536813552
- 255 00b8 14E000E0 		.word	-536813548
- 256 00bc 18E000E0 		.word	-536813544
- 257              		.cfi_endproc
- 258              	.LFE4:
- 260              		.align	1
- 261              		.global	main
- 262              		.syntax unified
- 263              		.code	16
- 264              		.thumb_func
- 265              		.fpu softvfp
- 267              	main:
- 268              	.LFB5:
+ 243              		.loc 1 59 0
+ 244 00a8 C046     		nop
+ 245 00aa BD46     		mov	sp, r7
+ 246 00ac 02B0     		add	sp, sp, #8
+ 247              		@ sp needed
+ 248 00ae 80BD     		pop	{r7, pc}
+ 249              	.L14:
+ 250              		.align	2
+ 251              	.L13:
+ 252 00b0 10E000E0 		.word	-536813552
+ 253 00b4 14E000E0 		.word	-536813548
+ 254 00b8 18E000E0 		.word	-536813544
+ 255              		.cfi_endproc
+ 256              	.LFE4:
+ 258              		.align	1
+ 259              		.global	main
+ 260              		.syntax unified
+ 261              		.code	16
+ 262              		.thumb_func
+ 263              		.fpu softvfp
+ 265              	main:
+ 266              	.LFB5:
   60:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 
   61:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** void main(void)
   62:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** {
- 269              		.loc 1 62 0
- 270              		.cfi_startproc
- 271              		@ args = 0, pretend = 0, frame = 0
- 272              		@ frame_needed = 1, uses_anonymous_args = 0
- 273 00c0 80B5     		push	{r7, lr}
- 274              		.cfi_def_cfa_offset 8
- 275              		.cfi_offset 7, -8
- 276              		.cfi_offset 14, -4
- 277 00c2 00AF     		add	r7, sp, #0
- 278              		.cfi_def_cfa_register 7
+ 267              		.loc 1 62 0
+ 268              		.cfi_startproc
+ 269              		@ args = 0, pretend = 0, frame = 0
+ 270              		@ frame_needed = 1, uses_anonymous_args = 0
+ 271 00bc 80B5     		push	{r7, lr}
+ 272              		.cfi_def_cfa_offset 8
+ 273              		.cfi_offset 7, -8
+ 274              		.cfi_offset 14, -4
+ 275 00be 00AF     		add	r7, sp, #0
+ 276              		.cfi_def_cfa_register 7
   63:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	init_app();
- 279              		.loc 1 63 0
- 280 00c4 FFF7FEFF 		bl	init_app
- 281              	.L16:
+ 277              		.loc 1 63 0
+ 278 00c0 FFF7FEFF 		bl	init_app
+ 279              	.L16:
   64:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	while(1)
   65:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 	{
   66:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 		*GPIO_ODR = 0x00;
- 282              		.loc 1 66 0 discriminator 1
- 283 00c8 064B     		ldr	r3, .L17
- 284 00ca 0022     		movs	r2, #0
- 285 00cc 1A70     		strb	r2, [r3]
+ 280              		.loc 1 66 0 discriminator 1
+ 281 00c4 064B     		ldr	r3, .L17
+ 282 00c6 0022     		movs	r2, #0
+ 283 00c8 1A70     		strb	r2, [r3]
   67:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 		delay_milli(1);
- 286              		.loc 1 67 0 discriminator 1
- 287 00ce 0120     		movs	r0, #1
- 288 00d0 FFF7FEFF 		bl	delay_milli
+ 284              		.loc 1 67 0 discriminator 1
+ 285 00ca 0120     		movs	r0, #1
+ 286 00cc FFF7FEFF 		bl	delay_milli
   68:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 		*GPIO_ODR = 0xFF;
- 289              		.loc 1 68 0 discriminator 1
- 290 00d4 034B     		ldr	r3, .L17
- 291 00d6 FF22     		movs	r2, #255
- 292 00d8 1A70     		strb	r2, [r3]
+ 287              		.loc 1 68 0 discriminator 1
+ 288 00d0 034B     		ldr	r3, .L17
+ 289 00d2 FF22     		movs	r2, #255
+ 290 00d4 1A70     		strb	r2, [r3]
   69:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 		delay_milli(1);
- 293              		.loc 1 69 0 discriminator 1
- 294 00da 0120     		movs	r0, #1
- 295 00dc FFF7FEFF 		bl	delay_milli
+ 291              		.loc 1 69 0 discriminator 1
+ 292 00d6 0120     		movs	r0, #1
+ 293 00d8 FFF7FEFF 		bl	delay_milli
   66:C:/Users/Maria/Documents/IT/MOP/MOP/delay\startup.c **** 		delay_milli(1);
- 296              		.loc 1 66 0 discriminator 1
- 297 00e0 F2E7     		b	.L16
- 298              	.L18:
- 299 00e2 C046     		.align	2
- 300              	.L17:
- 301 00e4 14100240 		.word	1073877012
- 302              		.cfi_endproc
- 303              	.LFE5:
- 305              	.Letext0:
+ 294              		.loc 1 66 0 discriminator 1
+ 295 00dc F2E7     		b	.L16
+ 296              	.L18:
+ 297 00de C046     		.align	2
+ 298              	.L17:
+ 299 00e0 14100240 		.word	1073877012
+ 300              		.cfi_endproc
+ 301              	.LFE5:
+ 303              	.Letext0:
