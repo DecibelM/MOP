@@ -64,9 +64,9 @@ void main(void)
 	while(1)
 	{
 		*GPIO_ODR = 0x00;
-		delay_milli(1);
+		delay_milli(500);
 		*GPIO_ODR = 0xFF;
-		delay_milli(1);
+		delay_milli(500);
 	}
 }
 

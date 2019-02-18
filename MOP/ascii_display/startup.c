@@ -36,8 +36,6 @@ __asm volatile(
 void init_app(void)
 {
 	*GPIO_MODER = 0x5555;
-	*(GPIO_MODER + 1) = 0x5555;
-	*GPIO_OTYPER = 0x00000000;
 }
 
 void ascii_ctrl_bit_set(unsigned char x)
