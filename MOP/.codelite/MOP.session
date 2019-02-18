@@ -5,23 +5,38 @@
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
       <wxString Value="C:\Users\Maria\Documents\IT\MOP\MOP\ascii_display\startup.c" Name="FileName"/>
-      <int Value="92" Name="FirstVisibleLine"/>
-      <int Value="194" Name="CurrentLine"/>
+      <int Value="22" Name="FirstVisibleLine"/>
+      <int Value="37" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
-      <IntVector Name="CollapsedFolds">
-        <IntVectorItem Value="59"/>
-        <IntVectorItem Value="67"/>
-        <IntVectorItem Value="79"/>
-        <IntVectorItem Value="87"/>
-        <IntVectorItem Value="96"/>
-        <IntVectorItem Value="107"/>
-        <IntVectorItem Value="118"/>
-        <IntVectorItem Value="123"/>
-        <IntVectorItem Value="136"/>
-        <IntVectorItem Value="148"/>
-        <IntVectorItem Value="156"/>
-        <IntVectorItem Value="167"/>
-      </IntVector>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="C:\Users\Maria\Documents\IT\MOP\MOP\keypad\startup.c" Name="FileName"/>
+      <int Value="47" Name="FirstVisibleLine"/>
+      <int Value="83" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="C:\Users\Maria\Documents\IT\MOP\MOP\delay\startup.c" Name="FileName"/>
+      <int Value="7" Name="FirstVisibleLine"/>
+      <int Value="34" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="C:\Users\Maria\Documents\IT\MOP\MOP\graphicdisplay\startup.c" Name="FileName"/>
+      <int Value="301" Name="FirstVisibleLine"/>
+      <int Value="315" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="C:\Users\Maria\Documents\IT\MOP\MOP\autopong\startup.c" Name="FileName"/>
+      <int Value="354" Name="FirstVisibleLine"/>
+      <int Value="337" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
     </TabInfo>
   </TabInfoArray>
   <SerializedObject Name="m_breakpoints">

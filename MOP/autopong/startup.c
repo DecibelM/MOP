@@ -216,7 +216,7 @@ void delay_milli(int ms)
 {
 	while(ms > 0)
 	{
-	delay_micro(10);
+	delay_micro(1000);
 	ms--;
 	}
 }
@@ -327,54 +327,95 @@ void pixel(int x, int y, int set)
 void draw_object(POBJECT obj)
 {
 	uint8_t p;
-	for(p = 0; p<*obj.numpoints; p++){
-		pixel(*obj.posx,*obj.posy,1);
+	uint8_t n = obj->geo->numpoints;
+	uint8_t x_coord;
+	uint8_t y_coord;
+	
+	POINT s;
+	for(p = 0; p<n; p++){
+		//s = obj -> geo -> px[p];
+		x_coord  = obj->posx + obj->geo->px[p].x;
+		y_coord = obj->posy + obj->geo->px[p].y;
+		//point = obj->geo->px;
+		//pixel(s.x, s.y,1);
+		pixel(x_coord,y_coord,1);
 	}
 }
 
 void clear_object(POBJECT obj)
 {
 	uint8_t p;
-	for(p = 0; p<*obj.numpoints; p++){
-		pixel(*obj.posx,*obj.posy,0);
+	uint8_t n = obj->geo->numpoints;
+	uint8_t x_coord;
+	uint8_t y_coord;
+	for(p = 0; p<n; p++){
+		x_coord  = obj->posx + obj->geo->px[p].x;
+		y_coord = obj->posy + obj->geo->px[p].y;
+		pixel(x_coord,y_coord,0);
 	}
 }
 
 void set_object_speed(POBJECT o, int speedx, int speedy){
-	*o.dirx = speedx;
-	*o.diry = speedy;
+	o->dirx = speedx;
+	o->diry = speedy;
 }
 
 void move_object(POBJECT o){
 	clear_object(o);
-	*o.posx += *o.dirx;
-	*o.posy += *o.diry;
+	o->posx += o->dirx;
+	o->posy += o->diry;
 	
-	if(*o.posx < 1){
-		*o.dirx = -*o.dirx;
+	if(o->posx < 1){
+		o->dirx = -o->dirx;
 	}
-	if(*o.posx > 128){
-		*o.dirx = -*o.dirx;
+	if(o->posx > 128){
+		o->dirx = -o->dirx;
 	}
-	if(*o.posy < 1){
-		*o.diry = -*o.diry;
+	if(o->posy < 1){
+		o->diry = -o->diry;
 	}
-	if(*o.posy > 64){
-		*o.diry = -*o.diry;
+	if(o->posy > 64){
+		o->diry = -o->diry;
 	}
 	draw_object(o);
 }
 
+	GEOMETRY ball_geometry =
+{
+	12,4,4,{{0,1},{0,2},{1,0},{1,1},{1,2},{1,3},{2,0},{2,1},{2,2},{2,3},{3,1},{3,2}}
+};
+
+static OBJECT ball=
+{&ball_geometry,
+0,0,
+1,1,
+draw_object,
+clear_object,
+move_object,
+set_object_speed};
+
+
 void main(void)
 {
-	uint8_t i;
+	//uint8_t i;
+
+	POBJECT p = &ball;
 	init_app();
 	graphic_initialize();
 	#ifndef SIMULATOR
 		graphic_clear_screen();
 	#endif
 	
-	for(i = 0; i < 128; i++){
+	p->set_speed(p,4,1);
+	while(1)
+	{
+		p->move(p);
+		delay_milli(40);
+	}
+	
+	
+	
+	/*for(i = 0; i < 128; i++){
 		pixel(i,10,1);
 	}
 	for(i = 0; i<64; i++){
@@ -386,7 +427,7 @@ void main(void)
 	}
 	for(i = 0; i<64; i++){
 		pixel(10,i,0);
-	}
+	}*/
 		
 		
 		
