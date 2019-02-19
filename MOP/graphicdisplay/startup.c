@@ -35,6 +35,8 @@ void startup(void) __attribute__((naked)) __attribute__((section (".start_sectio
 #define LCD_DISP_START 0xC0
 #define LCD_BUSY 0x80
 
+#define SIMULATOR
+
 void startup ( void )
 {
 __asm volatile(
@@ -45,10 +47,7 @@ __asm volatile(
 	) ;
 }
 
-void init_app(void)
-{
-	*GPIO_MODER = 0x55555555;
-}
+
 
 typedef unsigned char uint8_t;
 
@@ -190,7 +189,9 @@ void delay_milli(int ms)
 {
 	while(ms > 0)
 	{
-	delay_micro(10);
+	#ifndef SIMULATOR
+	delay_micro(1000);
+	#endif
 	ms--;
 	}
 }
@@ -199,10 +200,12 @@ void delay_micro(int us)
 {
 	while(us > 0)
 	{
+	#ifndef SIMULATOR
 	delay_250ns();
 	delay_250ns();
 	delay_250ns();
 	delay_250ns();
+	#endif
 	us--;
 	}
 }
@@ -221,10 +224,11 @@ void delay_250ns(void)
 
 void delay_500ns(void)
 {
+	#ifndef SIMULATOR
 	delay_250ns();
 	delay_250ns();
+	#endif
 }
-
 void graphic_initialize(void)
 {
 	graphic_ctrl_bit_set(B_E);
@@ -296,6 +300,11 @@ void pixel(int x, int y, int set)
 		mask = mask & c;
 	}
 	graphic_write_data(mask, controller);
+}
+
+void init_app(void)
+{
+	*GPIO_MODER = 0x55555555;
 }
 
 void main(void)

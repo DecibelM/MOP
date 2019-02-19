@@ -33,12 +33,6 @@ __asm volatile(
 	) ;
 }
 
-void init_app(void)
-{
-	*GPIO_MODER = 0x55555555;
-	*GPIO_OTYPER = 0x00000000;
-}
-
 void ascii_ctrl_bit_set(unsigned char x)
 {
 	unsigned char c;
@@ -116,18 +110,25 @@ unsigned char ascii_read_data(void)
 
 void delay_milli(int ms)
 {
+	while(ms > 0)
+	{
+	#ifndef SIMULATOR
 	delay_micro(1000);
+	#endif
+	ms--;
+	}
 }
 
 void delay_micro(int us)
 {
-	us = us/10;
 	while(us > 0)
 	{
+	#ifndef SIMULATOR
 	delay_250ns();
 	delay_250ns();
 	delay_250ns();
 	delay_250ns();
+	#endif
 	us--;
 	}
 }
@@ -182,8 +183,13 @@ void ascii_init(void)
 	
 	while((ascii_read_status() & 0x80) == 0x80){}
 	delay_micro(8);
-	ascii_write_cmd(0x04); //Rätt? Increment? 00000100
+	ascii_write_cmd(0x06); //Rätt? Increment? 00000100
 	delay_micro(39);
+}
+
+void init_app(void)
+{
+	*GPIO_MODER = 0x55555555;
 }
 
 int main(int argc, char **argv)

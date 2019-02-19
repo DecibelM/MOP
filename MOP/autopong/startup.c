@@ -45,11 +45,6 @@ __asm volatile(
 	) ;
 }
 
-void init_app(void)
-{
-	*GPIO_MODER = 0x55555555;
-}
-
 typedef unsigned char uint8_t;
 
 typedef struct tPoint
@@ -216,7 +211,9 @@ void delay_milli(int ms)
 {
 	while(ms > 0)
 	{
+	#ifndef SIMULATOR
 	delay_micro(1000);
+	#endif
 	ms--;
 	}
 }
@@ -225,10 +222,12 @@ void delay_micro(int us)
 {
 	while(us > 0)
 	{
+	#ifndef SIMULATOR
 	delay_250ns();
 	delay_250ns();
 	delay_250ns();
 	delay_250ns();
+	#endif
 	us--;
 	}
 }
@@ -247,8 +246,10 @@ void delay_250ns(void)
 
 void delay_500ns(void)
 {
+	#ifndef SIMULATOR
 	delay_250ns();
 	delay_250ns();
+	#endif
 }
 
 void graphic_initialize(void)
@@ -394,6 +395,10 @@ clear_object,
 move_object,
 set_object_speed};
 
+void init_app(void)
+{
+	*GPIO_MODER = 0x55555555;
+}
 
 void main(void)
 {
