@@ -336,4 +336,3 @@ void main(void)
 		graphic_write_command(LCD_SET_PAGE|1,B_CS1|B_CS2);
 		graphic_write_data(0xFF,B_CS1|B_CS2);*/
 }
-

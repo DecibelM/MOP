@@ -369,13 +369,13 @@ void move_object(POBJECT o){
 	if(o->posx < 1){
 		o->dirx = -o->dirx;
 	}
-	if(o->posx > 128){
+	if(o->posx > 128 - o->geo->sizex){
 		o->dirx = -o->dirx;
 	}
 	if(o->posy < 1){
 		o->diry = -o->diry;
 	}
-	if(o->posy > 64){
+	if(o->posy > 64 - o->geo->sizey){
 		o->diry = -o->diry;
 	}
 	draw_object(o);
