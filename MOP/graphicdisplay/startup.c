@@ -35,7 +35,8 @@ void startup(void) __attribute__((naked)) __attribute__((section (".start_sectio
 #define LCD_DISP_START 0xC0
 #define LCD_BUSY 0x80
 
-#define SIMULATOR
+//#define SIMULATOR
+#define USBDM
 
 void startup ( void )
 {
@@ -305,6 +306,10 @@ void pixel(int x, int y, int set)
 void init_app(void)
 {
 	*GPIO_MODER = 0x55555555;
+	#ifdef USBDM
+	*((unsigned long*) 0x40023830) = 0x18;
+	__asm volatile("LDR R0,=0x08000209\n BLX R0\n");
+	#endif
 }
 
 void main(void)

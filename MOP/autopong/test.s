@@ -1012,1205 +1012,1161 @@
  236:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
  788              		.loc 1 236 0
  789              		.cfi_startproc
- 790              		@ args = 0, pretend = 0, frame = 8
+ 790              		@ args = 0, pretend = 0, frame = 0
  791              		@ frame_needed = 1, uses_anonymous_args = 0
  792 0356 80B5     		push	{r7, lr}
  793              		.cfi_def_cfa_offset 8
  794              		.cfi_offset 7, -8
  795              		.cfi_offset 14, -4
- 796 0358 82B0     		sub	sp, sp, #8
- 797              		.cfi_def_cfa_offset 16
- 798 035a 00AF     		add	r7, sp, #0
- 799              		.cfi_def_cfa_register 7
- 237:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	*STK_CTRL = 0;
- 800              		.loc 1 237 0
- 801 035c 0F4B     		ldr	r3, .L47
- 802 035e 0022     		movs	r2, #0
- 803 0360 1A60     		str	r2, [r3]
- 238:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	*STK_LOAD = 0x29; //0x2A - 1
- 804              		.loc 1 238 0
- 805 0362 0F4B     		ldr	r3, .L47+4
- 806 0364 2922     		movs	r2, #41
- 807 0366 1A60     		str	r2, [r3]
- 239:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	*STK_VAL = 0x0;
- 808              		.loc 1 239 0
- 809 0368 0E4B     		ldr	r3, .L47+8
- 810 036a 0022     		movs	r2, #0
- 811 036c 1A60     		str	r2, [r3]
- 240:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	*STK_CTRL = 5;
- 812              		.loc 1 240 0
- 813 036e 0B4B     		ldr	r3, .L47
- 814 0370 0522     		movs	r2, #5
- 815 0372 1A60     		str	r2, [r3]
- 241:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	unsigned int ctrl = *STK_CTRL & 0x10000;
- 816              		.loc 1 241 0
- 817 0374 094B     		ldr	r3, .L47
- 818 0376 1A68     		ldr	r2, [r3]
- 819 0378 8023     		movs	r3, #128
- 820 037a 5B02     		lsls	r3, r3, #9
- 821 037c 1340     		ands	r3, r2
- 822 037e 7B60     		str	r3, [r7, #4]
- 242:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	while((*STK_CTRL & 0x10000) == 0);
- 823              		.loc 1 242 0
- 824 0380 C046     		nop
- 825              	.L46:
- 826              		.loc 1 242 0 is_stmt 0 discriminator 1
- 827 0382 064B     		ldr	r3, .L47
- 828 0384 1A68     		ldr	r2, [r3]
- 829 0386 8023     		movs	r3, #128
- 830 0388 5B02     		lsls	r3, r3, #9
- 831 038a 1340     		ands	r3, r2
- 832 038c F9D0     		beq	.L46
- 243:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	*STK_CTRL= 0;
- 833              		.loc 1 243 0 is_stmt 1
- 834 038e 034B     		ldr	r3, .L47
- 835 0390 0022     		movs	r2, #0
- 836 0392 1A60     		str	r2, [r3]
- 244:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
- 245:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
- 837              		.loc 1 245 0
- 838 0394 C046     		nop
- 839 0396 BD46     		mov	sp, r7
- 840 0398 02B0     		add	sp, sp, #8
- 841              		@ sp needed
- 842 039a 80BD     		pop	{r7, pc}
- 843              	.L48:
- 844              		.align	2
- 845              	.L47:
- 846 039c 10E000E0 		.word	-536813552
- 847 03a0 14E000E0 		.word	-536813548
- 848 03a4 18E000E0 		.word	-536813544
- 849              		.cfi_endproc
- 850              	.LFE12:
- 852              		.align	1
- 853              		.global	delay_500ns
- 854              		.syntax unified
- 855              		.code	16
- 856              		.thumb_func
- 857              		.fpu softvfp
- 859              	delay_500ns:
- 860              	.LFB13:
- 246:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
- 247:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void delay_500ns(void)
- 248:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
- 861              		.loc 1 248 0
- 862              		.cfi_startproc
- 863              		@ args = 0, pretend = 0, frame = 0
- 864              		@ frame_needed = 1, uses_anonymous_args = 0
- 865 03a8 80B5     		push	{r7, lr}
- 866              		.cfi_def_cfa_offset 8
- 867              		.cfi_offset 7, -8
- 868              		.cfi_offset 14, -4
- 869 03aa 00AF     		add	r7, sp, #0
- 870              		.cfi_def_cfa_register 7
- 249:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	#ifndef SIMULATOR
- 250:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	delay_250ns();
- 251:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	delay_250ns();
- 252:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	#endif
- 253:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
- 871              		.loc 1 253 0
- 872 03ac C046     		nop
- 873 03ae BD46     		mov	sp, r7
- 874              		@ sp needed
- 875 03b0 80BD     		pop	{r7, pc}
- 876              		.cfi_endproc
- 877              	.LFE13:
- 879              		.align	1
- 880              		.global	graphic_initialize
- 881              		.syntax unified
- 882              		.code	16
- 883              		.thumb_func
- 884              		.fpu softvfp
- 886              	graphic_initialize:
- 887              	.LFB14:
- 254:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
- 255:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void graphic_initialize(void)
- 256:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
- 888              		.loc 1 256 0
- 889              		.cfi_startproc
- 890              		@ args = 0, pretend = 0, frame = 0
- 891              		@ frame_needed = 1, uses_anonymous_args = 0
- 892 03b2 80B5     		push	{r7, lr}
- 893              		.cfi_def_cfa_offset 8
- 894              		.cfi_offset 7, -8
- 895              		.cfi_offset 14, -4
- 896 03b4 00AF     		add	r7, sp, #0
- 897              		.cfi_def_cfa_register 7
- 257:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_ctrl_bit_set(B_E);
- 898              		.loc 1 257 0
- 899 03b6 4020     		movs	r0, #64
- 900 03b8 FFF7FEFF 		bl	graphic_ctrl_bit_set
- 258:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	delay_micro(10);
- 901              		.loc 1 258 0
- 902 03bc 0A20     		movs	r0, #10
- 903 03be FFF7FEFF 		bl	delay_micro
- 259:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_ctrl_bit_clear(B_CS1|B_CS2|B_RST|B_E);
- 904              		.loc 1 259 0
- 905 03c2 7820     		movs	r0, #120
- 906 03c4 FFF7FEFF 		bl	graphic_ctrl_bit_clear
- 260:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	delay_milli(30);
- 907              		.loc 1 260 0
- 908 03c8 1E20     		movs	r0, #30
- 909 03ca FFF7FEFF 		bl	delay_milli
- 261:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_ctrl_bit_set(B_RST);
- 910              		.loc 1 261 0
- 911 03ce 2020     		movs	r0, #32
- 912 03d0 FFF7FEFF 		bl	graphic_ctrl_bit_set
- 262:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	delay_milli(100);
- 913              		.loc 1 262 0
- 914 03d4 6420     		movs	r0, #100
- 915 03d6 FFF7FEFF 		bl	delay_milli
- 263:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_OFF, B_CS1|B_CS2);
- 916              		.loc 1 263 0
- 917 03da 1821     		movs	r1, #24
- 918 03dc 3E20     		movs	r0, #62
- 919 03de FFF7FEFF 		bl	graphic_write_command
- 264:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_ON, B_CS1|B_CS2);
- 920              		.loc 1 264 0
- 921 03e2 1821     		movs	r1, #24
- 922 03e4 3F20     		movs	r0, #63
- 923 03e6 FFF7FEFF 		bl	graphic_write_command
- 265:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_DISP_START, B_CS1|B_CS2);
- 924              		.loc 1 265 0
- 925 03ea 1821     		movs	r1, #24
- 926 03ec C020     		movs	r0, #192
- 927 03ee FFF7FEFF 		bl	graphic_write_command
- 266:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_SET_ADD, B_CS1|B_CS2);
- 928              		.loc 1 266 0
- 929 03f2 1821     		movs	r1, #24
- 930 03f4 4020     		movs	r0, #64
- 931 03f6 FFF7FEFF 		bl	graphic_write_command
- 267:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_SET_PAGE, B_CS1|B_CS2);
- 932              		.loc 1 267 0
- 933 03fa 1821     		movs	r1, #24
- 934 03fc B820     		movs	r0, #184
- 935 03fe FFF7FEFF 		bl	graphic_write_command
- 268:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	select_controller(0);
- 936              		.loc 1 268 0
- 937 0402 0020     		movs	r0, #0
- 938 0404 FFF7FEFF 		bl	select_controller
- 269:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
- 939              		.loc 1 269 0
- 940 0408 C046     		nop
- 941 040a BD46     		mov	sp, r7
- 942              		@ sp needed
- 943 040c 80BD     		pop	{r7, pc}
- 944              		.cfi_endproc
- 945              	.LFE14:
- 947              		.align	1
- 948              		.global	graphic_clear_screen
- 949              		.syntax unified
- 950              		.code	16
- 951              		.thumb_func
- 952              		.fpu softvfp
- 954              	graphic_clear_screen:
- 955              	.LFB15:
- 270:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
- 271:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void graphic_clear_screen(void)
- 272:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
- 956              		.loc 1 272 0
- 957              		.cfi_startproc
- 958              		@ args = 0, pretend = 0, frame = 8
- 959              		@ frame_needed = 1, uses_anonymous_args = 0
- 960 040e 80B5     		push	{r7, lr}
- 961              		.cfi_def_cfa_offset 8
- 962              		.cfi_offset 7, -8
- 963              		.cfi_offset 14, -4
- 964 0410 82B0     		sub	sp, sp, #8
- 965              		.cfi_def_cfa_offset 16
- 966 0412 00AF     		add	r7, sp, #0
- 967              		.cfi_def_cfa_register 7
- 968              	.LBB2:
- 273:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	for(unsigned int page = 0; page < 8; page++)
- 969              		.loc 1 273 0
- 970 0414 0023     		movs	r3, #0
- 971 0416 7B60     		str	r3, [r7, #4]
- 972 0418 1DE0     		b	.L52
- 973              	.L55:
- 274:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	{
- 275:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		graphic_write_command(LCD_SET_PAGE|page,B_CS1|B_CS2);
- 974              		.loc 1 275 0
- 975 041a 7B68     		ldr	r3, [r7, #4]
- 976 041c DBB2     		uxtb	r3, r3
- 977 041e 4822     		movs	r2, #72
- 978 0420 5242     		rsbs	r2, r2, #0
- 979 0422 1343     		orrs	r3, r2
- 980 0424 DBB2     		uxtb	r3, r3
- 981 0426 1821     		movs	r1, #24
- 982 0428 1800     		movs	r0, r3
- 983 042a FFF7FEFF 		bl	graphic_write_command
- 276:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		graphic_write_command(LCD_SET_ADD|0,B_CS1|B_CS2);
- 984              		.loc 1 276 0
- 985 042e 1821     		movs	r1, #24
- 986 0430 4020     		movs	r0, #64
- 987 0432 FFF7FEFF 		bl	graphic_write_command
- 988              	.LBB3:
- 277:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		for(unsigned int add = 0; add<64;add++)
- 989              		.loc 1 277 0
- 990 0436 0023     		movs	r3, #0
- 991 0438 3B60     		str	r3, [r7]
- 992 043a 06E0     		b	.L53
- 993              	.L54:
- 278:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		{
- 279:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 			graphic_write_data(0, B_CS1|B_CS2);
- 994              		.loc 1 279 0 discriminator 3
- 995 043c 1821     		movs	r1, #24
- 996 043e 0020     		movs	r0, #0
- 997 0440 FFF7FEFF 		bl	graphic_write_data
- 277:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		for(unsigned int add = 0; add<64;add++)
- 998              		.loc 1 277 0 discriminator 3
- 999 0444 3B68     		ldr	r3, [r7]
- 1000 0446 0133     		adds	r3, r3, #1
- 1001 0448 3B60     		str	r3, [r7]
- 1002              	.L53:
- 277:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		for(unsigned int add = 0; add<64;add++)
- 1003              		.loc 1 277 0 is_stmt 0 discriminator 1
- 1004 044a 3B68     		ldr	r3, [r7]
- 1005 044c 3F2B     		cmp	r3, #63
- 1006 044e F5D9     		bls	.L54
- 1007              	.LBE3:
- 273:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	{
- 1008              		.loc 1 273 0 is_stmt 1 discriminator 2
- 1009 0450 7B68     		ldr	r3, [r7, #4]
- 1010 0452 0133     		adds	r3, r3, #1
- 1011 0454 7B60     		str	r3, [r7, #4]
- 1012              	.L52:
- 273:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	{
- 1013              		.loc 1 273 0 is_stmt 0 discriminator 1
- 1014 0456 7B68     		ldr	r3, [r7, #4]
- 1015 0458 072B     		cmp	r3, #7
- 1016 045a DED9     		bls	.L55
- 1017              	.LBE2:
- 280:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		}
- 281:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
- 282:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
- 1018              		.loc 1 282 0 is_stmt 1
- 1019 045c C046     		nop
- 1020 045e BD46     		mov	sp, r7
- 1021 0460 02B0     		add	sp, sp, #8
- 1022              		@ sp needed
- 1023 0462 80BD     		pop	{r7, pc}
- 1024              		.cfi_endproc
- 1025              	.LFE15:
- 1027              		.align	1
- 1028              		.global	pixel
- 1029              		.syntax unified
- 1030              		.code	16
- 1031              		.thumb_func
- 1032              		.fpu softvfp
- 1034              	pixel:
- 1035              	.LFB16:
- 283:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
- 284:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void pixel(int x, int y, int set)
- 285:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
- 1036              		.loc 1 285 0
- 1037              		.cfi_startproc
- 1038              		@ args = 0, pretend = 0, frame = 32
- 1039              		@ frame_needed = 1, uses_anonymous_args = 0
- 1040 0464 B0B5     		push	{r4, r5, r7, lr}
- 1041              		.cfi_def_cfa_offset 16
- 1042              		.cfi_offset 4, -16
- 1043              		.cfi_offset 5, -12
- 1044              		.cfi_offset 7, -8
- 1045              		.cfi_offset 14, -4
- 1046 0466 88B0     		sub	sp, sp, #32
- 1047              		.cfi_def_cfa_offset 48
- 1048 0468 00AF     		add	r7, sp, #0
- 1049              		.cfi_def_cfa_register 7
- 1050 046a F860     		str	r0, [r7, #12]
- 1051 046c B960     		str	r1, [r7, #8]
- 1052 046e 7A60     		str	r2, [r7, #4]
- 286:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t mask, c, controller;
- 287:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	int index;
- 288:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
- 289:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if((x < 1) || (y < 1) || (x > 128) || (y > 64)) return;
- 1053              		.loc 1 289 0
- 1054 0470 FB68     		ldr	r3, [r7, #12]
- 1055 0472 002B     		cmp	r3, #0
- 1056 0474 00DC     		bgt	.LCB840
- 1057 0476 B6E0     		b	.L77	@long jump
- 1058              	.LCB840:
- 1059              		.loc 1 289 0 is_stmt 0 discriminator 1
- 1060 0478 BB68     		ldr	r3, [r7, #8]
- 1061 047a 002B     		cmp	r3, #0
- 1062 047c 00DC     		bgt	.LCB843
- 1063 047e B2E0     		b	.L77	@long jump
- 1064              	.LCB843:
- 1065              		.loc 1 289 0 discriminator 2
- 1066 0480 FB68     		ldr	r3, [r7, #12]
- 1067 0482 802B     		cmp	r3, #128
- 1068 0484 00DD     		ble	.LCB846
- 1069 0486 AEE0     		b	.L77	@long jump
- 1070              	.LCB846:
- 1071              		.loc 1 289 0 discriminator 3
- 1072 0488 BB68     		ldr	r3, [r7, #8]
- 1073 048a 402B     		cmp	r3, #64
- 1074 048c 00DD     		ble	.LCB849
- 1075 048e AAE0     		b	.L77	@long jump
- 1076              	.LCB849:
+ 796 0358 00AF     		add	r7, sp, #0
+ 797              		.cfi_def_cfa_register 7
+ 237:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	#ifndef SIMULATOR
+ 238:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	*STK_CTRL = 0;
+ 239:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	*STK_LOAD = 0x29; //0x2A - 1
+ 240:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	*STK_VAL = 0x0;
+ 241:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	*STK_CTRL = 5;
+ 242:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	unsigned int ctrl = *STK_CTRL & 0x10000;
+ 243:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	while((*STK_CTRL & 0x10000) == 0);
+ 244:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	*STK_CTRL= 0;
+ 245:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	#endif
+ 246:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
+ 247:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
+ 798              		.loc 1 247 0
+ 799 035a C046     		nop
+ 800 035c BD46     		mov	sp, r7
+ 801              		@ sp needed
+ 802 035e 80BD     		pop	{r7, pc}
+ 803              		.cfi_endproc
+ 804              	.LFE12:
+ 806              		.align	1
+ 807              		.global	delay_500ns
+ 808              		.syntax unified
+ 809              		.code	16
+ 810              		.thumb_func
+ 811              		.fpu softvfp
+ 813              	delay_500ns:
+ 814              	.LFB13:
+ 248:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
+ 249:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void delay_500ns(void)
+ 250:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
+ 815              		.loc 1 250 0
+ 816              		.cfi_startproc
+ 817              		@ args = 0, pretend = 0, frame = 0
+ 818              		@ frame_needed = 1, uses_anonymous_args = 0
+ 819 0360 80B5     		push	{r7, lr}
+ 820              		.cfi_def_cfa_offset 8
+ 821              		.cfi_offset 7, -8
+ 822              		.cfi_offset 14, -4
+ 823 0362 00AF     		add	r7, sp, #0
+ 824              		.cfi_def_cfa_register 7
+ 251:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	#ifndef SIMULATOR
+ 252:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	delay_250ns();
+ 253:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	delay_250ns();
+ 254:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	#endif
+ 255:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
+ 825              		.loc 1 255 0
+ 826 0364 C046     		nop
+ 827 0366 BD46     		mov	sp, r7
+ 828              		@ sp needed
+ 829 0368 80BD     		pop	{r7, pc}
+ 830              		.cfi_endproc
+ 831              	.LFE13:
+ 833              		.align	1
+ 834              		.global	graphic_initialize
+ 835              		.syntax unified
+ 836              		.code	16
+ 837              		.thumb_func
+ 838              		.fpu softvfp
+ 840              	graphic_initialize:
+ 841              	.LFB14:
+ 256:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
+ 257:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void graphic_initialize(void)
+ 258:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
+ 842              		.loc 1 258 0
+ 843              		.cfi_startproc
+ 844              		@ args = 0, pretend = 0, frame = 0
+ 845              		@ frame_needed = 1, uses_anonymous_args = 0
+ 846 036a 80B5     		push	{r7, lr}
+ 847              		.cfi_def_cfa_offset 8
+ 848              		.cfi_offset 7, -8
+ 849              		.cfi_offset 14, -4
+ 850 036c 00AF     		add	r7, sp, #0
+ 851              		.cfi_def_cfa_register 7
+ 259:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_ctrl_bit_set(B_E);
+ 852              		.loc 1 259 0
+ 853 036e 4020     		movs	r0, #64
+ 854 0370 FFF7FEFF 		bl	graphic_ctrl_bit_set
+ 260:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	delay_micro(10);
+ 855              		.loc 1 260 0
+ 856 0374 0A20     		movs	r0, #10
+ 857 0376 FFF7FEFF 		bl	delay_micro
+ 261:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_ctrl_bit_clear(B_CS1|B_CS2|B_RST|B_E);
+ 858              		.loc 1 261 0
+ 859 037a 7820     		movs	r0, #120
+ 860 037c FFF7FEFF 		bl	graphic_ctrl_bit_clear
+ 262:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	delay_milli(30);
+ 861              		.loc 1 262 0
+ 862 0380 1E20     		movs	r0, #30
+ 863 0382 FFF7FEFF 		bl	delay_milli
+ 263:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_ctrl_bit_set(B_RST);
+ 864              		.loc 1 263 0
+ 865 0386 2020     		movs	r0, #32
+ 866 0388 FFF7FEFF 		bl	graphic_ctrl_bit_set
+ 264:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	delay_milli(100);
+ 867              		.loc 1 264 0
+ 868 038c 6420     		movs	r0, #100
+ 869 038e FFF7FEFF 		bl	delay_milli
+ 265:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_OFF, B_CS1|B_CS2);
+ 870              		.loc 1 265 0
+ 871 0392 1821     		movs	r1, #24
+ 872 0394 3E20     		movs	r0, #62
+ 873 0396 FFF7FEFF 		bl	graphic_write_command
+ 266:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_ON, B_CS1|B_CS2);
+ 874              		.loc 1 266 0
+ 875 039a 1821     		movs	r1, #24
+ 876 039c 3F20     		movs	r0, #63
+ 877 039e FFF7FEFF 		bl	graphic_write_command
+ 267:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_DISP_START, B_CS1|B_CS2);
+ 878              		.loc 1 267 0
+ 879 03a2 1821     		movs	r1, #24
+ 880 03a4 C020     		movs	r0, #192
+ 881 03a6 FFF7FEFF 		bl	graphic_write_command
+ 268:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_SET_ADD, B_CS1|B_CS2);
+ 882              		.loc 1 268 0
+ 883 03aa 1821     		movs	r1, #24
+ 884 03ac 4020     		movs	r0, #64
+ 885 03ae FFF7FEFF 		bl	graphic_write_command
+ 269:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_SET_PAGE, B_CS1|B_CS2);
+ 886              		.loc 1 269 0
+ 887 03b2 1821     		movs	r1, #24
+ 888 03b4 B820     		movs	r0, #184
+ 889 03b6 FFF7FEFF 		bl	graphic_write_command
+ 270:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	select_controller(0);
+ 890              		.loc 1 270 0
+ 891 03ba 0020     		movs	r0, #0
+ 892 03bc FFF7FEFF 		bl	select_controller
+ 271:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
+ 893              		.loc 1 271 0
+ 894 03c0 C046     		nop
+ 895 03c2 BD46     		mov	sp, r7
+ 896              		@ sp needed
+ 897 03c4 80BD     		pop	{r7, pc}
+ 898              		.cfi_endproc
+ 899              	.LFE14:
+ 901              		.align	1
+ 902              		.global	graphic_clear_screen
+ 903              		.syntax unified
+ 904              		.code	16
+ 905              		.thumb_func
+ 906              		.fpu softvfp
+ 908              	graphic_clear_screen:
+ 909              	.LFB15:
+ 272:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
+ 273:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void graphic_clear_screen(void)
+ 274:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
+ 910              		.loc 1 274 0
+ 911              		.cfi_startproc
+ 912              		@ args = 0, pretend = 0, frame = 8
+ 913              		@ frame_needed = 1, uses_anonymous_args = 0
+ 914 03c6 80B5     		push	{r7, lr}
+ 915              		.cfi_def_cfa_offset 8
+ 916              		.cfi_offset 7, -8
+ 917              		.cfi_offset 14, -4
+ 918 03c8 82B0     		sub	sp, sp, #8
+ 919              		.cfi_def_cfa_offset 16
+ 920 03ca 00AF     		add	r7, sp, #0
+ 921              		.cfi_def_cfa_register 7
+ 922              	.LBB2:
+ 275:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	for(unsigned int page = 0; page < 8; page++)
+ 923              		.loc 1 275 0
+ 924 03cc 0023     		movs	r3, #0
+ 925 03ce 7B60     		str	r3, [r7, #4]
+ 926 03d0 1DE0     		b	.L49
+ 927              	.L52:
+ 276:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	{
+ 277:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		graphic_write_command(LCD_SET_PAGE|page,B_CS1|B_CS2);
+ 928              		.loc 1 277 0
+ 929 03d2 7B68     		ldr	r3, [r7, #4]
+ 930 03d4 DBB2     		uxtb	r3, r3
+ 931 03d6 4822     		movs	r2, #72
+ 932 03d8 5242     		rsbs	r2, r2, #0
+ 933 03da 1343     		orrs	r3, r2
+ 934 03dc DBB2     		uxtb	r3, r3
+ 935 03de 1821     		movs	r1, #24
+ 936 03e0 1800     		movs	r0, r3
+ 937 03e2 FFF7FEFF 		bl	graphic_write_command
+ 278:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		graphic_write_command(LCD_SET_ADD|0,B_CS1|B_CS2);
+ 938              		.loc 1 278 0
+ 939 03e6 1821     		movs	r1, #24
+ 940 03e8 4020     		movs	r0, #64
+ 941 03ea FFF7FEFF 		bl	graphic_write_command
+ 942              	.LBB3:
+ 279:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		for(unsigned int add = 0; add<64;add++)
+ 943              		.loc 1 279 0
+ 944 03ee 0023     		movs	r3, #0
+ 945 03f0 3B60     		str	r3, [r7]
+ 946 03f2 06E0     		b	.L50
+ 947              	.L51:
+ 280:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		{
+ 281:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 			graphic_write_data(0, B_CS1|B_CS2);
+ 948              		.loc 1 281 0 discriminator 3
+ 949 03f4 1821     		movs	r1, #24
+ 950 03f6 0020     		movs	r0, #0
+ 951 03f8 FFF7FEFF 		bl	graphic_write_data
+ 279:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		for(unsigned int add = 0; add<64;add++)
+ 952              		.loc 1 279 0 discriminator 3
+ 953 03fc 3B68     		ldr	r3, [r7]
+ 954 03fe 0133     		adds	r3, r3, #1
+ 955 0400 3B60     		str	r3, [r7]
+ 956              	.L50:
+ 279:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		for(unsigned int add = 0; add<64;add++)
+ 957              		.loc 1 279 0 is_stmt 0 discriminator 1
+ 958 0402 3B68     		ldr	r3, [r7]
+ 959 0404 3F2B     		cmp	r3, #63
+ 960 0406 F5D9     		bls	.L51
+ 961              	.LBE3:
+ 275:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	{
+ 962              		.loc 1 275 0 is_stmt 1 discriminator 2
+ 963 0408 7B68     		ldr	r3, [r7, #4]
+ 964 040a 0133     		adds	r3, r3, #1
+ 965 040c 7B60     		str	r3, [r7, #4]
+ 966              	.L49:
+ 275:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	{
+ 967              		.loc 1 275 0 is_stmt 0 discriminator 1
+ 968 040e 7B68     		ldr	r3, [r7, #4]
+ 969 0410 072B     		cmp	r3, #7
+ 970 0412 DED9     		bls	.L52
+ 971              	.LBE2:
+ 282:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		}
+ 283:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
+ 284:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
+ 972              		.loc 1 284 0 is_stmt 1
+ 973 0414 C046     		nop
+ 974 0416 BD46     		mov	sp, r7
+ 975 0418 02B0     		add	sp, sp, #8
+ 976              		@ sp needed
+ 977 041a 80BD     		pop	{r7, pc}
+ 978              		.cfi_endproc
+ 979              	.LFE15:
+ 981              		.align	1
+ 982              		.global	pixel
+ 983              		.syntax unified
+ 984              		.code	16
+ 985              		.thumb_func
+ 986              		.fpu softvfp
+ 988              	pixel:
+ 989              	.LFB16:
+ 285:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
+ 286:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void pixel(int x, int y, int set)
+ 287:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
+ 990              		.loc 1 287 0
+ 991              		.cfi_startproc
+ 992              		@ args = 0, pretend = 0, frame = 32
+ 993              		@ frame_needed = 1, uses_anonymous_args = 0
+ 994 041c B0B5     		push	{r4, r5, r7, lr}
+ 995              		.cfi_def_cfa_offset 16
+ 996              		.cfi_offset 4, -16
+ 997              		.cfi_offset 5, -12
+ 998              		.cfi_offset 7, -8
+ 999              		.cfi_offset 14, -4
+ 1000 041e 88B0     		sub	sp, sp, #32
+ 1001              		.cfi_def_cfa_offset 48
+ 1002 0420 00AF     		add	r7, sp, #0
+ 1003              		.cfi_def_cfa_register 7
+ 1004 0422 F860     		str	r0, [r7, #12]
+ 1005 0424 B960     		str	r1, [r7, #8]
+ 1006 0426 7A60     		str	r2, [r7, #4]
+ 288:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t mask, c, controller;
+ 289:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	int index;
  290:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
- 291:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	index = (y-1)/8;
- 1077              		.loc 1 291 0 is_stmt 1
- 1078 0490 BB68     		ldr	r3, [r7, #8]
- 1079 0492 013B     		subs	r3, r3, #1
- 1080 0494 002B     		cmp	r3, #0
- 1081 0496 00DA     		bge	.L60
- 1082 0498 0733     		adds	r3, r3, #7
- 1083              	.L60:
- 1084 049a DB10     		asrs	r3, r3, #3
- 1085 049c BB61     		str	r3, [r7, #24]
+ 291:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if((x < 1) || (y < 1) || (x > 128) || (y > 64)) return;
+ 1007              		.loc 1 291 0
+ 1008 0428 FB68     		ldr	r3, [r7, #12]
+ 1009 042a 002B     		cmp	r3, #0
+ 1010 042c 00DC     		bgt	.LCB797
+ 1011 042e B6E0     		b	.L74	@long jump
+ 1012              	.LCB797:
+ 1013              		.loc 1 291 0 is_stmt 0 discriminator 1
+ 1014 0430 BB68     		ldr	r3, [r7, #8]
+ 1015 0432 002B     		cmp	r3, #0
+ 1016 0434 00DC     		bgt	.LCB800
+ 1017 0436 B2E0     		b	.L74	@long jump
+ 1018              	.LCB800:
+ 1019              		.loc 1 291 0 discriminator 2
+ 1020 0438 FB68     		ldr	r3, [r7, #12]
+ 1021 043a 802B     		cmp	r3, #128
+ 1022 043c 00DD     		ble	.LCB803
+ 1023 043e AEE0     		b	.L74	@long jump
+ 1024              	.LCB803:
+ 1025              		.loc 1 291 0 discriminator 3
+ 1026 0440 BB68     		ldr	r3, [r7, #8]
+ 1027 0442 402B     		cmp	r3, #64
+ 1028 0444 00DD     		ble	.LCB806
+ 1029 0446 AAE0     		b	.L74	@long jump
+ 1030              	.LCB806:
  292:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
- 293:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	switch((y-1)%8){
- 1086              		.loc 1 293 0
- 1087 049e BB68     		ldr	r3, [r7, #8]
- 1088 04a0 013B     		subs	r3, r3, #1
- 1089 04a2 534A     		ldr	r2, .L78
- 1090 04a4 1340     		ands	r3, r2
- 1091 04a6 04D5     		bpl	.L61
- 1092 04a8 013B     		subs	r3, r3, #1
- 1093 04aa 0822     		movs	r2, #8
- 1094 04ac 5242     		rsbs	r2, r2, #0
- 1095 04ae 1343     		orrs	r3, r2
- 1096 04b0 0133     		adds	r3, r3, #1
- 1097              	.L61:
- 1098 04b2 072B     		cmp	r3, #7
- 1099 04b4 2CD8     		bhi	.L62
- 1100 04b6 9A00     		lsls	r2, r3, #2
- 1101 04b8 4E4B     		ldr	r3, .L78+4
- 1102 04ba D318     		adds	r3, r2, r3
- 1103 04bc 1B68     		ldr	r3, [r3]
- 1104 04be 9F46     		mov	pc, r3
- 1105              		.section	.rodata
- 1106              		.align	2
- 1107              	.L64:
- 1108 0000 C0040000 		.word	.L63
- 1109 0004 CA040000 		.word	.L65
- 1110 0008 D4040000 		.word	.L66
- 1111 000c DE040000 		.word	.L67
- 1112 0010 E8040000 		.word	.L68
- 1113 0014 F2040000 		.word	.L69
- 1114 0018 FC040000 		.word	.L70
- 1115 001c 06050000 		.word	.L71
- 1116              		.text
- 1117              	.L63:
- 294:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 0: mask = 1; break;
- 1118              		.loc 1 294 0
- 1119 04c0 1F23     		movs	r3, #31
- 1120 04c2 FB18     		adds	r3, r7, r3
- 1121 04c4 0122     		movs	r2, #1
- 1122 04c6 1A70     		strb	r2, [r3]
- 1123 04c8 22E0     		b	.L62
- 1124              	.L65:
- 295:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 1: mask = 2; break;
- 1125              		.loc 1 295 0
- 1126 04ca 1F23     		movs	r3, #31
- 1127 04cc FB18     		adds	r3, r7, r3
- 1128 04ce 0222     		movs	r2, #2
- 1129 04d0 1A70     		strb	r2, [r3]
- 1130 04d2 1DE0     		b	.L62
- 1131              	.L66:
- 296:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 2: mask = 4; break;
- 1132              		.loc 1 296 0
- 1133 04d4 1F23     		movs	r3, #31
- 1134 04d6 FB18     		adds	r3, r7, r3
- 1135 04d8 0422     		movs	r2, #4
- 1136 04da 1A70     		strb	r2, [r3]
- 1137 04dc 18E0     		b	.L62
- 1138              	.L67:
- 297:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 3: mask = 8; break;
- 1139              		.loc 1 297 0
- 1140 04de 1F23     		movs	r3, #31
- 1141 04e0 FB18     		adds	r3, r7, r3
- 1142 04e2 0822     		movs	r2, #8
- 1143 04e4 1A70     		strb	r2, [r3]
- 1144 04e6 13E0     		b	.L62
- 1145              	.L68:
- 298:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 4: mask = 0x10; break;
- 1146              		.loc 1 298 0
- 1147 04e8 1F23     		movs	r3, #31
- 1148 04ea FB18     		adds	r3, r7, r3
- 1149 04ec 1022     		movs	r2, #16
- 1150 04ee 1A70     		strb	r2, [r3]
- 1151 04f0 0EE0     		b	.L62
- 1152              	.L69:
- 299:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 5: mask = 0x20; break;
- 1153              		.loc 1 299 0
- 1154 04f2 1F23     		movs	r3, #31
- 1155 04f4 FB18     		adds	r3, r7, r3
- 1156 04f6 2022     		movs	r2, #32
- 1157 04f8 1A70     		strb	r2, [r3]
- 1158 04fa 09E0     		b	.L62
- 1159              	.L70:
- 300:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 6: mask = 0x40; break;
- 1160              		.loc 1 300 0
- 1161 04fc 1F23     		movs	r3, #31
- 1162 04fe FB18     		adds	r3, r7, r3
- 1163 0500 4022     		movs	r2, #64
- 1164 0502 1A70     		strb	r2, [r3]
- 1165 0504 04E0     		b	.L62
- 1166              	.L71:
- 301:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 7: mask = 0x80; break;
- 1167              		.loc 1 301 0
- 1168 0506 1F23     		movs	r3, #31
- 1169 0508 FB18     		adds	r3, r7, r3
- 1170 050a 8022     		movs	r2, #128
- 1171 050c 1A70     		strb	r2, [r3]
- 1172 050e C046     		nop
- 1173              	.L62:
- 302:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
- 303:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
- 304:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if(set == 0){
- 1174              		.loc 1 304 0
- 1175 0510 7B68     		ldr	r3, [r7, #4]
- 1176 0512 002B     		cmp	r3, #0
- 1177 0514 05D1     		bne	.L72
- 305:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		mask = ~mask;
- 1178              		.loc 1 305 0
- 1179 0516 1F22     		movs	r2, #31
- 1180 0518 BB18     		adds	r3, r7, r2
- 1181 051a BA18     		adds	r2, r7, r2
- 1182 051c 1278     		ldrb	r2, [r2]
- 1183 051e D243     		mvns	r2, r2
- 1184 0520 1A70     		strb	r2, [r3]
- 1185              	.L72:
- 306:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
- 307:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if(x>64){
- 1186              		.loc 1 307 0
- 1187 0522 FB68     		ldr	r3, [r7, #12]
- 1188 0524 402B     		cmp	r3, #64
- 1189 0526 07DD     		ble	.L73
- 308:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		controller = B_CS2;
- 1190              		.loc 1 308 0
- 1191 0528 1E23     		movs	r3, #30
- 1192 052a FB18     		adds	r3, r7, r3
- 1193 052c 1022     		movs	r2, #16
- 1194 052e 1A70     		strb	r2, [r3]
- 309:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		x = x - 65;
- 1195              		.loc 1 309 0
- 1196 0530 FB68     		ldr	r3, [r7, #12]
- 1197 0532 413B     		subs	r3, r3, #65
- 1198 0534 FB60     		str	r3, [r7, #12]
- 1199 0536 06E0     		b	.L74
- 1200              	.L73:
- 310:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}else{
- 311:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		controller = B_CS1;
- 1201              		.loc 1 311 0
- 1202 0538 1E23     		movs	r3, #30
- 1203 053a FB18     		adds	r3, r7, r3
- 1204 053c 0822     		movs	r2, #8
- 1205 053e 1A70     		strb	r2, [r3]
- 312:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		x = x-1;
- 1206              		.loc 1 312 0
- 1207 0540 FB68     		ldr	r3, [r7, #12]
- 1208 0542 013B     		subs	r3, r3, #1
- 1209 0544 FB60     		str	r3, [r7, #12]
- 1210              	.L74:
- 313:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
- 314:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
- 315:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_SET_ADD | x,controller);
- 1211              		.loc 1 315 0
- 1212 0546 FB68     		ldr	r3, [r7, #12]
- 1213 0548 5BB2     		sxtb	r3, r3
- 1214 054a 4022     		movs	r2, #64
- 1215 054c 1343     		orrs	r3, r2
- 1216 054e 5BB2     		sxtb	r3, r3
- 1217 0550 DAB2     		uxtb	r2, r3
- 1218 0552 1E25     		movs	r5, #30
- 1219 0554 7B19     		adds	r3, r7, r5
- 1220 0556 1B78     		ldrb	r3, [r3]
- 1221 0558 1900     		movs	r1, r3
- 1222 055a 1000     		movs	r0, r2
- 1223 055c FFF7FEFF 		bl	graphic_write_command
- 316:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_SET_PAGE| index, controller);
- 1224              		.loc 1 316 0
- 1225 0560 BB69     		ldr	r3, [r7, #24]
- 1226 0562 5BB2     		sxtb	r3, r3
- 1227 0564 4822     		movs	r2, #72
- 1228 0566 5242     		rsbs	r2, r2, #0
- 1229 0568 1343     		orrs	r3, r2
- 1230 056a 5BB2     		sxtb	r3, r3
- 1231 056c DAB2     		uxtb	r2, r3
- 1232 056e 7B19     		adds	r3, r7, r5
- 1233 0570 1B78     		ldrb	r3, [r3]
- 1234 0572 1900     		movs	r1, r3
- 1235 0574 1000     		movs	r0, r2
- 1236 0576 FFF7FEFF 		bl	graphic_write_command
- 317:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	c = graphic_read_data(controller);
- 1237              		.loc 1 317 0
- 1238 057a 1723     		movs	r3, #23
- 1239 057c FC18     		adds	r4, r7, r3
- 1240 057e 7B19     		adds	r3, r7, r5
- 1241 0580 1B78     		ldrb	r3, [r3]
- 1242 0582 1800     		movs	r0, r3
- 1243 0584 FFF7FEFF 		bl	graphic_read_data
- 1244 0588 0300     		movs	r3, r0
- 1245 058a 2370     		strb	r3, [r4]
- 318:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_SET_ADD| x, controller);
- 1246              		.loc 1 318 0
- 1247 058c FB68     		ldr	r3, [r7, #12]
- 1248 058e 5BB2     		sxtb	r3, r3
- 1249 0590 4022     		movs	r2, #64
- 1250 0592 1343     		orrs	r3, r2
- 1251 0594 5BB2     		sxtb	r3, r3
- 1252 0596 DAB2     		uxtb	r2, r3
- 1253 0598 7B19     		adds	r3, r7, r5
- 1254 059a 1B78     		ldrb	r3, [r3]
- 1255 059c 1900     		movs	r1, r3
- 1256 059e 1000     		movs	r0, r2
- 1257 05a0 FFF7FEFF 		bl	graphic_write_command
- 319:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
- 320:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if(set){
- 1258              		.loc 1 320 0
- 1259 05a4 7B68     		ldr	r3, [r7, #4]
- 1260 05a6 002B     		cmp	r3, #0
- 1261 05a8 09D0     		beq	.L75
- 321:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		mask = mask | c;
- 1262              		.loc 1 321 0
- 1263 05aa 1F22     		movs	r2, #31
- 1264 05ac BB18     		adds	r3, r7, r2
- 1265 05ae B918     		adds	r1, r7, r2
- 1266 05b0 1722     		movs	r2, #23
- 1267 05b2 BA18     		adds	r2, r7, r2
- 1268 05b4 0978     		ldrb	r1, [r1]
- 1269 05b6 1278     		ldrb	r2, [r2]
- 1270 05b8 0A43     		orrs	r2, r1
- 1271 05ba 1A70     		strb	r2, [r3]
- 1272 05bc 08E0     		b	.L76
- 1273              	.L75:
- 322:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}else{
- 323:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		mask = mask & c;
- 1274              		.loc 1 323 0
- 1275 05be 1F22     		movs	r2, #31
- 1276 05c0 BB18     		adds	r3, r7, r2
- 1277 05c2 BA18     		adds	r2, r7, r2
- 1278 05c4 1721     		movs	r1, #23
- 1279 05c6 7918     		adds	r1, r7, r1
- 1280 05c8 1278     		ldrb	r2, [r2]
- 1281 05ca 0978     		ldrb	r1, [r1]
- 1282 05cc 0A40     		ands	r2, r1
- 1283 05ce 1A70     		strb	r2, [r3]
- 1284              	.L76:
- 324:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
- 325:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_data(mask, controller);
- 1285              		.loc 1 325 0
- 1286 05d0 1E23     		movs	r3, #30
- 1287 05d2 FB18     		adds	r3, r7, r3
- 1288 05d4 1A78     		ldrb	r2, [r3]
- 1289 05d6 1F23     		movs	r3, #31
- 1290 05d8 FB18     		adds	r3, r7, r3
- 1291 05da 1B78     		ldrb	r3, [r3]
- 1292 05dc 1100     		movs	r1, r2
- 1293 05de 1800     		movs	r0, r3
- 1294 05e0 FFF7FEFF 		bl	graphic_write_data
- 1295 05e4 00E0     		b	.L56
- 1296              	.L77:
- 289:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
- 1297              		.loc 1 289 0
- 1298 05e6 C046     		nop
- 1299              	.L56:
- 326:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
- 1300              		.loc 1 326 0
- 1301 05e8 BD46     		mov	sp, r7
- 1302 05ea 08B0     		add	sp, sp, #32
- 1303              		@ sp needed
- 1304 05ec B0BD     		pop	{r4, r5, r7, pc}
- 1305              	.L79:
- 1306 05ee C046     		.align	2
- 1307              	.L78:
- 1308 05f0 07000080 		.word	-2147483641
- 1309 05f4 00000000 		.word	.L64
- 1310              		.cfi_endproc
- 1311              	.LFE16:
- 1313              		.align	1
- 1314              		.global	draw_object
- 1315              		.syntax unified
- 1316              		.code	16
- 1317              		.thumb_func
- 1318              		.fpu softvfp
- 1320              	draw_object:
- 1321              	.LFB17:
- 327:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
- 328:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void draw_object(POBJECT obj)
- 329:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
- 1322              		.loc 1 329 0
- 1323              		.cfi_startproc
- 1324              		@ args = 0, pretend = 0, frame = 16
- 1325              		@ frame_needed = 1, uses_anonymous_args = 0
- 1326 05f8 B0B5     		push	{r4, r5, r7, lr}
- 1327              		.cfi_def_cfa_offset 16
- 1328              		.cfi_offset 4, -16
- 1329              		.cfi_offset 5, -12
- 1330              		.cfi_offset 7, -8
- 1331              		.cfi_offset 14, -4
- 1332 05fa 84B0     		sub	sp, sp, #16
- 1333              		.cfi_def_cfa_offset 32
- 1334 05fc 00AF     		add	r7, sp, #0
- 1335              		.cfi_def_cfa_register 7
- 1336 05fe 7860     		str	r0, [r7, #4]
- 330:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t p;
- 331:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t n = obj->geo->numpoints;
- 1337              		.loc 1 331 0
- 1338 0600 7B68     		ldr	r3, [r7, #4]
- 1339 0602 1B68     		ldr	r3, [r3]
- 1340 0604 1A68     		ldr	r2, [r3]
- 1341 0606 0E23     		movs	r3, #14
- 1342 0608 FB18     		adds	r3, r7, r3
- 1343 060a 1A70     		strb	r2, [r3]
- 332:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t x_coord;
- 333:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t y_coord;
- 334:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
- 335:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	POINT s;
- 336:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	for(p = 0; p<n; p++){
- 1344              		.loc 1 336 0
- 1345 060c 0F23     		movs	r3, #15
- 1346 060e FB18     		adds	r3, r7, r3
- 1347 0610 0022     		movs	r2, #0
- 1348 0612 1A70     		strb	r2, [r3]
- 1349 0614 2DE0     		b	.L81
- 1350              	.L82:
- 337:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		//s = obj -> geo -> px[p];
- 338:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		x_coord  = obj->posx + obj->geo->px[p].x;
- 1351              		.loc 1 338 0 discriminator 3
- 1352 0616 7B68     		ldr	r3, [r7, #4]
- 1353 0618 DB68     		ldr	r3, [r3, #12]
- 1354 061a D9B2     		uxtb	r1, r3
- 1355 061c 7B68     		ldr	r3, [r7, #4]
- 1356 061e 1A68     		ldr	r2, [r3]
- 1357 0620 0F24     		movs	r4, #15
- 1358 0622 3B19     		adds	r3, r7, r4
- 1359 0624 1B78     		ldrb	r3, [r3]
- 1360 0626 0433     		adds	r3, r3, #4
- 1361 0628 5B00     		lsls	r3, r3, #1
- 1362 062a D318     		adds	r3, r2, r3
- 1363 062c 0433     		adds	r3, r3, #4
- 1364 062e 1A78     		ldrb	r2, [r3]
- 1365 0630 0D20     		movs	r0, #13
- 1366 0632 3B18     		adds	r3, r7, r0
- 1367 0634 8A18     		adds	r2, r1, r2
- 1368 0636 1A70     		strb	r2, [r3]
- 339:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		y_coord = obj->posy + obj->geo->px[p].y;
- 1369              		.loc 1 339 0 discriminator 3
- 1370 0638 7B68     		ldr	r3, [r7, #4]
- 1371 063a 1B69     		ldr	r3, [r3, #16]
- 1372 063c D9B2     		uxtb	r1, r3
- 1373 063e 7B68     		ldr	r3, [r7, #4]
- 1374 0640 1A68     		ldr	r2, [r3]
- 1375 0642 3B19     		adds	r3, r7, r4
- 1376 0644 1B78     		ldrb	r3, [r3]
- 1377 0646 0433     		adds	r3, r3, #4
- 1378 0648 5B00     		lsls	r3, r3, #1
- 1379 064a D318     		adds	r3, r2, r3
- 1380 064c 0533     		adds	r3, r3, #5
- 1381 064e 1A78     		ldrb	r2, [r3]
- 1382 0650 0C25     		movs	r5, #12
- 1383 0652 7B19     		adds	r3, r7, r5
- 1384 0654 8A18     		adds	r2, r1, r2
- 1385 0656 1A70     		strb	r2, [r3]
- 340:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		//point = obj->geo->px;
- 341:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		//pixel(s.x, s.y,1);
- 342:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		pixel(x_coord,y_coord,1);
- 1386              		.loc 1 342 0 discriminator 3
- 1387 0658 3B18     		adds	r3, r7, r0
- 1388 065a 1878     		ldrb	r0, [r3]
- 1389 065c 7B19     		adds	r3, r7, r5
- 1390 065e 1B78     		ldrb	r3, [r3]
- 1391 0660 0122     		movs	r2, #1
- 1392 0662 1900     		movs	r1, r3
- 1393 0664 FFF7FEFF 		bl	pixel
- 336:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		//s = obj -> geo -> px[p];
- 1394              		.loc 1 336 0 discriminator 3
- 1395 0668 3B19     		adds	r3, r7, r4
- 1396 066a 1A78     		ldrb	r2, [r3]
- 1397 066c 3B19     		adds	r3, r7, r4
- 1398 066e 0132     		adds	r2, r2, #1
- 1399 0670 1A70     		strb	r2, [r3]
- 1400              	.L81:
- 336:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		//s = obj -> geo -> px[p];
- 1401              		.loc 1 336 0 is_stmt 0 discriminator 1
- 1402 0672 0F23     		movs	r3, #15
- 1403 0674 FA18     		adds	r2, r7, r3
- 1404 0676 0E23     		movs	r3, #14
- 1405 0678 FB18     		adds	r3, r7, r3
- 1406 067a 1278     		ldrb	r2, [r2]
- 1407 067c 1B78     		ldrb	r3, [r3]
- 1408 067e 9A42     		cmp	r2, r3
- 1409 0680 C9D3     		bcc	.L82
- 343:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
- 344:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
- 1410              		.loc 1 344 0 is_stmt 1
- 1411 0682 C046     		nop
- 1412 0684 BD46     		mov	sp, r7
- 1413 0686 04B0     		add	sp, sp, #16
- 1414              		@ sp needed
- 1415 0688 B0BD     		pop	{r4, r5, r7, pc}
- 1416              		.cfi_endproc
- 1417              	.LFE17:
- 1419              		.align	1
- 1420              		.global	clear_object
- 1421              		.syntax unified
- 1422              		.code	16
- 1423              		.thumb_func
- 1424              		.fpu softvfp
- 1426              	clear_object:
- 1427              	.LFB18:
- 345:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
- 346:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void clear_object(POBJECT obj)
- 347:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
- 1428              		.loc 1 347 0
- 1429              		.cfi_startproc
- 1430              		@ args = 0, pretend = 0, frame = 16
- 1431              		@ frame_needed = 1, uses_anonymous_args = 0
- 1432 068a B0B5     		push	{r4, r5, r7, lr}
- 1433              		.cfi_def_cfa_offset 16
- 1434              		.cfi_offset 4, -16
- 1435              		.cfi_offset 5, -12
- 1436              		.cfi_offset 7, -8
- 1437              		.cfi_offset 14, -4
- 1438 068c 84B0     		sub	sp, sp, #16
- 1439              		.cfi_def_cfa_offset 32
- 1440 068e 00AF     		add	r7, sp, #0
- 1441              		.cfi_def_cfa_register 7
- 1442 0690 7860     		str	r0, [r7, #4]
- 348:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t p;
- 349:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t n = obj->geo->numpoints;
- 1443              		.loc 1 349 0
- 1444 0692 7B68     		ldr	r3, [r7, #4]
- 1445 0694 1B68     		ldr	r3, [r3]
- 1446 0696 1A68     		ldr	r2, [r3]
- 1447 0698 0E23     		movs	r3, #14
- 1448 069a FB18     		adds	r3, r7, r3
- 1449 069c 1A70     		strb	r2, [r3]
- 350:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t x_coord;
- 351:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t y_coord;
- 352:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	for(p = 0; p<n; p++){
- 1450              		.loc 1 352 0
- 1451 069e 0F23     		movs	r3, #15
- 1452 06a0 FB18     		adds	r3, r7, r3
- 1453 06a2 0022     		movs	r2, #0
- 1454 06a4 1A70     		strb	r2, [r3]
- 1455 06a6 2DE0     		b	.L84
- 1456              	.L85:
- 353:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		x_coord  = obj->posx + obj->geo->px[p].x;
- 1457              		.loc 1 353 0 discriminator 3
- 1458 06a8 7B68     		ldr	r3, [r7, #4]
- 1459 06aa DB68     		ldr	r3, [r3, #12]
- 1460 06ac D9B2     		uxtb	r1, r3
- 1461 06ae 7B68     		ldr	r3, [r7, #4]
- 1462 06b0 1A68     		ldr	r2, [r3]
- 1463 06b2 0F24     		movs	r4, #15
- 1464 06b4 3B19     		adds	r3, r7, r4
- 1465 06b6 1B78     		ldrb	r3, [r3]
- 1466 06b8 0433     		adds	r3, r3, #4
- 1467 06ba 5B00     		lsls	r3, r3, #1
- 1468 06bc D318     		adds	r3, r2, r3
- 1469 06be 0433     		adds	r3, r3, #4
- 1470 06c0 1A78     		ldrb	r2, [r3]
- 1471 06c2 0D20     		movs	r0, #13
- 1472 06c4 3B18     		adds	r3, r7, r0
- 1473 06c6 8A18     		adds	r2, r1, r2
- 1474 06c8 1A70     		strb	r2, [r3]
- 354:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		y_coord = obj->posy + obj->geo->px[p].y;
- 1475              		.loc 1 354 0 discriminator 3
- 1476 06ca 7B68     		ldr	r3, [r7, #4]
- 1477 06cc 1B69     		ldr	r3, [r3, #16]
- 1478 06ce D9B2     		uxtb	r1, r3
- 1479 06d0 7B68     		ldr	r3, [r7, #4]
- 1480 06d2 1A68     		ldr	r2, [r3]
- 1481 06d4 3B19     		adds	r3, r7, r4
- 1482 06d6 1B78     		ldrb	r3, [r3]
- 1483 06d8 0433     		adds	r3, r3, #4
- 1484 06da 5B00     		lsls	r3, r3, #1
- 1485 06dc D318     		adds	r3, r2, r3
- 1486 06de 0533     		adds	r3, r3, #5
- 1487 06e0 1A78     		ldrb	r2, [r3]
- 1488 06e2 0C25     		movs	r5, #12
- 1489 06e4 7B19     		adds	r3, r7, r5
- 1490 06e6 8A18     		adds	r2, r1, r2
- 1491 06e8 1A70     		strb	r2, [r3]
- 355:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		pixel(x_coord,y_coord,0);
- 1492              		.loc 1 355 0 discriminator 3
- 1493 06ea 3B18     		adds	r3, r7, r0
- 1494 06ec 1878     		ldrb	r0, [r3]
- 1495 06ee 7B19     		adds	r3, r7, r5
- 1496 06f0 1B78     		ldrb	r3, [r3]
- 1497 06f2 0022     		movs	r2, #0
- 1498 06f4 1900     		movs	r1, r3
- 1499 06f6 FFF7FEFF 		bl	pixel
- 352:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		x_coord  = obj->posx + obj->geo->px[p].x;
- 1500              		.loc 1 352 0 discriminator 3
- 1501 06fa 3B19     		adds	r3, r7, r4
- 1502 06fc 1A78     		ldrb	r2, [r3]
- 1503 06fe 3B19     		adds	r3, r7, r4
- 1504 0700 0132     		adds	r2, r2, #1
- 1505 0702 1A70     		strb	r2, [r3]
- 1506              	.L84:
- 352:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		x_coord  = obj->posx + obj->geo->px[p].x;
- 1507              		.loc 1 352 0 is_stmt 0 discriminator 1
- 1508 0704 0F23     		movs	r3, #15
- 1509 0706 FA18     		adds	r2, r7, r3
- 1510 0708 0E23     		movs	r3, #14
- 1511 070a FB18     		adds	r3, r7, r3
- 1512 070c 1278     		ldrb	r2, [r2]
- 1513 070e 1B78     		ldrb	r3, [r3]
- 1514 0710 9A42     		cmp	r2, r3
- 1515 0712 C9D3     		bcc	.L85
- 356:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
- 357:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
- 1516              		.loc 1 357 0 is_stmt 1
- 1517 0714 C046     		nop
- 1518 0716 BD46     		mov	sp, r7
- 1519 0718 04B0     		add	sp, sp, #16
- 1520              		@ sp needed
- 1521 071a B0BD     		pop	{r4, r5, r7, pc}
- 1522              		.cfi_endproc
- 1523              	.LFE18:
- 1525              		.align	1
- 1526              		.global	set_object_speed
- 1527              		.syntax unified
- 1528              		.code	16
- 1529              		.thumb_func
- 1530              		.fpu softvfp
- 1532              	set_object_speed:
- 1533              	.LFB19:
- 358:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
- 359:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void set_object_speed(POBJECT o, int speedx, int speedy){
- 1534              		.loc 1 359 0
- 1535              		.cfi_startproc
- 1536              		@ args = 0, pretend = 0, frame = 16
- 1537              		@ frame_needed = 1, uses_anonymous_args = 0
- 1538 071c 80B5     		push	{r7, lr}
- 1539              		.cfi_def_cfa_offset 8
- 1540              		.cfi_offset 7, -8
- 1541              		.cfi_offset 14, -4
- 1542 071e 84B0     		sub	sp, sp, #16
- 1543              		.cfi_def_cfa_offset 24
- 1544 0720 00AF     		add	r7, sp, #0
- 1545              		.cfi_def_cfa_register 7
- 1546 0722 F860     		str	r0, [r7, #12]
- 1547 0724 B960     		str	r1, [r7, #8]
- 1548 0726 7A60     		str	r2, [r7, #4]
- 360:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	o->dirx = speedx;
- 1549              		.loc 1 360 0
- 1550 0728 FB68     		ldr	r3, [r7, #12]
- 1551 072a BA68     		ldr	r2, [r7, #8]
- 1552 072c 5A60     		str	r2, [r3, #4]
- 361:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	o->diry = speedy;
- 1553              		.loc 1 361 0
- 1554 072e FB68     		ldr	r3, [r7, #12]
- 1555 0730 7A68     		ldr	r2, [r7, #4]
- 1556 0732 9A60     		str	r2, [r3, #8]
- 362:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
- 1557              		.loc 1 362 0
- 1558 0734 C046     		nop
- 1559 0736 BD46     		mov	sp, r7
- 1560 0738 04B0     		add	sp, sp, #16
- 1561              		@ sp needed
- 1562 073a 80BD     		pop	{r7, pc}
- 1563              		.cfi_endproc
- 1564              	.LFE19:
- 1566              		.align	1
- 1567              		.global	move_object
- 1568              		.syntax unified
- 1569              		.code	16
- 1570              		.thumb_func
- 1571              		.fpu softvfp
- 1573              	move_object:
- 1574              	.LFB20:
- 363:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
- 364:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void move_object(POBJECT o){
- 1575              		.loc 1 364 0
- 1576              		.cfi_startproc
- 1577              		@ args = 0, pretend = 0, frame = 8
- 1578              		@ frame_needed = 1, uses_anonymous_args = 0
- 1579 073c 80B5     		push	{r7, lr}
- 1580              		.cfi_def_cfa_offset 8
- 1581              		.cfi_offset 7, -8
- 1582              		.cfi_offset 14, -4
- 1583 073e 82B0     		sub	sp, sp, #8
- 1584              		.cfi_def_cfa_offset 16
- 1585 0740 00AF     		add	r7, sp, #0
- 1586              		.cfi_def_cfa_register 7
- 1587 0742 7860     		str	r0, [r7, #4]
- 365:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	clear_object(o);
- 1588              		.loc 1 365 0
- 1589 0744 7B68     		ldr	r3, [r7, #4]
- 1590 0746 1800     		movs	r0, r3
- 1591 0748 FFF7FEFF 		bl	clear_object
- 366:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	o->posx += o->dirx;
- 1592              		.loc 1 366 0
- 1593 074c 7B68     		ldr	r3, [r7, #4]
- 1594 074e DA68     		ldr	r2, [r3, #12]
- 1595 0750 7B68     		ldr	r3, [r7, #4]
- 1596 0752 5B68     		ldr	r3, [r3, #4]
- 1597 0754 D218     		adds	r2, r2, r3
- 1598 0756 7B68     		ldr	r3, [r7, #4]
- 1599 0758 DA60     		str	r2, [r3, #12]
- 367:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	o->posy += o->diry;
- 1600              		.loc 1 367 0
- 1601 075a 7B68     		ldr	r3, [r7, #4]
- 1602 075c 1A69     		ldr	r2, [r3, #16]
- 1603 075e 7B68     		ldr	r3, [r7, #4]
- 1604 0760 9B68     		ldr	r3, [r3, #8]
- 1605 0762 D218     		adds	r2, r2, r3
+ 293:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	index = (y-1)/8;
+ 1031              		.loc 1 293 0 is_stmt 1
+ 1032 0448 BB68     		ldr	r3, [r7, #8]
+ 1033 044a 013B     		subs	r3, r3, #1
+ 1034 044c 002B     		cmp	r3, #0
+ 1035 044e 00DA     		bge	.L57
+ 1036 0450 0733     		adds	r3, r3, #7
+ 1037              	.L57:
+ 1038 0452 DB10     		asrs	r3, r3, #3
+ 1039 0454 BB61     		str	r3, [r7, #24]
+ 294:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
+ 295:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	switch((y-1)%8){
+ 1040              		.loc 1 295 0
+ 1041 0456 BB68     		ldr	r3, [r7, #8]
+ 1042 0458 013B     		subs	r3, r3, #1
+ 1043 045a 534A     		ldr	r2, .L75
+ 1044 045c 1340     		ands	r3, r2
+ 1045 045e 04D5     		bpl	.L58
+ 1046 0460 013B     		subs	r3, r3, #1
+ 1047 0462 0822     		movs	r2, #8
+ 1048 0464 5242     		rsbs	r2, r2, #0
+ 1049 0466 1343     		orrs	r3, r2
+ 1050 0468 0133     		adds	r3, r3, #1
+ 1051              	.L58:
+ 1052 046a 072B     		cmp	r3, #7
+ 1053 046c 2CD8     		bhi	.L59
+ 1054 046e 9A00     		lsls	r2, r3, #2
+ 1055 0470 4E4B     		ldr	r3, .L75+4
+ 1056 0472 D318     		adds	r3, r2, r3
+ 1057 0474 1B68     		ldr	r3, [r3]
+ 1058 0476 9F46     		mov	pc, r3
+ 1059              		.section	.rodata
+ 1060              		.align	2
+ 1061              	.L61:
+ 1062 0000 78040000 		.word	.L60
+ 1063 0004 82040000 		.word	.L62
+ 1064 0008 8C040000 		.word	.L63
+ 1065 000c 96040000 		.word	.L64
+ 1066 0010 A0040000 		.word	.L65
+ 1067 0014 AA040000 		.word	.L66
+ 1068 0018 B4040000 		.word	.L67
+ 1069 001c BE040000 		.word	.L68
+ 1070              		.text
+ 1071              	.L60:
+ 296:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 0: mask = 1; break;
+ 1072              		.loc 1 296 0
+ 1073 0478 1F23     		movs	r3, #31
+ 1074 047a FB18     		adds	r3, r7, r3
+ 1075 047c 0122     		movs	r2, #1
+ 1076 047e 1A70     		strb	r2, [r3]
+ 1077 0480 22E0     		b	.L59
+ 1078              	.L62:
+ 297:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 1: mask = 2; break;
+ 1079              		.loc 1 297 0
+ 1080 0482 1F23     		movs	r3, #31
+ 1081 0484 FB18     		adds	r3, r7, r3
+ 1082 0486 0222     		movs	r2, #2
+ 1083 0488 1A70     		strb	r2, [r3]
+ 1084 048a 1DE0     		b	.L59
+ 1085              	.L63:
+ 298:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 2: mask = 4; break;
+ 1086              		.loc 1 298 0
+ 1087 048c 1F23     		movs	r3, #31
+ 1088 048e FB18     		adds	r3, r7, r3
+ 1089 0490 0422     		movs	r2, #4
+ 1090 0492 1A70     		strb	r2, [r3]
+ 1091 0494 18E0     		b	.L59
+ 1092              	.L64:
+ 299:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 3: mask = 8; break;
+ 1093              		.loc 1 299 0
+ 1094 0496 1F23     		movs	r3, #31
+ 1095 0498 FB18     		adds	r3, r7, r3
+ 1096 049a 0822     		movs	r2, #8
+ 1097 049c 1A70     		strb	r2, [r3]
+ 1098 049e 13E0     		b	.L59
+ 1099              	.L65:
+ 300:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 4: mask = 0x10; break;
+ 1100              		.loc 1 300 0
+ 1101 04a0 1F23     		movs	r3, #31
+ 1102 04a2 FB18     		adds	r3, r7, r3
+ 1103 04a4 1022     		movs	r2, #16
+ 1104 04a6 1A70     		strb	r2, [r3]
+ 1105 04a8 0EE0     		b	.L59
+ 1106              	.L66:
+ 301:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 5: mask = 0x20; break;
+ 1107              		.loc 1 301 0
+ 1108 04aa 1F23     		movs	r3, #31
+ 1109 04ac FB18     		adds	r3, r7, r3
+ 1110 04ae 2022     		movs	r2, #32
+ 1111 04b0 1A70     		strb	r2, [r3]
+ 1112 04b2 09E0     		b	.L59
+ 1113              	.L67:
+ 302:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 6: mask = 0x40; break;
+ 1114              		.loc 1 302 0
+ 1115 04b4 1F23     		movs	r3, #31
+ 1116 04b6 FB18     		adds	r3, r7, r3
+ 1117 04b8 4022     		movs	r2, #64
+ 1118 04ba 1A70     		strb	r2, [r3]
+ 1119 04bc 04E0     		b	.L59
+ 1120              	.L68:
+ 303:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		case 7: mask = 0x80; break;
+ 1121              		.loc 1 303 0
+ 1122 04be 1F23     		movs	r3, #31
+ 1123 04c0 FB18     		adds	r3, r7, r3
+ 1124 04c2 8022     		movs	r2, #128
+ 1125 04c4 1A70     		strb	r2, [r3]
+ 1126 04c6 C046     		nop
+ 1127              	.L59:
+ 304:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
+ 305:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
+ 306:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if(set == 0){
+ 1128              		.loc 1 306 0
+ 1129 04c8 7B68     		ldr	r3, [r7, #4]
+ 1130 04ca 002B     		cmp	r3, #0
+ 1131 04cc 05D1     		bne	.L69
+ 307:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		mask = ~mask;
+ 1132              		.loc 1 307 0
+ 1133 04ce 1F22     		movs	r2, #31
+ 1134 04d0 BB18     		adds	r3, r7, r2
+ 1135 04d2 BA18     		adds	r2, r7, r2
+ 1136 04d4 1278     		ldrb	r2, [r2]
+ 1137 04d6 D243     		mvns	r2, r2
+ 1138 04d8 1A70     		strb	r2, [r3]
+ 1139              	.L69:
+ 308:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
+ 309:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if(x>64){
+ 1140              		.loc 1 309 0
+ 1141 04da FB68     		ldr	r3, [r7, #12]
+ 1142 04dc 402B     		cmp	r3, #64
+ 1143 04de 07DD     		ble	.L70
+ 310:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		controller = B_CS2;
+ 1144              		.loc 1 310 0
+ 1145 04e0 1E23     		movs	r3, #30
+ 1146 04e2 FB18     		adds	r3, r7, r3
+ 1147 04e4 1022     		movs	r2, #16
+ 1148 04e6 1A70     		strb	r2, [r3]
+ 311:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		x = x - 65;
+ 1149              		.loc 1 311 0
+ 1150 04e8 FB68     		ldr	r3, [r7, #12]
+ 1151 04ea 413B     		subs	r3, r3, #65
+ 1152 04ec FB60     		str	r3, [r7, #12]
+ 1153 04ee 06E0     		b	.L71
+ 1154              	.L70:
+ 312:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}else{
+ 313:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		controller = B_CS1;
+ 1155              		.loc 1 313 0
+ 1156 04f0 1E23     		movs	r3, #30
+ 1157 04f2 FB18     		adds	r3, r7, r3
+ 1158 04f4 0822     		movs	r2, #8
+ 1159 04f6 1A70     		strb	r2, [r3]
+ 314:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		x = x-1;
+ 1160              		.loc 1 314 0
+ 1161 04f8 FB68     		ldr	r3, [r7, #12]
+ 1162 04fa 013B     		subs	r3, r3, #1
+ 1163 04fc FB60     		str	r3, [r7, #12]
+ 1164              	.L71:
+ 315:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
+ 316:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
+ 317:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_SET_ADD | x,controller);
+ 1165              		.loc 1 317 0
+ 1166 04fe FB68     		ldr	r3, [r7, #12]
+ 1167 0500 5BB2     		sxtb	r3, r3
+ 1168 0502 4022     		movs	r2, #64
+ 1169 0504 1343     		orrs	r3, r2
+ 1170 0506 5BB2     		sxtb	r3, r3
+ 1171 0508 DAB2     		uxtb	r2, r3
+ 1172 050a 1E25     		movs	r5, #30
+ 1173 050c 7B19     		adds	r3, r7, r5
+ 1174 050e 1B78     		ldrb	r3, [r3]
+ 1175 0510 1900     		movs	r1, r3
+ 1176 0512 1000     		movs	r0, r2
+ 1177 0514 FFF7FEFF 		bl	graphic_write_command
+ 318:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_SET_PAGE| index, controller);
+ 1178              		.loc 1 318 0
+ 1179 0518 BB69     		ldr	r3, [r7, #24]
+ 1180 051a 5BB2     		sxtb	r3, r3
+ 1181 051c 4822     		movs	r2, #72
+ 1182 051e 5242     		rsbs	r2, r2, #0
+ 1183 0520 1343     		orrs	r3, r2
+ 1184 0522 5BB2     		sxtb	r3, r3
+ 1185 0524 DAB2     		uxtb	r2, r3
+ 1186 0526 7B19     		adds	r3, r7, r5
+ 1187 0528 1B78     		ldrb	r3, [r3]
+ 1188 052a 1900     		movs	r1, r3
+ 1189 052c 1000     		movs	r0, r2
+ 1190 052e FFF7FEFF 		bl	graphic_write_command
+ 319:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	c = graphic_read_data(controller);
+ 1191              		.loc 1 319 0
+ 1192 0532 1723     		movs	r3, #23
+ 1193 0534 FC18     		adds	r4, r7, r3
+ 1194 0536 7B19     		adds	r3, r7, r5
+ 1195 0538 1B78     		ldrb	r3, [r3]
+ 1196 053a 1800     		movs	r0, r3
+ 1197 053c FFF7FEFF 		bl	graphic_read_data
+ 1198 0540 0300     		movs	r3, r0
+ 1199 0542 2370     		strb	r3, [r4]
+ 320:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_command(LCD_SET_ADD| x, controller);
+ 1200              		.loc 1 320 0
+ 1201 0544 FB68     		ldr	r3, [r7, #12]
+ 1202 0546 5BB2     		sxtb	r3, r3
+ 1203 0548 4022     		movs	r2, #64
+ 1204 054a 1343     		orrs	r3, r2
+ 1205 054c 5BB2     		sxtb	r3, r3
+ 1206 054e DAB2     		uxtb	r2, r3
+ 1207 0550 7B19     		adds	r3, r7, r5
+ 1208 0552 1B78     		ldrb	r3, [r3]
+ 1209 0554 1900     		movs	r1, r3
+ 1210 0556 1000     		movs	r0, r2
+ 1211 0558 FFF7FEFF 		bl	graphic_write_command
+ 321:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
+ 322:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if(set){
+ 1212              		.loc 1 322 0
+ 1213 055c 7B68     		ldr	r3, [r7, #4]
+ 1214 055e 002B     		cmp	r3, #0
+ 1215 0560 09D0     		beq	.L72
+ 323:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		mask = mask | c;
+ 1216              		.loc 1 323 0
+ 1217 0562 1F22     		movs	r2, #31
+ 1218 0564 BB18     		adds	r3, r7, r2
+ 1219 0566 B918     		adds	r1, r7, r2
+ 1220 0568 1722     		movs	r2, #23
+ 1221 056a BA18     		adds	r2, r7, r2
+ 1222 056c 0978     		ldrb	r1, [r1]
+ 1223 056e 1278     		ldrb	r2, [r2]
+ 1224 0570 0A43     		orrs	r2, r1
+ 1225 0572 1A70     		strb	r2, [r3]
+ 1226 0574 08E0     		b	.L73
+ 1227              	.L72:
+ 324:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}else{
+ 325:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		mask = mask & c;
+ 1228              		.loc 1 325 0
+ 1229 0576 1F22     		movs	r2, #31
+ 1230 0578 BB18     		adds	r3, r7, r2
+ 1231 057a BA18     		adds	r2, r7, r2
+ 1232 057c 1721     		movs	r1, #23
+ 1233 057e 7918     		adds	r1, r7, r1
+ 1234 0580 1278     		ldrb	r2, [r2]
+ 1235 0582 0978     		ldrb	r1, [r1]
+ 1236 0584 0A40     		ands	r2, r1
+ 1237 0586 1A70     		strb	r2, [r3]
+ 1238              	.L73:
+ 326:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
+ 327:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_write_data(mask, controller);
+ 1239              		.loc 1 327 0
+ 1240 0588 1E23     		movs	r3, #30
+ 1241 058a FB18     		adds	r3, r7, r3
+ 1242 058c 1A78     		ldrb	r2, [r3]
+ 1243 058e 1F23     		movs	r3, #31
+ 1244 0590 FB18     		adds	r3, r7, r3
+ 1245 0592 1B78     		ldrb	r3, [r3]
+ 1246 0594 1100     		movs	r1, r2
+ 1247 0596 1800     		movs	r0, r3
+ 1248 0598 FFF7FEFF 		bl	graphic_write_data
+ 1249 059c 00E0     		b	.L53
+ 1250              	.L74:
+ 291:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
+ 1251              		.loc 1 291 0
+ 1252 059e C046     		nop
+ 1253              	.L53:
+ 328:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
+ 1254              		.loc 1 328 0
+ 1255 05a0 BD46     		mov	sp, r7
+ 1256 05a2 08B0     		add	sp, sp, #32
+ 1257              		@ sp needed
+ 1258 05a4 B0BD     		pop	{r4, r5, r7, pc}
+ 1259              	.L76:
+ 1260 05a6 C046     		.align	2
+ 1261              	.L75:
+ 1262 05a8 07000080 		.word	-2147483641
+ 1263 05ac 00000000 		.word	.L61
+ 1264              		.cfi_endproc
+ 1265              	.LFE16:
+ 1267              		.align	1
+ 1268              		.global	draw_object
+ 1269              		.syntax unified
+ 1270              		.code	16
+ 1271              		.thumb_func
+ 1272              		.fpu softvfp
+ 1274              	draw_object:
+ 1275              	.LFB17:
+ 329:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
+ 330:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void draw_object(POBJECT obj)
+ 331:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
+ 1276              		.loc 1 331 0
+ 1277              		.cfi_startproc
+ 1278              		@ args = 0, pretend = 0, frame = 16
+ 1279              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1280 05b0 B0B5     		push	{r4, r5, r7, lr}
+ 1281              		.cfi_def_cfa_offset 16
+ 1282              		.cfi_offset 4, -16
+ 1283              		.cfi_offset 5, -12
+ 1284              		.cfi_offset 7, -8
+ 1285              		.cfi_offset 14, -4
+ 1286 05b2 84B0     		sub	sp, sp, #16
+ 1287              		.cfi_def_cfa_offset 32
+ 1288 05b4 00AF     		add	r7, sp, #0
+ 1289              		.cfi_def_cfa_register 7
+ 1290 05b6 7860     		str	r0, [r7, #4]
+ 332:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t p;
+ 333:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t n = obj->geo->numpoints;
+ 1291              		.loc 1 333 0
+ 1292 05b8 7B68     		ldr	r3, [r7, #4]
+ 1293 05ba 1B68     		ldr	r3, [r3]
+ 1294 05bc 1A68     		ldr	r2, [r3]
+ 1295 05be 0E23     		movs	r3, #14
+ 1296 05c0 FB18     		adds	r3, r7, r3
+ 1297 05c2 1A70     		strb	r2, [r3]
+ 334:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t x_coord;
+ 335:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t y_coord;
+ 336:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
+ 337:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	POINT s;
+ 338:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	for(p = 0; p<n; p++){
+ 1298              		.loc 1 338 0
+ 1299 05c4 0F23     		movs	r3, #15
+ 1300 05c6 FB18     		adds	r3, r7, r3
+ 1301 05c8 0022     		movs	r2, #0
+ 1302 05ca 1A70     		strb	r2, [r3]
+ 1303 05cc 2DE0     		b	.L78
+ 1304              	.L79:
+ 339:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		//s = obj -> geo -> px[p];
+ 340:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		x_coord  = obj->posx + obj->geo->px[p].x;
+ 1305              		.loc 1 340 0 discriminator 3
+ 1306 05ce 7B68     		ldr	r3, [r7, #4]
+ 1307 05d0 DB68     		ldr	r3, [r3, #12]
+ 1308 05d2 D9B2     		uxtb	r1, r3
+ 1309 05d4 7B68     		ldr	r3, [r7, #4]
+ 1310 05d6 1A68     		ldr	r2, [r3]
+ 1311 05d8 0F24     		movs	r4, #15
+ 1312 05da 3B19     		adds	r3, r7, r4
+ 1313 05dc 1B78     		ldrb	r3, [r3]
+ 1314 05de 0433     		adds	r3, r3, #4
+ 1315 05e0 5B00     		lsls	r3, r3, #1
+ 1316 05e2 D318     		adds	r3, r2, r3
+ 1317 05e4 0433     		adds	r3, r3, #4
+ 1318 05e6 1A78     		ldrb	r2, [r3]
+ 1319 05e8 0D20     		movs	r0, #13
+ 1320 05ea 3B18     		adds	r3, r7, r0
+ 1321 05ec 8A18     		adds	r2, r1, r2
+ 1322 05ee 1A70     		strb	r2, [r3]
+ 341:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		y_coord = obj->posy + obj->geo->px[p].y;
+ 1323              		.loc 1 341 0 discriminator 3
+ 1324 05f0 7B68     		ldr	r3, [r7, #4]
+ 1325 05f2 1B69     		ldr	r3, [r3, #16]
+ 1326 05f4 D9B2     		uxtb	r1, r3
+ 1327 05f6 7B68     		ldr	r3, [r7, #4]
+ 1328 05f8 1A68     		ldr	r2, [r3]
+ 1329 05fa 3B19     		adds	r3, r7, r4
+ 1330 05fc 1B78     		ldrb	r3, [r3]
+ 1331 05fe 0433     		adds	r3, r3, #4
+ 1332 0600 5B00     		lsls	r3, r3, #1
+ 1333 0602 D318     		adds	r3, r2, r3
+ 1334 0604 0533     		adds	r3, r3, #5
+ 1335 0606 1A78     		ldrb	r2, [r3]
+ 1336 0608 0C25     		movs	r5, #12
+ 1337 060a 7B19     		adds	r3, r7, r5
+ 1338 060c 8A18     		adds	r2, r1, r2
+ 1339 060e 1A70     		strb	r2, [r3]
+ 342:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		//point = obj->geo->px;
+ 343:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		//pixel(s.x, s.y,1);
+ 344:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		pixel(x_coord,y_coord,1);
+ 1340              		.loc 1 344 0 discriminator 3
+ 1341 0610 3B18     		adds	r3, r7, r0
+ 1342 0612 1878     		ldrb	r0, [r3]
+ 1343 0614 7B19     		adds	r3, r7, r5
+ 1344 0616 1B78     		ldrb	r3, [r3]
+ 1345 0618 0122     		movs	r2, #1
+ 1346 061a 1900     		movs	r1, r3
+ 1347 061c FFF7FEFF 		bl	pixel
+ 338:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		//s = obj -> geo -> px[p];
+ 1348              		.loc 1 338 0 discriminator 3
+ 1349 0620 3B19     		adds	r3, r7, r4
+ 1350 0622 1A78     		ldrb	r2, [r3]
+ 1351 0624 3B19     		adds	r3, r7, r4
+ 1352 0626 0132     		adds	r2, r2, #1
+ 1353 0628 1A70     		strb	r2, [r3]
+ 1354              	.L78:
+ 338:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		//s = obj -> geo -> px[p];
+ 1355              		.loc 1 338 0 is_stmt 0 discriminator 1
+ 1356 062a 0F23     		movs	r3, #15
+ 1357 062c FA18     		adds	r2, r7, r3
+ 1358 062e 0E23     		movs	r3, #14
+ 1359 0630 FB18     		adds	r3, r7, r3
+ 1360 0632 1278     		ldrb	r2, [r2]
+ 1361 0634 1B78     		ldrb	r3, [r3]
+ 1362 0636 9A42     		cmp	r2, r3
+ 1363 0638 C9D3     		bcc	.L79
+ 345:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
+ 346:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
+ 1364              		.loc 1 346 0 is_stmt 1
+ 1365 063a C046     		nop
+ 1366 063c BD46     		mov	sp, r7
+ 1367 063e 04B0     		add	sp, sp, #16
+ 1368              		@ sp needed
+ 1369 0640 B0BD     		pop	{r4, r5, r7, pc}
+ 1370              		.cfi_endproc
+ 1371              	.LFE17:
+ 1373              		.align	1
+ 1374              		.global	clear_object
+ 1375              		.syntax unified
+ 1376              		.code	16
+ 1377              		.thumb_func
+ 1378              		.fpu softvfp
+ 1380              	clear_object:
+ 1381              	.LFB18:
+ 347:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
+ 348:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void clear_object(POBJECT obj)
+ 349:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
+ 1382              		.loc 1 349 0
+ 1383              		.cfi_startproc
+ 1384              		@ args = 0, pretend = 0, frame = 16
+ 1385              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1386 0642 B0B5     		push	{r4, r5, r7, lr}
+ 1387              		.cfi_def_cfa_offset 16
+ 1388              		.cfi_offset 4, -16
+ 1389              		.cfi_offset 5, -12
+ 1390              		.cfi_offset 7, -8
+ 1391              		.cfi_offset 14, -4
+ 1392 0644 84B0     		sub	sp, sp, #16
+ 1393              		.cfi_def_cfa_offset 32
+ 1394 0646 00AF     		add	r7, sp, #0
+ 1395              		.cfi_def_cfa_register 7
+ 1396 0648 7860     		str	r0, [r7, #4]
+ 350:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t p;
+ 351:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t n = obj->geo->numpoints;
+ 1397              		.loc 1 351 0
+ 1398 064a 7B68     		ldr	r3, [r7, #4]
+ 1399 064c 1B68     		ldr	r3, [r3]
+ 1400 064e 1A68     		ldr	r2, [r3]
+ 1401 0650 0E23     		movs	r3, #14
+ 1402 0652 FB18     		adds	r3, r7, r3
+ 1403 0654 1A70     		strb	r2, [r3]
+ 352:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t x_coord;
+ 353:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	uint8_t y_coord;
+ 354:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	for(p = 0; p<n; p++){
+ 1404              		.loc 1 354 0
+ 1405 0656 0F23     		movs	r3, #15
+ 1406 0658 FB18     		adds	r3, r7, r3
+ 1407 065a 0022     		movs	r2, #0
+ 1408 065c 1A70     		strb	r2, [r3]
+ 1409 065e 2DE0     		b	.L81
+ 1410              	.L82:
+ 355:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		x_coord  = obj->posx + obj->geo->px[p].x;
+ 1411              		.loc 1 355 0 discriminator 3
+ 1412 0660 7B68     		ldr	r3, [r7, #4]
+ 1413 0662 DB68     		ldr	r3, [r3, #12]
+ 1414 0664 D9B2     		uxtb	r1, r3
+ 1415 0666 7B68     		ldr	r3, [r7, #4]
+ 1416 0668 1A68     		ldr	r2, [r3]
+ 1417 066a 0F24     		movs	r4, #15
+ 1418 066c 3B19     		adds	r3, r7, r4
+ 1419 066e 1B78     		ldrb	r3, [r3]
+ 1420 0670 0433     		adds	r3, r3, #4
+ 1421 0672 5B00     		lsls	r3, r3, #1
+ 1422 0674 D318     		adds	r3, r2, r3
+ 1423 0676 0433     		adds	r3, r3, #4
+ 1424 0678 1A78     		ldrb	r2, [r3]
+ 1425 067a 0D20     		movs	r0, #13
+ 1426 067c 3B18     		adds	r3, r7, r0
+ 1427 067e 8A18     		adds	r2, r1, r2
+ 1428 0680 1A70     		strb	r2, [r3]
+ 356:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		y_coord = obj->posy + obj->geo->px[p].y;
+ 1429              		.loc 1 356 0 discriminator 3
+ 1430 0682 7B68     		ldr	r3, [r7, #4]
+ 1431 0684 1B69     		ldr	r3, [r3, #16]
+ 1432 0686 D9B2     		uxtb	r1, r3
+ 1433 0688 7B68     		ldr	r3, [r7, #4]
+ 1434 068a 1A68     		ldr	r2, [r3]
+ 1435 068c 3B19     		adds	r3, r7, r4
+ 1436 068e 1B78     		ldrb	r3, [r3]
+ 1437 0690 0433     		adds	r3, r3, #4
+ 1438 0692 5B00     		lsls	r3, r3, #1
+ 1439 0694 D318     		adds	r3, r2, r3
+ 1440 0696 0533     		adds	r3, r3, #5
+ 1441 0698 1A78     		ldrb	r2, [r3]
+ 1442 069a 0C25     		movs	r5, #12
+ 1443 069c 7B19     		adds	r3, r7, r5
+ 1444 069e 8A18     		adds	r2, r1, r2
+ 1445 06a0 1A70     		strb	r2, [r3]
+ 357:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		pixel(x_coord,y_coord,0);
+ 1446              		.loc 1 357 0 discriminator 3
+ 1447 06a2 3B18     		adds	r3, r7, r0
+ 1448 06a4 1878     		ldrb	r0, [r3]
+ 1449 06a6 7B19     		adds	r3, r7, r5
+ 1450 06a8 1B78     		ldrb	r3, [r3]
+ 1451 06aa 0022     		movs	r2, #0
+ 1452 06ac 1900     		movs	r1, r3
+ 1453 06ae FFF7FEFF 		bl	pixel
+ 354:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		x_coord  = obj->posx + obj->geo->px[p].x;
+ 1454              		.loc 1 354 0 discriminator 3
+ 1455 06b2 3B19     		adds	r3, r7, r4
+ 1456 06b4 1A78     		ldrb	r2, [r3]
+ 1457 06b6 3B19     		adds	r3, r7, r4
+ 1458 06b8 0132     		adds	r2, r2, #1
+ 1459 06ba 1A70     		strb	r2, [r3]
+ 1460              	.L81:
+ 354:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		x_coord  = obj->posx + obj->geo->px[p].x;
+ 1461              		.loc 1 354 0 is_stmt 0 discriminator 1
+ 1462 06bc 0F23     		movs	r3, #15
+ 1463 06be FA18     		adds	r2, r7, r3
+ 1464 06c0 0E23     		movs	r3, #14
+ 1465 06c2 FB18     		adds	r3, r7, r3
+ 1466 06c4 1278     		ldrb	r2, [r2]
+ 1467 06c6 1B78     		ldrb	r3, [r3]
+ 1468 06c8 9A42     		cmp	r2, r3
+ 1469 06ca C9D3     		bcc	.L82
+ 358:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
+ 359:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
+ 1470              		.loc 1 359 0 is_stmt 1
+ 1471 06cc C046     		nop
+ 1472 06ce BD46     		mov	sp, r7
+ 1473 06d0 04B0     		add	sp, sp, #16
+ 1474              		@ sp needed
+ 1475 06d2 B0BD     		pop	{r4, r5, r7, pc}
+ 1476              		.cfi_endproc
+ 1477              	.LFE18:
+ 1479              		.align	1
+ 1480              		.global	set_object_speed
+ 1481              		.syntax unified
+ 1482              		.code	16
+ 1483              		.thumb_func
+ 1484              		.fpu softvfp
+ 1486              	set_object_speed:
+ 1487              	.LFB19:
+ 360:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
+ 361:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void set_object_speed(POBJECT o, int speedx, int speedy){
+ 1488              		.loc 1 361 0
+ 1489              		.cfi_startproc
+ 1490              		@ args = 0, pretend = 0, frame = 16
+ 1491              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1492 06d4 80B5     		push	{r7, lr}
+ 1493              		.cfi_def_cfa_offset 8
+ 1494              		.cfi_offset 7, -8
+ 1495              		.cfi_offset 14, -4
+ 1496 06d6 84B0     		sub	sp, sp, #16
+ 1497              		.cfi_def_cfa_offset 24
+ 1498 06d8 00AF     		add	r7, sp, #0
+ 1499              		.cfi_def_cfa_register 7
+ 1500 06da F860     		str	r0, [r7, #12]
+ 1501 06dc B960     		str	r1, [r7, #8]
+ 1502 06de 7A60     		str	r2, [r7, #4]
+ 362:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	o->dirx = speedx;
+ 1503              		.loc 1 362 0
+ 1504 06e0 FB68     		ldr	r3, [r7, #12]
+ 1505 06e2 BA68     		ldr	r2, [r7, #8]
+ 1506 06e4 5A60     		str	r2, [r3, #4]
+ 363:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	o->diry = speedy;
+ 1507              		.loc 1 363 0
+ 1508 06e6 FB68     		ldr	r3, [r7, #12]
+ 1509 06e8 7A68     		ldr	r2, [r7, #4]
+ 1510 06ea 9A60     		str	r2, [r3, #8]
+ 364:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
+ 1511              		.loc 1 364 0
+ 1512 06ec C046     		nop
+ 1513 06ee BD46     		mov	sp, r7
+ 1514 06f0 04B0     		add	sp, sp, #16
+ 1515              		@ sp needed
+ 1516 06f2 80BD     		pop	{r7, pc}
+ 1517              		.cfi_endproc
+ 1518              	.LFE19:
+ 1520              		.align	1
+ 1521              		.global	move_object
+ 1522              		.syntax unified
+ 1523              		.code	16
+ 1524              		.thumb_func
+ 1525              		.fpu softvfp
+ 1527              	move_object:
+ 1528              	.LFB20:
+ 365:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
+ 366:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void move_object(POBJECT o){
+ 1529              		.loc 1 366 0
+ 1530              		.cfi_startproc
+ 1531              		@ args = 0, pretend = 0, frame = 8
+ 1532              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1533 06f4 80B5     		push	{r7, lr}
+ 1534              		.cfi_def_cfa_offset 8
+ 1535              		.cfi_offset 7, -8
+ 1536              		.cfi_offset 14, -4
+ 1537 06f6 82B0     		sub	sp, sp, #8
+ 1538              		.cfi_def_cfa_offset 16
+ 1539 06f8 00AF     		add	r7, sp, #0
+ 1540              		.cfi_def_cfa_register 7
+ 1541 06fa 7860     		str	r0, [r7, #4]
+ 367:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	clear_object(o);
+ 1542              		.loc 1 367 0
+ 1543 06fc 7B68     		ldr	r3, [r7, #4]
+ 1544 06fe 1800     		movs	r0, r3
+ 1545 0700 FFF7FEFF 		bl	clear_object
+ 368:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	o->posx += o->dirx;
+ 1546              		.loc 1 368 0
+ 1547 0704 7B68     		ldr	r3, [r7, #4]
+ 1548 0706 DA68     		ldr	r2, [r3, #12]
+ 1549 0708 7B68     		ldr	r3, [r7, #4]
+ 1550 070a 5B68     		ldr	r3, [r3, #4]
+ 1551 070c D218     		adds	r2, r2, r3
+ 1552 070e 7B68     		ldr	r3, [r7, #4]
+ 1553 0710 DA60     		str	r2, [r3, #12]
+ 369:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	o->posy += o->diry;
+ 1554              		.loc 1 369 0
+ 1555 0712 7B68     		ldr	r3, [r7, #4]
+ 1556 0714 1A69     		ldr	r2, [r3, #16]
+ 1557 0716 7B68     		ldr	r3, [r7, #4]
+ 1558 0718 9B68     		ldr	r3, [r3, #8]
+ 1559 071a D218     		adds	r2, r2, r3
+ 1560 071c 7B68     		ldr	r3, [r7, #4]
+ 1561 071e 1A61     		str	r2, [r3, #16]
+ 370:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
+ 371:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if(o->posx < 1){
+ 1562              		.loc 1 371 0
+ 1563 0720 7B68     		ldr	r3, [r7, #4]
+ 1564 0722 DB68     		ldr	r3, [r3, #12]
+ 1565 0724 002B     		cmp	r3, #0
+ 1566 0726 04DC     		bgt	.L85
+ 372:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		o->dirx = -o->dirx;
+ 1567              		.loc 1 372 0
+ 1568 0728 7B68     		ldr	r3, [r7, #4]
+ 1569 072a 5B68     		ldr	r3, [r3, #4]
+ 1570 072c 5A42     		rsbs	r2, r3, #0
+ 1571 072e 7B68     		ldr	r3, [r7, #4]
+ 1572 0730 5A60     		str	r2, [r3, #4]
+ 1573              	.L85:
+ 373:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
+ 374:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if(o->posx > 128 - o->geo->sizex){
+ 1574              		.loc 1 374 0
+ 1575 0732 7B68     		ldr	r3, [r7, #4]
+ 1576 0734 DA68     		ldr	r2, [r3, #12]
+ 1577 0736 7B68     		ldr	r3, [r7, #4]
+ 1578 0738 1B68     		ldr	r3, [r3]
+ 1579 073a 5B68     		ldr	r3, [r3, #4]
+ 1580 073c 8021     		movs	r1, #128
+ 1581 073e CB1A     		subs	r3, r1, r3
+ 1582 0740 9A42     		cmp	r2, r3
+ 1583 0742 04DD     		ble	.L86
+ 375:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		o->dirx = -o->dirx;
+ 1584              		.loc 1 375 0
+ 1585 0744 7B68     		ldr	r3, [r7, #4]
+ 1586 0746 5B68     		ldr	r3, [r3, #4]
+ 1587 0748 5A42     		rsbs	r2, r3, #0
+ 1588 074a 7B68     		ldr	r3, [r7, #4]
+ 1589 074c 5A60     		str	r2, [r3, #4]
+ 1590              	.L86:
+ 376:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
+ 377:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if(o->posy < 1){
+ 1591              		.loc 1 377 0
+ 1592 074e 7B68     		ldr	r3, [r7, #4]
+ 1593 0750 1B69     		ldr	r3, [r3, #16]
+ 1594 0752 002B     		cmp	r3, #0
+ 1595 0754 04DC     		bgt	.L87
+ 378:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		o->diry = -o->diry;
+ 1596              		.loc 1 378 0
+ 1597 0756 7B68     		ldr	r3, [r7, #4]
+ 1598 0758 9B68     		ldr	r3, [r3, #8]
+ 1599 075a 5A42     		rsbs	r2, r3, #0
+ 1600 075c 7B68     		ldr	r3, [r7, #4]
+ 1601 075e 9A60     		str	r2, [r3, #8]
+ 1602              	.L87:
+ 379:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
+ 380:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if(o->posy > 64 - o->geo->sizey){
+ 1603              		.loc 1 380 0
+ 1604 0760 7B68     		ldr	r3, [r7, #4]
+ 1605 0762 1A69     		ldr	r2, [r3, #16]
  1606 0764 7B68     		ldr	r3, [r7, #4]
- 1607 0766 1A61     		str	r2, [r3, #16]
- 368:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
- 369:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if(o->posx < 1){
- 1608              		.loc 1 369 0
- 1609 0768 7B68     		ldr	r3, [r7, #4]
- 1610 076a DB68     		ldr	r3, [r3, #12]
- 1611 076c 002B     		cmp	r3, #0
- 1612 076e 04DC     		bgt	.L88
- 370:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		o->dirx = -o->dirx;
- 1613              		.loc 1 370 0
- 1614 0770 7B68     		ldr	r3, [r7, #4]
- 1615 0772 5B68     		ldr	r3, [r3, #4]
- 1616 0774 5A42     		rsbs	r2, r3, #0
- 1617 0776 7B68     		ldr	r3, [r7, #4]
- 1618 0778 5A60     		str	r2, [r3, #4]
+ 1607 0766 1B68     		ldr	r3, [r3]
+ 1608 0768 9B68     		ldr	r3, [r3, #8]
+ 1609 076a 4021     		movs	r1, #64
+ 1610 076c CB1A     		subs	r3, r1, r3
+ 1611 076e 9A42     		cmp	r2, r3
+ 1612 0770 04DD     		ble	.L88
+ 381:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		o->diry = -o->diry;
+ 1613              		.loc 1 381 0
+ 1614 0772 7B68     		ldr	r3, [r7, #4]
+ 1615 0774 9B68     		ldr	r3, [r3, #8]
+ 1616 0776 5A42     		rsbs	r2, r3, #0
+ 1617 0778 7B68     		ldr	r3, [r7, #4]
+ 1618 077a 9A60     		str	r2, [r3, #8]
  1619              	.L88:
- 371:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
- 372:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if(o->posx > 128 - o->geo->sizex){
- 1620              		.loc 1 372 0
- 1621 077a 7B68     		ldr	r3, [r7, #4]
- 1622 077c DA68     		ldr	r2, [r3, #12]
- 1623 077e 7B68     		ldr	r3, [r7, #4]
- 1624 0780 1B68     		ldr	r3, [r3]
- 1625 0782 5B68     		ldr	r3, [r3, #4]
- 1626 0784 8021     		movs	r1, #128
- 1627 0786 CB1A     		subs	r3, r1, r3
- 1628 0788 9A42     		cmp	r2, r3
- 1629 078a 04DD     		ble	.L89
- 373:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		o->dirx = -o->dirx;
- 1630              		.loc 1 373 0
- 1631 078c 7B68     		ldr	r3, [r7, #4]
- 1632 078e 5B68     		ldr	r3, [r3, #4]
- 1633 0790 5A42     		rsbs	r2, r3, #0
- 1634 0792 7B68     		ldr	r3, [r7, #4]
- 1635 0794 5A60     		str	r2, [r3, #4]
- 1636              	.L89:
- 374:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
- 375:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if(o->posy < 1){
- 1637              		.loc 1 375 0
- 1638 0796 7B68     		ldr	r3, [r7, #4]
- 1639 0798 1B69     		ldr	r3, [r3, #16]
- 1640 079a 002B     		cmp	r3, #0
- 1641 079c 04DC     		bgt	.L90
- 376:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		o->diry = -o->diry;
- 1642              		.loc 1 376 0
- 1643 079e 7B68     		ldr	r3, [r7, #4]
- 1644 07a0 9B68     		ldr	r3, [r3, #8]
- 1645 07a2 5A42     		rsbs	r2, r3, #0
- 1646 07a4 7B68     		ldr	r3, [r7, #4]
- 1647 07a6 9A60     		str	r2, [r3, #8]
- 1648              	.L90:
- 377:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
- 378:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	if(o->posy > 64 - o->geo->sizey){
- 1649              		.loc 1 378 0
- 1650 07a8 7B68     		ldr	r3, [r7, #4]
- 1651 07aa 1A69     		ldr	r2, [r3, #16]
- 1652 07ac 7B68     		ldr	r3, [r7, #4]
- 1653 07ae 1B68     		ldr	r3, [r3]
- 1654 07b0 9B68     		ldr	r3, [r3, #8]
- 1655 07b2 4021     		movs	r1, #64
- 1656 07b4 CB1A     		subs	r3, r1, r3
- 1657 07b6 9A42     		cmp	r2, r3
- 1658 07b8 04DD     		ble	.L91
- 379:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		o->diry = -o->diry;
- 1659              		.loc 1 379 0
- 1660 07ba 7B68     		ldr	r3, [r7, #4]
- 1661 07bc 9B68     		ldr	r3, [r3, #8]
- 1662 07be 5A42     		rsbs	r2, r3, #0
- 1663 07c0 7B68     		ldr	r3, [r7, #4]
- 1664 07c2 9A60     		str	r2, [r3, #8]
- 1665              	.L91:
- 380:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
- 381:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	draw_object(o);
- 1666              		.loc 1 381 0
- 1667 07c4 7B68     		ldr	r3, [r7, #4]
- 1668 07c6 1800     		movs	r0, r3
- 1669 07c8 FFF7FEFF 		bl	draw_object
- 382:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
- 1670              		.loc 1 382 0
- 1671 07cc C046     		nop
- 1672 07ce BD46     		mov	sp, r7
- 1673 07d0 02B0     		add	sp, sp, #8
- 1674              		@ sp needed
- 1675 07d2 80BD     		pop	{r7, pc}
- 1676              		.cfi_endproc
- 1677              	.LFE20:
- 1679              		.global	ball_geometry
- 1680              		.data
- 1681              		.align	2
- 1684              	ball_geometry:
- 1685 0000 0C000000 		.word	12
- 1686 0004 04000000 		.word	4
- 1687 0008 04000000 		.word	4
- 1688 000c 00       		.byte	0
- 1689 000d 01       		.byte	1
- 1690 000e 00       		.byte	0
- 1691 000f 02       		.byte	2
- 1692 0010 01       		.byte	1
- 1693 0011 00       		.byte	0
- 1694 0012 01       		.byte	1
- 1695 0013 01       		.byte	1
- 1696 0014 01       		.byte	1
- 1697 0015 02       		.byte	2
- 1698 0016 01       		.byte	1
- 1699 0017 03       		.byte	3
- 1700 0018 02       		.byte	2
- 1701 0019 00       		.byte	0
- 1702 001a 02       		.byte	2
- 1703 001b 01       		.byte	1
- 1704 001c 02       		.byte	2
- 1705 001d 02       		.byte	2
- 1706 001e 02       		.byte	2
- 1707 001f 03       		.byte	3
- 1708 0020 03       		.byte	3
- 1709 0021 01       		.byte	1
- 1710 0022 03       		.byte	3
- 1711 0023 02       		.byte	2
- 1712 0024 00000000 		.space	16
- 1712      00000000 
- 1712      00000000 
- 1712      00000000 
- 1713              		.align	2
- 1716              	ball:
- 1717 0034 00000000 		.word	ball_geometry
- 1718 0038 00000000 		.word	0
- 1719 003c 00000000 		.word	0
- 1720 0040 01000000 		.word	1
- 1721 0044 01000000 		.word	1
- 1722 0048 00000000 		.word	draw_object
- 1723 004c 00000000 		.word	clear_object
- 1724 0050 00000000 		.word	move_object
- 1725 0054 00000000 		.word	set_object_speed
- 1726              		.text
- 1727              		.align	1
- 1728              		.global	init_app
- 1729              		.syntax unified
- 1730              		.code	16
- 1731              		.thumb_func
- 1732              		.fpu softvfp
- 1734              	init_app:
- 1735              	.LFB21:
- 383:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
- 384:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	GEOMETRY ball_geometry =
- 385:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
- 386:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	12,4,4,{{0,1},{0,2},{1,0},{1,1},{1,2},{1,3},{2,0},{2,1},{2,2},{2,3},{3,1},{3,2}}
- 387:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** };
- 388:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
- 389:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** static OBJECT ball=
- 390:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {&ball_geometry,
- 391:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 0,0,
- 392:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 1,1,
- 393:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** draw_object,
- 394:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** clear_object,
- 395:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** move_object,
- 396:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** set_object_speed};
- 397:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
- 398:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void init_app(void)
- 399:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
- 1736              		.loc 1 399 0
- 1737              		.cfi_startproc
- 1738              		@ args = 0, pretend = 0, frame = 0
- 1739              		@ frame_needed = 1, uses_anonymous_args = 0
- 1740 07d4 80B5     		push	{r7, lr}
- 1741              		.cfi_def_cfa_offset 8
- 1742              		.cfi_offset 7, -8
- 1743              		.cfi_offset 14, -4
- 1744 07d6 00AF     		add	r7, sp, #0
- 1745              		.cfi_def_cfa_register 7
- 400:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	*GPIO_MODER = 0x55555555;
- 1746              		.loc 1 400 0
- 1747 07d8 024B     		ldr	r3, .L93
- 1748 07da 034A     		ldr	r2, .L93+4
- 1749 07dc 1A60     		str	r2, [r3]
- 401:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
- 1750              		.loc 1 401 0
- 1751 07de C046     		nop
- 1752 07e0 BD46     		mov	sp, r7
- 1753              		@ sp needed
- 1754 07e2 80BD     		pop	{r7, pc}
- 1755              	.L94:
- 1756              		.align	2
- 1757              	.L93:
- 1758 07e4 00100240 		.word	1073876992
- 1759 07e8 55555555 		.word	1431655765
- 1760              		.cfi_endproc
- 1761              	.LFE21:
- 1763              		.align	1
- 1764              		.global	main
- 1765              		.syntax unified
- 1766              		.code	16
- 1767              		.thumb_func
- 1768              		.fpu softvfp
- 1770              	main:
- 1771              	.LFB22:
- 402:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
- 403:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void main(void)
- 404:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
- 1772              		.loc 1 404 0
- 1773              		.cfi_startproc
- 1774              		@ args = 0, pretend = 0, frame = 8
- 1775              		@ frame_needed = 1, uses_anonymous_args = 0
- 1776 07ec 80B5     		push	{r7, lr}
- 1777              		.cfi_def_cfa_offset 8
- 1778              		.cfi_offset 7, -8
- 1779              		.cfi_offset 14, -4
- 1780 07ee 82B0     		sub	sp, sp, #8
- 1781              		.cfi_def_cfa_offset 16
- 1782 07f0 00AF     		add	r7, sp, #0
- 1783              		.cfi_def_cfa_register 7
- 405:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	//uint8_t i;
- 406:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
- 407:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	POBJECT p = &ball;
- 1784              		.loc 1 407 0
- 1785 07f2 0A4B     		ldr	r3, .L97
- 1786 07f4 7B60     		str	r3, [r7, #4]
- 408:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	init_app();
- 1787              		.loc 1 408 0
- 1788 07f6 FFF7FEFF 		bl	init_app
- 409:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_initialize();
- 1789              		.loc 1 409 0
- 1790 07fa FFF7FEFF 		bl	graphic_initialize
- 410:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	#ifndef SIMULATOR
- 411:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		graphic_clear_screen();
- 412:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	#endif
- 413:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
- 414:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	p->set_speed(p,4,1);
- 1791              		.loc 1 414 0
- 1792 07fe 7B68     		ldr	r3, [r7, #4]
- 1793 0800 1B6A     		ldr	r3, [r3, #32]
- 1794 0802 7868     		ldr	r0, [r7, #4]
- 1795 0804 0122     		movs	r2, #1
- 1796 0806 0421     		movs	r1, #4
- 1797 0808 9847     		blx	r3
- 1798              	.LVL0:
- 1799              	.L96:
- 415:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	while(1)
- 416:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	{
- 417:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		p->move(p);
- 1800              		.loc 1 417 0 discriminator 1
- 1801 080a 7B68     		ldr	r3, [r7, #4]
- 1802 080c DB69     		ldr	r3, [r3, #28]
- 1803 080e 7A68     		ldr	r2, [r7, #4]
- 1804 0810 1000     		movs	r0, r2
- 1805 0812 9847     		blx	r3
- 1806              	.LVL1:
- 418:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		delay_milli(40);
- 1807              		.loc 1 418 0 discriminator 1
- 1808 0814 2820     		movs	r0, #40
- 1809 0816 FFF7FEFF 		bl	delay_milli
- 417:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		delay_milli(40);
- 1810              		.loc 1 417 0 discriminator 1
- 1811 081a F6E7     		b	.L96
- 1812              	.L98:
- 1813              		.align	2
- 1814              	.L97:
- 1815 081c 34000000 		.word	ball
- 1816              		.cfi_endproc
- 1817              	.LFE22:
- 1819              	.Letext0:
- 1820              		.file 2 "c:\\cseapp\\codelite\\tools\\gcc-arm\\arm-none-eabi\\include\\machine\\_default_types.h"
- 1821              		.file 3 "c:\\cseapp\\codelite\\tools\\gcc-arm\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 382:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	}
+ 383:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	draw_object(o);
+ 1620              		.loc 1 383 0
+ 1621 077c 7B68     		ldr	r3, [r7, #4]
+ 1622 077e 1800     		movs	r0, r3
+ 1623 0780 FFF7FEFF 		bl	draw_object
+ 384:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
+ 1624              		.loc 1 384 0
+ 1625 0784 C046     		nop
+ 1626 0786 BD46     		mov	sp, r7
+ 1627 0788 02B0     		add	sp, sp, #8
+ 1628              		@ sp needed
+ 1629 078a 80BD     		pop	{r7, pc}
+ 1630              		.cfi_endproc
+ 1631              	.LFE20:
+ 1633              		.global	ball_geometry
+ 1634              		.data
+ 1635              		.align	2
+ 1638              	ball_geometry:
+ 1639 0000 0C000000 		.word	12
+ 1640 0004 04000000 		.word	4
+ 1641 0008 04000000 		.word	4
+ 1642 000c 00       		.byte	0
+ 1643 000d 01       		.byte	1
+ 1644 000e 00       		.byte	0
+ 1645 000f 02       		.byte	2
+ 1646 0010 01       		.byte	1
+ 1647 0011 00       		.byte	0
+ 1648 0012 01       		.byte	1
+ 1649 0013 01       		.byte	1
+ 1650 0014 01       		.byte	1
+ 1651 0015 02       		.byte	2
+ 1652 0016 01       		.byte	1
+ 1653 0017 03       		.byte	3
+ 1654 0018 02       		.byte	2
+ 1655 0019 00       		.byte	0
+ 1656 001a 02       		.byte	2
+ 1657 001b 01       		.byte	1
+ 1658 001c 02       		.byte	2
+ 1659 001d 02       		.byte	2
+ 1660 001e 02       		.byte	2
+ 1661 001f 03       		.byte	3
+ 1662 0020 03       		.byte	3
+ 1663 0021 01       		.byte	1
+ 1664 0022 03       		.byte	3
+ 1665 0023 02       		.byte	2
+ 1666 0024 00000000 		.space	16
+ 1666      00000000 
+ 1666      00000000 
+ 1666      00000000 
+ 1667              		.align	2
+ 1670              	ball:
+ 1671 0034 00000000 		.word	ball_geometry
+ 1672 0038 00000000 		.word	0
+ 1673 003c 00000000 		.word	0
+ 1674 0040 01000000 		.word	1
+ 1675 0044 01000000 		.word	1
+ 1676 0048 00000000 		.word	draw_object
+ 1677 004c 00000000 		.word	clear_object
+ 1678 0050 00000000 		.word	move_object
+ 1679 0054 00000000 		.word	set_object_speed
+ 1680              		.text
+ 1681              		.align	1
+ 1682              		.global	init_app
+ 1683              		.syntax unified
+ 1684              		.code	16
+ 1685              		.thumb_func
+ 1686              		.fpu softvfp
+ 1688              	init_app:
+ 1689              	.LFB21:
+ 385:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
+ 386:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	GEOMETRY ball_geometry =
+ 387:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
+ 388:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	12,4,4,{{0,1},{0,2},{1,0},{1,1},{1,2},{1,3},{2,0},{2,1},{2,2},{2,3},{3,1},{3,2}}
+ 389:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** };
+ 390:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
+ 391:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** static OBJECT ball=
+ 392:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {&ball_geometry,
+ 393:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 0,0,
+ 394:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 1,1,
+ 395:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** draw_object,
+ 396:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** clear_object,
+ 397:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** move_object,
+ 398:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** set_object_speed};
+ 399:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
+ 400:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void init_app(void)
+ 401:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
+ 1690              		.loc 1 401 0
+ 1691              		.cfi_startproc
+ 1692              		@ args = 0, pretend = 0, frame = 0
+ 1693              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1694 078c 80B5     		push	{r7, lr}
+ 1695              		.cfi_def_cfa_offset 8
+ 1696              		.cfi_offset 7, -8
+ 1697              		.cfi_offset 14, -4
+ 1698 078e 00AF     		add	r7, sp, #0
+ 1699              		.cfi_def_cfa_register 7
+ 402:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	*GPIO_MODER = 0x55555555;
+ 1700              		.loc 1 402 0
+ 1701 0790 024B     		ldr	r3, .L90
+ 1702 0792 034A     		ldr	r2, .L90+4
+ 1703 0794 1A60     		str	r2, [r3]
+ 403:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** }
+ 1704              		.loc 1 403 0
+ 1705 0796 C046     		nop
+ 1706 0798 BD46     		mov	sp, r7
+ 1707              		@ sp needed
+ 1708 079a 80BD     		pop	{r7, pc}
+ 1709              	.L91:
+ 1710              		.align	2
+ 1711              	.L90:
+ 1712 079c 00100240 		.word	1073876992
+ 1713 07a0 55555555 		.word	1431655765
+ 1714              		.cfi_endproc
+ 1715              	.LFE21:
+ 1717              		.align	1
+ 1718              		.global	main
+ 1719              		.syntax unified
+ 1720              		.code	16
+ 1721              		.thumb_func
+ 1722              		.fpu softvfp
+ 1724              	main:
+ 1725              	.LFB22:
+ 404:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
+ 405:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** void main(void)
+ 406:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** {
+ 1726              		.loc 1 406 0
+ 1727              		.cfi_startproc
+ 1728              		@ args = 0, pretend = 0, frame = 8
+ 1729              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1730 07a4 80B5     		push	{r7, lr}
+ 1731              		.cfi_def_cfa_offset 8
+ 1732              		.cfi_offset 7, -8
+ 1733              		.cfi_offset 14, -4
+ 1734 07a6 82B0     		sub	sp, sp, #8
+ 1735              		.cfi_def_cfa_offset 16
+ 1736 07a8 00AF     		add	r7, sp, #0
+ 1737              		.cfi_def_cfa_register 7
+ 407:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	//uint8_t i;
+ 408:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 
+ 409:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	POBJECT p = &ball;
+ 1738              		.loc 1 409 0
+ 1739 07aa 0A4B     		ldr	r3, .L94
+ 1740 07ac 7B60     		str	r3, [r7, #4]
+ 410:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	init_app();
+ 1741              		.loc 1 410 0
+ 1742 07ae FFF7FEFF 		bl	init_app
+ 411:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	graphic_initialize();
+ 1743              		.loc 1 411 0
+ 1744 07b2 FFF7FEFF 		bl	graphic_initialize
+ 412:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	#ifndef SIMULATOR
+ 413:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		graphic_clear_screen();
+ 414:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	#endif
+ 415:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	
+ 416:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	p->set_speed(p,4,1);
+ 1745              		.loc 1 416 0
+ 1746 07b6 7B68     		ldr	r3, [r7, #4]
+ 1747 07b8 1B6A     		ldr	r3, [r3, #32]
+ 1748 07ba 7868     		ldr	r0, [r7, #4]
+ 1749 07bc 0122     		movs	r2, #1
+ 1750 07be 0421     		movs	r1, #4
+ 1751 07c0 9847     		blx	r3
+ 1752              	.LVL0:
+ 1753              	.L93:
+ 417:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	while(1)
+ 418:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 	{
+ 419:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		p->move(p);
+ 1754              		.loc 1 419 0 discriminator 1
+ 1755 07c2 7B68     		ldr	r3, [r7, #4]
+ 1756 07c4 DB69     		ldr	r3, [r3, #28]
+ 1757 07c6 7A68     		ldr	r2, [r7, #4]
+ 1758 07c8 1000     		movs	r0, r2
+ 1759 07ca 9847     		blx	r3
+ 1760              	.LVL1:
+ 420:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		delay_milli(40);
+ 1761              		.loc 1 420 0 discriminator 1
+ 1762 07cc 2820     		movs	r0, #40
+ 1763 07ce FFF7FEFF 		bl	delay_milli
+ 419:C:/Users/Maria/Documents/IT/MOP/MOP/autopong\startup.c **** 		delay_milli(40);
+ 1764              		.loc 1 419 0 discriminator 1
+ 1765 07d2 F6E7     		b	.L93
+ 1766              	.L95:
+ 1767              		.align	2
+ 1768              	.L94:
+ 1769 07d4 34000000 		.word	ball
+ 1770              		.cfi_endproc
+ 1771              	.LFE22:
+ 1773              	.Letext0:
+ 1774              		.file 2 "c:\\cseapp\\codelite\\tools\\gcc-arm\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 1775              		.file 3 "c:\\cseapp\\codelite\\tools\\gcc-arm\\arm-none-eabi\\include\\sys\\_stdint.h"

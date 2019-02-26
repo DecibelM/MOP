@@ -1136,7 +1136,6 @@ void main(void)
 		/*graphic_write_command(LCD_SET_ADD|10,B_CS1|B_CS2);
 		graphic_write_command(LCD_SET_PAGE|1,B_CS1|B_CS2);
 		graphic_write_data(0xFF,B_CS1|B_CS2);*/
-}
 200006dc:	46c0      	nop			; (mov r8, r8)
 200006de:	46bd      	mov	sp, r7
 200006e0:	b002      	add	sp, #8

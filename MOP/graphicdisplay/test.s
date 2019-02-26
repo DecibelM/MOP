@@ -1805,7 +1805,7 @@
  335:C:/Users/Maria/Documents/IT/MOP/MOP/graphicdisplay\startup.c **** 		/*graphic_write_command(LCD_SET_ADD|10,B_CS1|B_CS2);
  336:C:/Users/Maria/Documents/IT/MOP/MOP/graphicdisplay\startup.c **** 		graphic_write_command(LCD_SET_PAGE|1,B_CS1|B_CS2);
  337:C:/Users/Maria/Documents/IT/MOP/MOP/graphicdisplay\startup.c **** 		graphic_write_data(0xFF,B_CS1|B_CS2);*/
- 338:C:/Users/Maria/Documents/IT/MOP/MOP/graphicdisplay\startup.c **** }
+ 338:C:/Users/Maria/Documents/IT/MOP/MOP/graphicdisplay\startup.c **** }...
  1481              		.loc 1 338 0 is_stmt 1
  1482 06cc C046     		nop
  1483 06ce BD46     		mov	sp, r7

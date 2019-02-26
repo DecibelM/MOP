@@ -1,5 +1,5 @@
 /*
- * 	startup.c
+ * 	startup.c flipflop_irq
  *
  */
 void startup(void) __attribute__((naked)) __attribute__((section (".start_section")) );
@@ -24,6 +24,8 @@ __asm volatile(
 
 #define SCB_VTOR ((volatile unsigned long *)0xE000ED08)
 
+#define USBDM
+
 
 #define EXTI3_IRQ_BPOS 0x00000008
 
@@ -40,6 +42,12 @@ void irq_handler(void)
 
 void app_init(void)
 {
+	#ifdef USBDM
+	*((unsigned long *) 0x40023830) = 0x18;
+	*((unsigned long *) 0x40023844) |= 0x4000;
+	*((unsigned long *) 0xE000ED08) = 0x2001C000;
+	#endif
+	
 	*GPIO_MODER = 0x55555555;
 	//IO pinne PE3 till EXTI3
 	*((unsigned int *) SYSCFG_EXTICR1) &= ~0xF000;
@@ -47,8 +55,8 @@ void app_init(void)
 	
 	//EXTI3 konfigureras till att generera avbrott
 	*((unsigned int *) 0x40013C00) |= 8;
-	*((unsigned int *) 0x40013C08) |= 8;
-	*((unsigned int *) 0x40013C0C) &= ~8;
+	*((unsigned int *) 0x40013C0C) |= 8;
+	*((unsigned int *) 0x40013C08) &= ~8;
 	
 	*SCB_VTOR = 0x2001C000;
 	*((void (**) (void)) 0x2001C064 ) = irq_handler;
@@ -60,8 +68,11 @@ void app_init(void)
 void main(void)
 {
 	app_init();
+	count = 0;
 	while(1){
+		if(count < 5){
+		count++;
+		}
 		*GPIO_ODR_LOW = count;
 	}
 }
-

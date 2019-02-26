@@ -1,9 +1,10 @@
 /*
- * 	startup.c
+ * 	startup.c systick_irq
  *
  */
 void startup(void) __attribute__((naked)) __attribute__((section (".start_section")) );
-#define SIMULATOR
+//#define SIMULATOR
+#define USBDM
 #ifdef SIMULATOR
 #define DELAY_COUNT 100
 #else
@@ -67,6 +68,13 @@ void delay(unsigned int count)
 
 void init_app(void)
 {
+	#ifdef USBDM
+	*((unsigned long *) 0x40023830) = 0x18;
+	*((unsigned long *) 0x40023844) |= 0x4000;
+	*((unsigned long *) 0xE000ED08) = 0x2001C000;
+	#endif
+	
+	
 	*GPIO_MODER = 0x55555555;
 	*SCB_VTOR = 0x2001C000;
 	*((void (**)(void) ) 0x2001C03C ) = systick_irq_handler;
@@ -89,4 +97,3 @@ void main(void)
 	}
 	*GPIO_ODR_LOW = 0xFC;
 }
-

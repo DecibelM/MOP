@@ -1,5 +1,5 @@
 /*
- * 	startup.c autopong
+ * 	startup.c autopong_move
  *
  */
 #include <stdint.h>
@@ -14,6 +14,15 @@ void startup(void) __attribute__((naked)) __attribute__((section (".start_sectio
 #define GPIO_IDR_HIGH ((volatile unsigned char *) (0x40021011))
 #define GPIO_ODR_HIGH ((volatile unsigned char *) (0x40021015))
 #define GPIO_ODR_LOW ((volatile unsigned char *) (0x40021014))
+
+#define GPIO_D 0x40020C00 
+#define GPIOD_MODER ((volatile unsigned int *) (GPIO_D))  
+#define GPIOD_OTYPER ((volatile unsigned short *) (GPIO_D+0x4))  
+#define GPIOD_PUPDR ((volatile unsigned int *) (GPIO_D+0xC)) 
+#define GPIOD_IDR_LOW ((volatile unsigned char *) (GPIO_D+0x10))  
+#define GPIOD_IDR_HIGH ((volatile unsigned char *) (GPIO_D+0x11))  
+#define GPIOD_ODR_LOW ((volatile unsigned char *) (GPIO_D+0x14))  
+#define GPIOD_ODR_HIGH ((volatile unsigned char *) (GPIO_D+0x15)) 
 
 #define STK_CTRL ((volatile unsigned int *)(0xE000E010))
 #define STK_LOAD ((volatile unsigned int *)(0xE000E014))
@@ -360,8 +369,23 @@ void clear_object(POBJECT obj)
 }
 
 void set_object_speed(POBJECT o, int speedx, int speedy){
+	
 	o->dirx = speedx;
 	o->diry = speedy;
+	
+	if(o->posx < 1){
+		o->dirx = -o->dirx;
+	}
+	if(o->posx > 128 - o->geo->sizex){
+		o->dirx = -o->dirx;
+	}
+	if(o->posy < 1){
+		o->diry = -o->diry;
+	}
+	if(o->posy > 64 - o->geo->sizey){
+		o->diry = -o->diry;
+	}
+	
 }
 
 void move_object(POBJECT o){
@@ -398,18 +422,65 @@ clear_object,
 move_object,
 set_object_speed};
 
+unsigned char keyb(void) 
+{ 
+ unsigned char key[]={1,2,3,0xA,4,5,6,0xB,7,8,9,0xC,0xE,0,0xF,0xD}; 
+ int row, col; 
+ for (row=1; row <=4 ; row++ ) { 
+  kbdActivate(row); 
+  col = kbdGetCol();
+  if( col != 0 ) { 
+   kbdActivate( 0 ); 
+   return key [4*(row-1)+(col-1) ]; 
+  } 
+ } 
+ kbdActivate( 0 ); 
+ return 0xFF; 
+}
+
+void kbdActivate( unsigned int row ) /* Aktivera angiven rad hos tangentbordet, eller * deaktivera samtliga */
+{  
+ switch( row ) 
+ { 
+  case 1: *GPIOD_ODR_HIGH = 0x10; break; 
+  case 2: *GPIOD_ODR_HIGH = 0x20; break; 
+  case 3: *GPIOD_ODR_HIGH = 0x40; break; 
+  case 4: *GPIOD_ODR_HIGH = 0x80; break; 
+  case 0: *GPIOD_ODR_HIGH = 0x00; break; 
+ } 
+}
+int kbdGetCol ( void )  /* Om någon tangent (i aktiverad rad) * är nedtryckt, returnera dess kolumnnummer, * annars, returnera 0 */ 
+{
+ unsigned char c; 
+ c = *GPIOD_IDR_HIGH; 
+ if ( c & 0x8 ) return 4; 
+ if ( c & 0x4 ) return 3;
+ if ( c & 0x2 ) return 2;
+ if ( c & 0x1 ) return 1; 
+ return 0; 
+}
+
+
+
+
 void init_app(void)
 {
-	*GPIO_MODER = 0x55555555;
 	#ifdef USBDM
 	*((unsigned long*) 0x40023830) = 0x18;
 	__asm volatile("LDR R0,=0x08000209\n BLX R0\n");
 	#endif
+	
+	* ( (unsigned int *) GPIOD_MODER )= 0x55005555;
+	* ( (unsigned short *) GPIOD_OTYPER) = 0x0100;
+	* ( (unsigned int *) GPIOD_PUPDR) = 0x00AA0000;
+ 
+	*GPIO_MODER = 0x55555555;
+	
 }
 
 void main(void)
 {
-	//uint8_t i;
+	char c;
 
 	POBJECT p = &ball;
 	init_app();
@@ -418,32 +489,18 @@ void main(void)
 		graphic_clear_screen();
 	#endif
 	
-	p->set_speed(p,4,1);
 	while(1)
 	{
 		p->move(p);
 		delay_milli(40);
+		c = keyb();
+		switch(c)
+		{
+			case 6: p->set_speed(p,2,0); break;
+			case 4: p->set_speed(p,-2,0); break;
+			case 2: p->set_speed(p,0,-2); break;
+			case 8: p->set_speed(p,0,2); break;
+		}
 	}
-	
-	
-	
-	/*for(i = 0; i < 128; i++){
-		pixel(i,10,1);
-	}
-	for(i = 0; i<64; i++){
-		pixel(10,i,1);
-	}
-	delay_milli(500);
-	for(i = 0; i<128; i++){
-		pixel(i,10,0);
-	}
-	for(i = 0; i<64; i++){
-		pixel(10,i,0);
-	}*/
-		
-		
-		
-		/*graphic_write_command(LCD_SET_ADD|10,B_CS1|B_CS2);
-		graphic_write_command(LCD_SET_PAGE|1,B_CS1|B_CS2);
-		graphic_write_data(0xFF,B_CS1|B_CS2);*/
+
 }
