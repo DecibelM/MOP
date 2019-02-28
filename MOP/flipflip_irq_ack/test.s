@@ -23,35 +23,37 @@
   24              	.LFB0:
   25              		.file 1 "C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack/startup.c"
    1:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** /*
-   2:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c ****  * 	startup.c
+   2:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c ****  * 	startup.c flipflop_irq_ack
    3:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c ****  *
    4:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c ****  */
-   5:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** void startup(void) __attribute__((naked)) __attribute__((section (".start_section")) );
+   5:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c ****  #include "gpio_2.h"
    6:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
-   7:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** void startup ( void )
-   8:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** {
-  26              		.loc 1 8 0
+   7:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** void startup(void) __attribute__((naked)) __attribute__((section (".start_section")) );
+   8:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
+   9:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** void startup ( void )
+  10:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** {
+  26              		.loc 1 10 0
   27              		.cfi_startproc
   28              		@ Naked Function: prologue and epilogue provided by programmer.
   29              		@ args = 0, pretend = 0, frame = 0
   30              		@ frame_needed = 1, uses_anonymous_args = 0
-   9:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** __asm volatile(
-  31              		.loc 1 9 0
+  11:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** __asm volatile(
+  31              		.loc 1 11 0
   32              		.syntax divided
-  33              	@ 9 "C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack/startup.c" 1
+  33              	@ 11 "C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack/startup.c" 1
   34 0000 0248     		 LDR R0,=0x2001C000
   35 0002 8546     	 MOV SP,R0
   36 0004 FFF7FEFF 	 BL main
   37 0008 FEE7     	_exit: B .
   38              	
   39              	@ 0 "" 2
-  10:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	" LDR R0,=0x2001C000\n"		/* set stack */
-  11:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	" MOV SP,R0\n"
-  12:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	" BL main\n"				/* call main */
-  13:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	"_exit: B .\n"				/* never return */
-  14:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	) ;
-  15:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** }
-  40              		.loc 1 15 0
+  12:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	" LDR R0,=0x2001C000\n"		/* set stack */
+  13:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	" MOV SP,R0\n"
+  14:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	" BL main\n"				/* call main */
+  15:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	"_exit: B .\n"				/* never return */
+  16:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	) ;
+  17:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** }
+  40              		.loc 1 17 0
   41              		.thumb
   42              		.syntax unified
   43 000a C046     		nop
@@ -72,40 +74,48 @@
   61              		.fpu softvfp
   63              	irq_handler:
   64              	.LFB1:
-  16:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
-  17:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_D 0x40020C00 
-  18:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_MODER ((volatile unsigned int *) (GPIO_D))
-  19:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_IDR_LOW ((volatile unsigned char *) (GPIO_D+0x10))  
-  20:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_IDR_HIGH ((volatile unsigned char *) (GPIO_D+0x11))  
-  21:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_ODR_LOW ((volatile unsigned char *) (GPIO_D+0x14))  
-  22:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_ODR_HIGH ((volatile unsigned char *) (GPIO_D+0x15))
-  23:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
-  24:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_E 0x40021000
-  25:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIOE_MODER ((volatile unsigned int *) (0x40021000))
-  26:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIOE_OTYPER ((volatile unsigned short *) (0x40021004))
-  27:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIOE_IDR_LOW ((volatile unsigned char *) (0x40021010))
-  28:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIOE_IDR_HIGH ((volatile unsigned char *) (0x40021011))
-  29:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIOE_ODR_HIGH ((volatile unsigned char *) (0x40021015))
-  30:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIOE_ODR_LOW ((volatile unsigned char *) (0x40021014))
-  31:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
-  32:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define SYSCFG_EXTICR1 ((volatile unsigned int *) 0x40013808)
-  33:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
-  34:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define EXTI_PR ((volatile unsigned int *) 0x40013C14)
+  18:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
+  19:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** /*
+  20:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_D 0x40020C00 
+  21:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_MODER ((volatile unsigned int *) (GPIO_D))
+  22:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_IDR_LOW ((volatile unsigned char *) (GPIO_D+0x10))  
+  23:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_IDR_HIGH ((volatile unsigned char *) (GPIO_D+0x11))  
+  24:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_ODR_LOW ((volatile unsigned char *) (GPIO_D+0x14))  
+  25:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_ODR_HIGH ((volatile unsigned char *) (GPIO_D+0x15))
+  26:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
+  27:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_E 0x40021000
+  28:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIOE_MODER ((volatile unsigned int *) (0x40021000))
+  29:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIOE_OTYPER ((volatile unsigned short *) (0x40021004))
+  30:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIOE_IDR_LOW ((volatile unsigned char *) (0x40021010))
+  31:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIOE_IDR_HIGH ((volatile unsigned char *) (0x40021011))
+  32:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIOE_ODR_HIGH ((volatile unsigned char *) (0x40021015))
+  33:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIOE_ODR_LOW ((volatile unsigned char *) (0x40021014))
+  34:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** */
   35:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
-  36:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define SCB_VTOR ((volatile unsigned long *)0xE000ED08)
-  37:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
+  36:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_D (*((volatile GPIO*) 0x40020c00))
+  37:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define GPIO_E (*((volatile GPIO*) 0x40021000))
   38:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
-  39:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define EXTI3_IRQ_PE3 0x00000008
-  40:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define EXTI3_IRQ_PE2 0x00000004
-  41:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define EXTI3_IRQ_PE1 0x00000002
-  42:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define EXTI3_IRQ_PE0 0x00000001
-  43:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
-  44:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** unsigned int count;
-  45:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** unsigned int lit = 0;
-  46:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
-  47:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** void irq_handler(void)
-  48:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** {
-  65              		.loc 1 48 0
+  39:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define SYSCFG_EXTICR1 ((volatile unsigned int *) 0x40013808)
+  40:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
+  41:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define EXTI_PR ((volatile unsigned int *) 0x40013C14)
+  42:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
+  43:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define SCB_VTOR ((volatile unsigned long *)0xE000ED08)
+  44:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
+  45:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
+  46:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define EXTI3_IRQ_PE3 0x00000008
+  47:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define EXTI3_IRQ_PE2 0x00000004
+  48:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define EXTI3_IRQ_PE1 0x00000002
+  49:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define EXTI3_IRQ_PE0 0x00000001
+  50:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
+  51:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** //#define USBDM
+  52:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** #define SIMULATOR
+  53:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
+  54:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** unsigned int count;
+  55:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** unsigned int lit = 0;
+  56:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
+  57:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** void irq_handler(void)
+  58:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** {
+  65              		.loc 1 58 0
   66              		.cfi_startproc
   67              		@ args = 0, pretend = 0, frame = 0
   68              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -115,43 +125,43 @@
   72              		.cfi_offset 14, -4
   73 0002 00AF     		add	r7, sp, #0
   74              		.cfi_def_cfa_register 7
-  49:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	if( (*EXTI_PR & EXTI3_IRQ_PE3) != 0 )
-  75              		.loc 1 49 0
+  59:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	if( (*EXTI_PR & EXTI3_IRQ_PE3) != 0 )
+  75              		.loc 1 59 0
   76 0004 264B     		ldr	r3, .L8
   77 0006 1B68     		ldr	r3, [r3]
   78 0008 0822     		movs	r2, #8
   79 000a 1340     		ands	r3, r2
   80 000c 45D0     		beq	.L7
-  50:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	{
-  51:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		
-  52:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		*EXTI_PR |= EXTI3_IRQ_PE3;
-  81              		.loc 1 52 0
+  60:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	{
+  61:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		
+  62:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		*EXTI_PR |= EXTI3_IRQ_PE3;
+  81              		.loc 1 62 0
   82 000e 244B     		ldr	r3, .L8
   83 0010 1A68     		ldr	r2, [r3]
   84 0012 234B     		ldr	r3, .L8
   85 0014 0821     		movs	r1, #8
   86 0016 0A43     		orrs	r2, r1
   87 0018 1A60     		str	r2, [r3]
-  53:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		
-  54:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		if( (*GPIOE_IDR_LOW & EXTI3_IRQ_PE0) )
-  88              		.loc 1 54 0
+  63:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		
+  64:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		if( (GPIO_E.idrLow & EXTI3_IRQ_PE0) )
+  88              		.loc 1 64 0
   89 001a 224B     		ldr	r3, .L8+4
-  90 001c 1B78     		ldrb	r3, [r3]
+  90 001c 1B7C     		ldrb	r3, [r3, #16]
   91 001e DBB2     		uxtb	r3, r3
   92 0020 1A00     		movs	r2, r3
   93 0022 0123     		movs	r3, #1
   94 0024 1340     		ands	r3, r2
   95 0026 0AD0     		beq	.L4
-  55:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		{
-  56:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		count++;
-  96              		.loc 1 56 0
+  65:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		{
+  66:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		count++;
+  96              		.loc 1 66 0
   97 0028 1F4B     		ldr	r3, .L8+8
   98 002a 1B68     		ldr	r3, [r3]
   99 002c 5A1C     		adds	r2, r3, #1
  100 002e 1E4B     		ldr	r3, .L8+8
  101 0030 1A60     		str	r2, [r3]
-  57:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		*EXTI_PR |= EXTI3_IRQ_PE0;
- 102              		.loc 1 57 0
+  67:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		*EXTI_PR |= EXTI3_IRQ_PE0;
+ 102              		.loc 1 67 0
  103 0032 1B4B     		ldr	r3, .L8
  104 0034 1A68     		ldr	r2, [r3]
  105 0036 1A4B     		ldr	r3, .L8
@@ -159,25 +169,25 @@
  107 003a 0A43     		orrs	r2, r1
  108 003c 1A60     		str	r2, [r3]
  109              	.L4:
-  58:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		}
-  59:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		
-  60:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		if( (*GPIOE_IDR_LOW & EXTI3_IRQ_PE1) )
- 110              		.loc 1 60 0
+  68:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		}
+  69:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		
+  70:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		if( (GPIO_E.idrLow & EXTI3_IRQ_PE1) )
+ 110              		.loc 1 70 0
  111 003e 194B     		ldr	r3, .L8+4
- 112 0040 1B78     		ldrb	r3, [r3]
+ 112 0040 1B7C     		ldrb	r3, [r3, #16]
  113 0042 DBB2     		uxtb	r3, r3
  114 0044 1A00     		movs	r2, r3
  115 0046 0223     		movs	r3, #2
  116 0048 1340     		ands	r3, r2
  117 004a 08D0     		beq	.L5
-  61:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		{
-  62:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		count = 0;
- 118              		.loc 1 62 0
+  71:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		{
+  72:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		count = 0;
+ 118              		.loc 1 72 0
  119 004c 164B     		ldr	r3, .L8+8
  120 004e 0022     		movs	r2, #0
  121 0050 1A60     		str	r2, [r3]
-  63:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		*EXTI_PR |= EXTI3_IRQ_PE1;
- 122              		.loc 1 63 0
+  73:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		*EXTI_PR |= EXTI3_IRQ_PE1;
+ 122              		.loc 1 73 0
  123 0052 134B     		ldr	r3, .L8
  124 0054 1A68     		ldr	r2, [r3]
  125 0056 124B     		ldr	r3, .L8
@@ -185,65 +195,65 @@
  127 005a 0A43     		orrs	r2, r1
  128 005c 1A60     		str	r2, [r3]
  129              	.L5:
-  64:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		}
-  65:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		
-  66:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		if( (*GPIOE_IDR_LOW & EXTI3_IRQ_PE2) )
- 130              		.loc 1 66 0
+  74:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		}
+  75:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		
+  76:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		if( (GPIO_E.idrLow & EXTI3_IRQ_PE2) )
+ 130              		.loc 1 76 0
  131 005e 114B     		ldr	r3, .L8+4
- 132 0060 1B78     		ldrb	r3, [r3]
+ 132 0060 1B7C     		ldrb	r3, [r3, #16]
  133 0062 DBB2     		uxtb	r3, r3
  134 0064 1A00     		movs	r2, r3
  135 0066 0423     		movs	r3, #4
  136 0068 1340     		ands	r3, r2
  137 006a 16D0     		beq	.L7
-  67:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		{
-  68:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 			*EXTI_PR |= EXTI3_IRQ_PE2;
- 138              		.loc 1 68 0
+  77:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		{
+  78:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 			*EXTI_PR |= EXTI3_IRQ_PE2;
+ 138              		.loc 1 78 0
  139 006c 0C4B     		ldr	r3, .L8
  140 006e 1A68     		ldr	r2, [r3]
  141 0070 0B4B     		ldr	r3, .L8
  142 0072 0421     		movs	r1, #4
  143 0074 0A43     		orrs	r2, r1
  144 0076 1A60     		str	r2, [r3]
-  69:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 			if(lit)
- 145              		.loc 1 69 0
+  79:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 			if(lit)
+ 145              		.loc 1 79 0
  146 0078 0C4B     		ldr	r3, .L8+12
  147 007a 1B68     		ldr	r3, [r3]
  148 007c 002B     		cmp	r3, #0
  149 007e 06D0     		beq	.L6
-  70:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 			{
-  71:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 				*GPIO_ODR_HIGH = 0;
- 150              		.loc 1 71 0
+  80:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 			{
+  81:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 				GPIO_D.odrHigh = 0;
+ 150              		.loc 1 81 0
  151 0080 0B4B     		ldr	r3, .L8+16
  152 0082 0022     		movs	r2, #0
- 153 0084 1A70     		strb	r2, [r3]
-  72:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 				lit = 0;
- 154              		.loc 1 72 0
+ 153 0084 5A75     		strb	r2, [r3, #21]
+  82:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 				lit = 0;
+ 154              		.loc 1 82 0
  155 0086 094B     		ldr	r3, .L8+12
  156 0088 0022     		movs	r2, #0
  157 008a 1A60     		str	r2, [r3]
-  73:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 			}else{
-  74:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 				*GPIO_ODR_HIGH = 0xFF;
-  75:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 				lit = 1;
-  76:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 			}
-  77:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		}
-  78:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	}
-  79:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** }
- 158              		.loc 1 79 0
+  83:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 			}else{
+  84:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 				GPIO_D.odrHigh = 0xFF;
+  85:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 				lit = 1;
+  86:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 			}
+  87:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		}
+  88:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	}
+  89:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** }
+ 158              		.loc 1 89 0
  159 008c 05E0     		b	.L7
  160              	.L6:
-  74:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 				lit = 1;
- 161              		.loc 1 74 0
+  84:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 				lit = 1;
+ 161              		.loc 1 84 0
  162 008e 084B     		ldr	r3, .L8+16
  163 0090 FF22     		movs	r2, #255
- 164 0092 1A70     		strb	r2, [r3]
-  75:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 			}
- 165              		.loc 1 75 0
+ 164 0092 5A75     		strb	r2, [r3, #21]
+  85:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 			}
+ 165              		.loc 1 85 0
  166 0094 054B     		ldr	r3, .L8+12
  167 0096 0122     		movs	r2, #1
  168 0098 1A60     		str	r2, [r3]
  169              	.L7:
- 170              		.loc 1 79 0
+ 170              		.loc 1 89 0
  171 009a C046     		nop
  172 009c BD46     		mov	sp, r7
  173              		@ sp needed
@@ -252,10 +262,10 @@
  176              		.align	2
  177              	.L8:
  178 00a0 143C0140 		.word	1073822740
- 179 00a4 10100240 		.word	1073877008
+ 179 00a4 00100240 		.word	1073876992
  180 00a8 00000000 		.word	count
  181 00ac 00000000 		.word	lit
- 182 00b0 150C0240 		.word	1073875989
+ 182 00b0 000C0240 		.word	1073875968
  183              		.cfi_endproc
  184              	.LFE1:
  186              		.align	1
@@ -266,10 +276,10 @@
  191              		.fpu softvfp
  193              	app_init:
  194              	.LFB2:
-  80:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
-  81:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** void app_init(void)
-  82:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** {
- 195              		.loc 1 82 0
+  90:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
+  91:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** void app_init(void)
+  92:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** {
+ 195              		.loc 1 92 0
  196              		.cfi_startproc
  197              		@ args = 0, pretend = 0, frame = 0
  198              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -279,27 +289,33 @@
  202              		.cfi_offset 14, -4
  203 00b6 00AF     		add	r7, sp, #0
  204              		.cfi_def_cfa_register 7
-  83:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*GPIO_MODER = 0x55555555;
- 205              		.loc 1 83 0
+  93:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	#ifdef USBDM
+  94:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((unsigned long *) 0x40023830) = 0x18;
+  95:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((unsigned long *) 0x40023844) |= 0x4000;
+  96:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((unsigned long *) 0xE000ED08) = 0x2001C000;
+  97:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	#endif
+  98:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	
+  99:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	GPIO_D.moder = 0x55555555;
+ 205              		.loc 1 99 0
  206 00b8 1A4B     		ldr	r3, .L11
  207 00ba 1B4A     		ldr	r2, .L11+4
  208 00bc 1A60     		str	r2, [r3]
-  84:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*GPIOE_MODER =0x00000000;
- 209              		.loc 1 84 0
+ 100:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	GPIO_E.moder =0x00000000;
+ 209              		.loc 1 100 0
  210 00be 1B4B     		ldr	r3, .L11+8
  211 00c0 0022     		movs	r2, #0
  212 00c2 1A60     		str	r2, [r3]
-  85:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	//IO pinne PE3 till EXTI3
-  86:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((unsigned int *) SYSCFG_EXTICR1) &= ~0xF000;
- 213              		.loc 1 86 0
+ 101:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	//IO pinne PE3 till EXTI3
+ 102:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((unsigned int *) SYSCFG_EXTICR1) &= ~0xF000;
+ 213              		.loc 1 102 0
  214 00c4 1A4B     		ldr	r3, .L11+12
  215 00c6 1A68     		ldr	r2, [r3]
  216 00c8 194B     		ldr	r3, .L11+12
  217 00ca 1A49     		ldr	r1, .L11+16
  218 00cc 0A40     		ands	r2, r1
  219 00ce 1A60     		str	r2, [r3]
-  87:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((unsigned int *) SYSCFG_EXTICR1) |= 0x4000;
- 220              		.loc 1 87 0
+ 103:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((unsigned int *) SYSCFG_EXTICR1) |= 0x4000;
+ 220              		.loc 1 103 0
  221 00d0 174B     		ldr	r3, .L11+12
  222 00d2 1A68     		ldr	r2, [r3]
  223 00d4 164B     		ldr	r3, .L11+12
@@ -307,46 +323,46 @@
  225 00d8 C901     		lsls	r1, r1, #7
  226 00da 0A43     		orrs	r2, r1
  227 00dc 1A60     		str	r2, [r3]
-  88:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	
-  89:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	//EXTI3 konfigureras till att generera avbrott
-  90:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((unsigned int *) 0x40013C00) |= 8;
- 228              		.loc 1 90 0
+ 104:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	
+ 105:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	//EXTI3 konfigureras till att generera avbrott
+ 106:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((unsigned int *) 0x40013C00) |= 8;
+ 228              		.loc 1 106 0
  229 00de 164B     		ldr	r3, .L11+20
  230 00e0 1A68     		ldr	r2, [r3]
  231 00e2 154B     		ldr	r3, .L11+20
  232 00e4 0821     		movs	r1, #8
  233 00e6 0A43     		orrs	r2, r1
  234 00e8 1A60     		str	r2, [r3]
-  91:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((unsigned int *) 0x40013C08) |= 8;
- 235              		.loc 1 91 0
+ 107:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((unsigned int *) 0x40013C08) |= 8;
+ 235              		.loc 1 107 0
  236 00ea 144B     		ldr	r3, .L11+24
  237 00ec 1A68     		ldr	r2, [r3]
  238 00ee 134B     		ldr	r3, .L11+24
  239 00f0 0821     		movs	r1, #8
  240 00f2 0A43     		orrs	r2, r1
  241 00f4 1A60     		str	r2, [r3]
-  92:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((unsigned int *) 0x40013C0C) &= ~8;
- 242              		.loc 1 92 0
+ 108:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((unsigned int *) 0x40013C0C) &= ~8;
+ 242              		.loc 1 108 0
  243 00f6 124B     		ldr	r3, .L11+28
  244 00f8 1A68     		ldr	r2, [r3]
  245 00fa 114B     		ldr	r3, .L11+28
  246 00fc 0821     		movs	r1, #8
  247 00fe 8A43     		bics	r2, r1
  248 0100 1A60     		str	r2, [r3]
-  93:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	
-  94:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*SCB_VTOR = 0x2001C000;
- 249              		.loc 1 94 0
+ 109:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	
+ 110:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*SCB_VTOR = 0x2001C000;
+ 249              		.loc 1 110 0
  250 0102 104B     		ldr	r3, .L11+32
  251 0104 104A     		ldr	r2, .L11+36
  252 0106 1A60     		str	r2, [r3]
-  95:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((void (**) (void)) 0x2001C064 ) = irq_handler;
- 253              		.loc 1 95 0
+ 111:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((void (**) (void)) 0x2001C064 ) = irq_handler;
+ 253              		.loc 1 111 0
  254 0108 104B     		ldr	r3, .L11+40
  255 010a 114A     		ldr	r2, .L11+44
  256 010c 1A60     		str	r2, [r3]
-  96:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	
-  97:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((unsigned int *) 0xE000E100) |= (1<<9);
- 257              		.loc 1 97 0
+ 112:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	
+ 113:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	*((unsigned int *) 0xE000E100) |= (1<<9);
+ 257              		.loc 1 113 0
  258 010e 114B     		ldr	r3, .L11+48
  259 0110 1A68     		ldr	r2, [r3]
  260 0112 104B     		ldr	r3, .L11+48
@@ -354,9 +370,9 @@
  262 0116 8900     		lsls	r1, r1, #2
  263 0118 0A43     		orrs	r2, r1
  264 011a 1A60     		str	r2, [r3]
-  98:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	
-  99:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** }
- 265              		.loc 1 99 0
+ 114:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	
+ 115:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** }
+ 265              		.loc 1 115 0
  266 011c C046     		nop
  267 011e BD46     		mov	sp, r7
  268              		@ sp needed
@@ -387,10 +403,10 @@
  294              		.fpu softvfp
  296              	main:
  297              	.LFB3:
- 100:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
- 101:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** void main(void)
- 102:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** {
- 298              		.loc 1 102 0
+ 116:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 
+ 117:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** void main(void)
+ 118:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** {
+ 298              		.loc 1 118 0
  299              		.cfi_startproc
  300              		@ args = 0, pretend = 0, frame = 0
  301              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -400,24 +416,25 @@
  305              		.cfi_offset 14, -4
  306 015a 00AF     		add	r7, sp, #0
  307              		.cfi_def_cfa_register 7
- 103:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	app_init();
- 308              		.loc 1 103 0
+ 119:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	app_init();
+ 308              		.loc 1 119 0
  309 015c FFF7FEFF 		bl	app_init
  310              	.L14:
- 104:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	while(1){
- 105:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		*GPIO_ODR_LOW = count;
- 311              		.loc 1 105 0 discriminator 1
+ 120:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 	while(1){
+ 121:C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack\startup.c **** 		GPIO_D.odrLow = count;
+ 311              		.loc 1 121 0 discriminator 1
  312 0160 024B     		ldr	r3, .L15
  313 0162 1A68     		ldr	r2, [r3]
  314 0164 024B     		ldr	r3, .L15+4
  315 0166 D2B2     		uxtb	r2, r2
- 316 0168 1A70     		strb	r2, [r3]
+ 316 0168 1A75     		strb	r2, [r3, #20]
  317 016a F9E7     		b	.L14
  318              	.L16:
  319              		.align	2
  320              	.L15:
  321 016c 00000000 		.word	count
- 322 0170 140C0240 		.word	1073875988
+ 322 0170 000C0240 		.word	1073875968
  323              		.cfi_endproc
  324              	.LFE3:
  326              	.Letext0:
+ 327              		.file 2 "C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack/gpio_2.h"

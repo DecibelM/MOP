@@ -3,17 +3,17 @@
 ## any manual changes will be erased      
 ##
 ## Debug
-ProjectName            :=flipflip_irq_ack
+ProjectName            :=flipflop_irq_vectored
 ConfigurationName      :=Debug
 WorkspacePath          :=C:/Users/Maria/Documents/IT/MOP/MOP
-ProjectPath            :=C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack
+ProjectPath            :=C:/Users/Maria/Documents/IT/MOP/MOP/flipflop_irq_vectored
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Maria
-Date                   :=26/02/2019
+Date                   :=28/02/2019
 CodeLitePath           :=C:/cseapp/CodeLite
 LinkerName             :=$(CodeLiteDir)/tools/gcc-arm/bin/arm-none-eabi-g++.exe
 SharedObjectLinkerName :=$(CodeLiteDir)/tools/gcc-arm/arm-none-eabi-g++.exe -shared -fPIC
@@ -32,7 +32,7 @@ Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E
-ObjectsFileList        :="flipflip_irq_ack.txt"
+ObjectsFileList        :="flipflop_irq_vectored.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=makedir
 RcCmpOptions           := 
@@ -86,8 +86,8 @@ $(OutputFile): $(IntermediateDirectory)/.d $(Objects)
 
 PostBuild:
 	@echo Executing Post Build commands ...
-	arm-none-eabi-objcopy -S -O srec  ./Debug/flipflip_irq_ack.elf ./Debug/flipflip_irq_ack.s19
-	arm-none-eabi-objdump -D -S ./Debug/flipflip_irq_ack.elf > ./Debug/flipflip_irq_ack.dass
+	arm-none-eabi-objcopy -S -O srec  ./Debug/flipflop_irq_vectored.elf ./Debug/flipflop_irq_vectored.s19
+	arm-none-eabi-objdump -D -S ./Debug/flipflop_irq_vectored.elf > ./Debug/flipflop_irq_vectored.dass
 	@echo Done
 
 MakeIntermediateDirs:
@@ -104,7 +104,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/startup.c$(ObjectSuffix): startup.c $(IntermediateDirectory)/startup.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/MOP/flipflip_irq_ack/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/MOP/flipflop_irq_vectored/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/startup.c$(DependSuffix): startup.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/startup.c$(ObjectSuffix) -MF$(IntermediateDirectory)/startup.c$(DependSuffix) -MM startup.c
 

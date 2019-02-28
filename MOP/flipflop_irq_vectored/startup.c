@@ -2,6 +2,7 @@
  * 	startup.c flipflop_irq_vectored
  *
  */
+ //#include <GPIO.h>
 void startup(void) __attribute__((naked)) __attribute__((section (".start_section")) );
 
 void startup ( void )
@@ -13,6 +14,7 @@ __asm volatile(
 	"_exit: B .\n"				/* never return */
 	) ;
 }
+
 
 #define GPIO_D 0x40020C00 
 #define GPIO_MODER ((volatile unsigned int *) (GPIO_D))
@@ -28,6 +30,10 @@ __asm volatile(
 #define GPIOE_IDR_HIGH ((volatile unsigned char *) (0x40021011))
 #define GPIOE_ODR_HIGH ((volatile unsigned char *) (0x40021015))
 #define GPIOE_ODR_LOW ((volatile unsigned char *) (0x40021014))
+ 
+ 
+ 
+
 
 #define EXTI_PR ((volatile unsigned int *) 0x40013C14)
 
@@ -57,7 +63,7 @@ __asm volatile(
 
 unsigned int count;
 unsigned int lit = 0;
-
+/*
 void irq_handler(void)
 {
 	if( (*EXTI_PR & EXTI3_IRQ_BPOS) != 0 )
@@ -91,30 +97,72 @@ void irq_handler(void)
 		}
 	}
 }
+ * */
+
+void irq_handler_EXTI_2(void)
+{
+	if( (*GPIOE_IDR_LOW & EXTI2_IRQ_BPOS) )
+	{
+	if(lit)
+	{
+		*GPIO_ODR_HIGH = 0; //Här är fel, lampan skall blinka inte bara tändas/släckas?
+		lit = 0;
+	}else{
+		*GPIO_ODR_HIGH = 0xFF;
+		lit = 1;
+	}
+	*EXTI_PR |= EXTI2_IRQ_BPOS;
+	}
+	*GPIOE_ODR_LOW |= 0x40;
+	*GPIOE_ODR_LOW &= ~0x40;
+}
+
+void irq_handler_EXTI_1(void)
+{
+	if( (*GPIOE_IDR_LOW & EXTI1_IRQ_BPOS) ){
+	count = 0;
+	*EXTI_PR |= EXTI1_IRQ_BPOS;
+	}
+	*GPIOE_ODR_LOW |= 0x20;
+	*GPIOE_ODR_LOW &= ~0x20;
+}
+
+void irq_handler_EXTI_0(void)
+{
+	if( (*GPIOE_IDR_LOW & EXTI0_IRQ_BPOS) ){
+	count++;
+	*EXTI_PR |= EXTI0_IRQ_BPOS;
+	}
+	*GPIOE_ODR_LOW |= 0x10;
+	*GPIOE_ODR_LOW &= ~0x10;
+}
 
 void app_init(void)
 {
 	*GPIO_MODER = 0x55555555;
-	*GPIOE_MODER =0x00000000;
+	*GPIOE_MODER =0x00001500;
 	//IO pinne PE3-0 till EXTI3-0
-	*((unsigned int *) SYSCFG_EXTICR1) &= ~0xFFFF;
-	*((unsigned int *) SYSCFG_EXTICR1) |= 0x4444;
+	*((unsigned int *) SYSCFG_EXTICR1) &= ~0x0FFF;
+	*((unsigned int *) SYSCFG_EXTICR1) |= 0x0444;
 	
 	
 	//EXTI3-0 konfigureras till att generera avbrott
-	*((unsigned int *) 0x40013C00) |= 0xF;
-	*((unsigned int *) 0x40013C08) |= 0xF;
-	*((unsigned int *) 0x40013C0C) &= ~0xF;
+	*((unsigned int *) 0x40013C00) |= 0x7;
+	*((unsigned int *) 0x40013C08) |= 0x7;
+	*((unsigned int *) 0x40013C0C) &= ~0x7;
 	
 	//Avbrottsvektor konfigureras
 	*SCB_VTOR = 0x2001C000;
-	*((void (**) (void)) 0x2001C064 ) = irq_handler; //ANDRA DESSA!!!
-	*((void (**) (void)) 0x2001C064 ) = irq_handler;
-	*((void (**) (void)) 0x2001C064 ) = irq_handler;
-	*((void (**) (void)) 0x2001C064 ) = irq_handler;
+	//*((void (**) (void)) 0x2001C064 ) = irq_handler_EXTI3; //Behövs denna?!!!
+	*((void (**) (void)) 0x2001C060 ) = irq_handler_EXTI_2;
+	*((void (**) (void)) 0x2001C05C ) = irq_handler_EXTI_1;
+	*((void (**) (void)) 0x2001C058 ) = irq_handler_EXTI_0;
 	
-	*((unsigned int *) 0xE000E100) |= (1<<9);
-	
+	//AKtivera NVIC för EXTI
+	//*((unsigned int *) 0xE000E100) |= (1<<9);
+	*((unsigned int *) 0xE000E100) |= (1<<8);
+	*((unsigned int *) 0xE000E100) |= (1<<7);
+	*((unsigned int *) 0xE000E100) |= (1<<6);
 }
 
 void main(void)

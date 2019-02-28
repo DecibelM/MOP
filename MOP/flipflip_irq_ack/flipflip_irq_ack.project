@@ -130,6 +130,8 @@ monitor restart</PostConnectCommands>
     </Configuration>
   </Settings>
   <VirtualDirectory Name="src">
+    <File Name="gpio_2.h"/>
+    <File Name="../flipflop_irq_vectored/gpio.h"/>
     <File Name="startup.c"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
