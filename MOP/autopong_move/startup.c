@@ -44,8 +44,8 @@ void startup(void) __attribute__((naked)) __attribute__((section (".start_sectio
 #define LCD_DISP_START 0xC0
 #define LCD_BUSY 0x80
 
-//#define SIMULATOR
-#define USBDM
+#define SIMULATOR
+//#define USBDM
 
 void startup ( void )
 {

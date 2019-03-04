@@ -13,7 +13,8 @@
   <Project Name="flipflop_irq" Path="flipflop_irq/flipflop_irq.project" Active="No"/>
   <Project Name="flipflip_irq_ack" Path="flipflip_irq_ack/flipflip_irq_ack.project" Active="No"/>
   <Project Name="autopong_move" Path="autopong_move/autopong_move.project" Active="No"/>
-  <Project Name="flipflop_irq_vectored" Path="flipflop_irq_vectored/flipflop_irq_vectored.project" Active="Yes"/>
+  <Project Name="flipflop_irq_vectored" Path="flipflop_irq_vectored/flipflop_irq_vectored.project" Active="No"/>
+  <Project Name="snake" Path="snake/snake.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
@@ -31,6 +32,7 @@
       <Project Name="flipflip_irq_ack" ConfigName="Debug"/>
       <Project Name="autopong_move" ConfigName="Debug"/>
       <Project Name="flipflop_irq_vectored" ConfigName="Debug"/>
+      <Project Name="snake" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
@@ -48,6 +50,7 @@
       <Project Name="flipflip_irq_ack" ConfigName="Release"/>
       <Project Name="autopong_move" ConfigName="Release"/>
       <Project Name="flipflop_irq_vectored" ConfigName="Release"/>
+      <Project Name="snake" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>

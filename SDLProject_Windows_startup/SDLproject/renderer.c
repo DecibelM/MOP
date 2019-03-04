@@ -3,18 +3,42 @@
 
 SDL_Window*   gWindow    = NULL; //The window we'll be rendering to
 SDL_Renderer* gRenderer  = NULL; //The window renderer
-TTF_Font *gFont          = NULL; //Used font. Documentation of TTF_Font can be found here:  
+TTF_Font*     gFont      = NULL; //Used font. Documentation of TTF_Font can be found here:  
                                  //  https://www.libsdl.org/projects/docs/SDL_ttf/SDL_ttf.html#SEC6
 
+//Render just a part of the GfxObject's image to screen - defined in srcRect
+void renderGfxSubFrame(GfxObject* gfx, int x, int y, double angle, float scale, SDL_Rect srcRect )
+{
+	//SDL_Rect srcRect = { 0, 0, gfx->textureWidth, gfx->textureHeight }; // select the whole image
+    
+    // Use scale to compute new output width, height and x,y. 
+    // Note on scaling: integer-discretized output positions means that width and height should be modified 
+    // an equal amount on the left/right/top/bottom sides to look good (i.e., in steps of two).
+    int w = gfx->outputWidth*scale + 0.5; // round to nearest
+    if ( ((w - gfx->outputWidth) % 2) == 1)
+        w--;
+    int h = gfx->outputHeight*scale + 0.5; // round to nearest
+    if ( ((h - gfx->outputHeight) % 2) == 1)
+        h--;        
 
+    float dstX = x - w/2;
+    float dstY = y - h/2;
+	SDL_Rect dstRect = { dstX, dstY, w,  h };  // output position and width/height
+    
+	//Render to screen
+    SDL_RenderCopyEx(gRenderer, gfx->mTexture, &srcRect, &dstRect, angle, NULL, SDL_FLIP_NONE);
+    // NULL here specifies that rotation will be done around the center of the image. 
+    // See here for details: https://wiki.libsdl.org/SDL_RenderCopyEx
+}
+
+//Render gfx object to screen
 void renderGfxObject(GfxObject* gfx, int x, int y, double angle, float scale )
 {
-	//Render gfx object to screen
 	SDL_Rect srcRect = { 0, 0, gfx->textureWidth, gfx->textureHeight }; // select the whole image
     
     // Use scale to compute new output width, height and x,y. 
     // Note on scaling: integer-discretized output positions means that width and height should be modified 
-    // an equal amount on left/right/top/bottom sides to look good (i.e., in steps of two).
+    // an equal amount on the left/right/top/bottom sides to look good (i.e., in steps of two).
     int w = gfx->outputWidth*scale + 0.5; // round to nearest
     if ( ((w - gfx->outputWidth) % 2) == 1)
         w--;
@@ -50,10 +74,11 @@ GfxObject createGfxObject(  const char* filename )
             //Get image dimensions
             gfx.textureWidth  = loadedSurface->w;
             gfx.textureHeight = loadedSurface->h;
-            // Set some default output size
+            // Set some default output size. For now, use the original image size.
             gfx.outputWidth  = gfx.textureWidth;
             gfx.outputHeight = gfx.textureHeight;
             
+            SDL_SetTextureBlendMode(gfx.mTexture, SDL_BLENDMODE_BLEND);
         }
         SDL_FreeSurface( loadedSurface ); //Get rid of old loaded surface
     }
@@ -133,7 +158,7 @@ void closeRenderer()
     	
     // free the font
     TTF_CloseFont(gFont);
-    gFont=NULL; // to be safe...
+    gFont = NULL; // For our own sake to mark that the font is closed.
 
     //Destroy window	
     SDL_DestroyRenderer( gRenderer );

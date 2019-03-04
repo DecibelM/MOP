@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Maria
-Date                   :=28/02/2019
+Date                   :=03/03/2019
 CodeLitePath           :=C:/cseapp/CodeLite
 LinkerName             :=$(CodeLiteDir)/tools/gcc/bin/g++
 SharedObjectLinkerName :=$(CodeLiteDir)/tools/gcc/bin/g++ -shared -fPIC
@@ -62,7 +62,7 @@ AS       := $(CodeLiteDir)/tools/gcc/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\cseapp\CodeLite
-Objects0=$(IntermediateDirectory)/main.c$(ObjectSuffix) $(IntermediateDirectory)/renderer.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/heart.c$(ObjectSuffix) $(IntermediateDirectory)/coin.c$(ObjectSuffix) $(IntermediateDirectory)/main.c$(ObjectSuffix) $(IntermediateDirectory)/renderer.c$(ObjectSuffix) $(IntermediateDirectory)/aliens.c$(ObjectSuffix) $(IntermediateDirectory)/background.c$(ObjectSuffix) $(IntermediateDirectory)/gameobject.c$(ObjectSuffix) $(IntermediateDirectory)/player.c$(ObjectSuffix) 
 
 
 
@@ -98,6 +98,16 @@ PreBuild:
 ##
 ## Objects
 ##
+$(IntermediateDirectory)/heart.c$(ObjectSuffix): heart.c 
+	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/SDLProject_Windows_startup/SDLproject/heart.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/heart.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/heart.c$(PreprocessSuffix): heart.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/heart.c$(PreprocessSuffix) heart.c
+
+$(IntermediateDirectory)/coin.c$(ObjectSuffix): coin.c 
+	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/SDLProject_Windows_startup/SDLproject/coin.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/coin.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/coin.c$(PreprocessSuffix): coin.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/coin.c$(PreprocessSuffix) coin.c
+
 $(IntermediateDirectory)/main.c$(ObjectSuffix): main.c 
 	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/SDLProject_Windows_startup/SDLproject/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.c$(PreprocessSuffix): main.c
@@ -107,6 +117,26 @@ $(IntermediateDirectory)/renderer.c$(ObjectSuffix): renderer.c
 	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/SDLProject_Windows_startup/SDLproject/renderer.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/renderer.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/renderer.c$(PreprocessSuffix): renderer.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/renderer.c$(PreprocessSuffix) renderer.c
+
+$(IntermediateDirectory)/aliens.c$(ObjectSuffix): aliens.c 
+	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/SDLProject_Windows_startup/SDLproject/aliens.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/aliens.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/aliens.c$(PreprocessSuffix): aliens.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/aliens.c$(PreprocessSuffix) aliens.c
+
+$(IntermediateDirectory)/background.c$(ObjectSuffix): background.c 
+	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/SDLProject_Windows_startup/SDLproject/background.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/background.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/background.c$(PreprocessSuffix): background.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/background.c$(PreprocessSuffix) background.c
+
+$(IntermediateDirectory)/gameobject.c$(ObjectSuffix): gameobject.c 
+	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/SDLProject_Windows_startup/SDLproject/gameobject.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/gameobject.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/gameobject.c$(PreprocessSuffix): gameobject.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gameobject.c$(PreprocessSuffix) gameobject.c
+
+$(IntermediateDirectory)/player.c$(ObjectSuffix): player.c 
+	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/SDLProject_Windows_startup/SDLproject/player.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/player.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/player.c$(PreprocessSuffix): player.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/player.c$(PreprocessSuffix) player.c
 
 ##
 ## Clean

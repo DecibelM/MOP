@@ -1,0 +1,1 @@
+./Debug/heart.c.o ./Debug/coin.c.o ./Debug/gameobject.c.o ./Debug/background.c.o ./Debug/player.c.o ./Debug/main.c.o ./Debug/renderer.c.o ./Debug/aliens.c.o   

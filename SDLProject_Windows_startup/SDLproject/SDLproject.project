@@ -8,6 +8,17 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <File Name="heart.h"/>
+    <File Name="heart.c"/>
+    <File Name="coin.h"/>
+    <File Name="coin.c"/>
+    <File Name="aliens.h"/>
+    <File Name="aliens.c"/>
+    <File Name="gameobject.c"/>
+    <File Name="background.c"/>
+    <File Name="background.h"/>
+    <File Name="player.c"/>
+    <File Name="player.h"/>
     <File Name="gameobject.h"/>
     <File Name="vecmath.h"/>
     <File Name="main.c"/>
