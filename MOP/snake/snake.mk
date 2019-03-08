@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Maria
-Date                   :=04/03/2019
+Date                   :=08/03/2019
 CodeLitePath           :=C:/cseapp/CodeLite
 LinkerName             :=$(CodeLiteDir)/tools/gcc-arm/bin/arm-none-eabi-g++.exe
 SharedObjectLinkerName :=$(CodeLiteDir)/tools/gcc-arm/arm-none-eabi-g++.exe -shared -fPIC
@@ -66,7 +66,7 @@ ARM_V6LIB:=$(CodeLiteDir)/tools/gcc-arm/arm-none-eabi/lib/thumb/v6-m
 ARM_GCC_V6LIB:=$(CodeLiteDir)/tools/gcc-arm/lib/gcc/arm-none-eabi/7.2.1/thumb/v6-m
 ARM_M4FPLIB:=$(CodeLiteDir)/tools/gcc-arm/arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard
 ARM_GCC_M4FPLIB:=$(CodeLiteDir)/tools/gcc-arm/lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m
-Objects0=$(IntermediateDirectory)/ascii.c$(ObjectSuffix) $(IntermediateDirectory)/keyb.c$(ObjectSuffix) $(IntermediateDirectory)/delay.c$(ObjectSuffix) $(IntermediateDirectory)/graphic.c$(ObjectSuffix) $(IntermediateDirectory)/startup.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/delay.c$(ObjectSuffix) $(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IntermediateDirectory)/graphic.c$(ObjectSuffix) $(IntermediateDirectory)/structs.c$(ObjectSuffix) $(IntermediateDirectory)/ascii.c$(ObjectSuffix) $(IntermediateDirectory)/keyb.c$(ObjectSuffix) 
 
 
 
@@ -103,6 +103,38 @@ PreBuild:
 ##
 ## Objects
 ##
+$(IntermediateDirectory)/delay.c$(ObjectSuffix): delay.c $(IntermediateDirectory)/delay.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/MOP/snake/delay.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/delay.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/delay.c$(DependSuffix): delay.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/delay.c$(ObjectSuffix) -MF$(IntermediateDirectory)/delay.c$(DependSuffix) -MM delay.c
+
+$(IntermediateDirectory)/delay.c$(PreprocessSuffix): delay.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/delay.c$(PreprocessSuffix) delay.c
+
+$(IntermediateDirectory)/startup.c$(ObjectSuffix): startup.c $(IntermediateDirectory)/startup.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/MOP/snake/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/startup.c$(DependSuffix): startup.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/startup.c$(ObjectSuffix) -MF$(IntermediateDirectory)/startup.c$(DependSuffix) -MM startup.c
+
+$(IntermediateDirectory)/startup.c$(PreprocessSuffix): startup.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/startup.c$(PreprocessSuffix) startup.c
+
+$(IntermediateDirectory)/graphic.c$(ObjectSuffix): graphic.c $(IntermediateDirectory)/graphic.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/MOP/snake/graphic.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/graphic.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/graphic.c$(DependSuffix): graphic.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/graphic.c$(ObjectSuffix) -MF$(IntermediateDirectory)/graphic.c$(DependSuffix) -MM graphic.c
+
+$(IntermediateDirectory)/graphic.c$(PreprocessSuffix): graphic.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/graphic.c$(PreprocessSuffix) graphic.c
+
+$(IntermediateDirectory)/structs.c$(ObjectSuffix): structs.c $(IntermediateDirectory)/structs.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/MOP/snake/structs.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/structs.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/structs.c$(DependSuffix): structs.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/structs.c$(ObjectSuffix) -MF$(IntermediateDirectory)/structs.c$(DependSuffix) -MM structs.c
+
+$(IntermediateDirectory)/structs.c$(PreprocessSuffix): structs.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/structs.c$(PreprocessSuffix) structs.c
+
 $(IntermediateDirectory)/ascii.c$(ObjectSuffix): ascii.c $(IntermediateDirectory)/ascii.c$(DependSuffix)
 	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/MOP/snake/ascii.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ascii.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/ascii.c$(DependSuffix): ascii.c
@@ -118,30 +150,6 @@ $(IntermediateDirectory)/keyb.c$(DependSuffix): keyb.c
 
 $(IntermediateDirectory)/keyb.c$(PreprocessSuffix): keyb.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/keyb.c$(PreprocessSuffix) keyb.c
-
-$(IntermediateDirectory)/delay.c$(ObjectSuffix): delay.c $(IntermediateDirectory)/delay.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/MOP/snake/delay.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/delay.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/delay.c$(DependSuffix): delay.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/delay.c$(ObjectSuffix) -MF$(IntermediateDirectory)/delay.c$(DependSuffix) -MM delay.c
-
-$(IntermediateDirectory)/delay.c$(PreprocessSuffix): delay.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/delay.c$(PreprocessSuffix) delay.c
-
-$(IntermediateDirectory)/graphic.c$(ObjectSuffix): graphic.c $(IntermediateDirectory)/graphic.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/MOP/snake/graphic.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/graphic.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/graphic.c$(DependSuffix): graphic.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/graphic.c$(ObjectSuffix) -MF$(IntermediateDirectory)/graphic.c$(DependSuffix) -MM graphic.c
-
-$(IntermediateDirectory)/graphic.c$(PreprocessSuffix): graphic.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/graphic.c$(PreprocessSuffix) graphic.c
-
-$(IntermediateDirectory)/startup.c$(ObjectSuffix): startup.c $(IntermediateDirectory)/startup.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Maria/Documents/IT/MOP/MOP/snake/startup.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/startup.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/startup.c$(DependSuffix): startup.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/startup.c$(ObjectSuffix) -MF$(IntermediateDirectory)/startup.c$(DependSuffix) -MM startup.c
-
-$(IntermediateDirectory)/startup.c$(PreprocessSuffix): startup.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/startup.c$(PreprocessSuffix) startup.c
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

@@ -21,21 +21,22 @@ __asm volatile(
 	) ;
 }
 
+int snakeLength;
+OBJECT snakeVec[100];
+POBJECT pSnakeVec[100];
+
 void set_object_speed(POBJECT o, int speedx, int speedy){
-	o->dirx = speedx;
-	o->diry = speedy;
-	/*
-	if(o->dirx == -speedx | o->diry == -speedy)
+	if(speedx != -o->dirx)
 	{
-	
-	}else{
-		
+		o->dirx = speedx;
 	}
-	 */
+	if(speedy != -o->diry){
+		o->diry = speedy;
+	}
 }
 
 void move_object(POBJECT o){
-	clear_object(o);
+	//clear_object(o);
 	o->posx += o->dirx;
 	o->posy += o->diry;
 	
@@ -51,7 +52,7 @@ void move_object(POBJECT o){
 	if(o->posy > 64 - o->geo->sizey){
 		o->posy = 1 ;
 	}
-	draw_object(o);
+	//draw_object(o);
 }
 
 	GEOMETRY ball_geometry =
@@ -59,10 +60,10 @@ void move_object(POBJECT o){
 	12,4,4,{{0,1},{0,2},{1,0},{1,1},{1,2},{1,3},{2,0},{2,1},{2,2},{2,3},{3,1},{3,2}}
 };
 
-static OBJECT ball=
+static OBJECT snake=
 {&ball_geometry,
 0,0,
-2,2,
+6,2,
 draw_object,
 clear_object,
 move_object,
@@ -70,8 +71,8 @@ set_object_speed};
 
 static OBJECT apple=
 {&ball_geometry,
-0,0,
-7,7,
+0,4,
+10,2,
 draw_object,
 clear_object,
 move_object,
@@ -88,23 +89,27 @@ void init_app(void)
 	GPIO_D.moder= 0x55005555;
 	GPIO_D.otyper = 0x0100;
 	GPIO_D.pupdr = 0x00AA0000;
- 
 	GPIO_E.moder = 0x55555555;
-	
 }
 
 int points =0;
 char *s;
 char string[] = "Points";
 
-void collision(POBJECT p, POBJECT a)
+void collision(POBJECT pSnakeVec[], POBJECT a)
 {
+	POBJECT p = pSnakeVec[0];
 	if(p->posx +4 >= a->posx & p->posx <= a->posx + 4)
 	{
 		if(p->posy +4 >= a->posy & p->posy <= a->posy + 4)
 		{
 			clear_object(a);
 			points++;
+			POBJECT x = pSnakeVec[snakeLength-1];
+			POBJECT y = &snakeVec[snakeLength];
+			extend_snake(&snakeVec[snakeLength],pSnakeVec[snakeLength-1] );
+			pSnakeVec[snakeLength] = &snakeVec[snakeLength];
+			snakeLength++;
 			
 			char string[] = "Points:";
 			s = string;
@@ -116,18 +121,52 @@ void collision(POBJECT p, POBJECT a)
 			char pts = points + '0';
 			ascii_write_char(pts);
 			
-			a->posx = a->posx + 5;
-			a->posy = a->posy + 5;
+			a->move(a);
 		}
 	}
 }
+
+void move_snake(POBJECT o, int i){
+	//clear_object(o);
+	o->posx = pSnakeVec[i-1]->posx;
+	o->posy = pSnakeVec[i-1]->posy;
+}
+
+
+void extend_snake(POBJECT new, POBJECT tail)
+{
+	new->geo = &ball_geometry;
+	new->dirx = tail->dirx;
+	new->diry = tail->diry;
+	new->posx = tail->posx - tail->geo->sizex;
+	new->posy = tail->posy;
+	new->draw = draw_object;
+	new->clear = clear_object;
+	new->smove = move_snake;
+}
+
+
+
+OBJECT p2 = {&ball_geometry,
+	0,0,
+	2,2,
+	draw_object,
+	clear_object,
+	move_snake,
+	set_object_speed};
 
 void main(void)
 {
 	char c;
 	
-	POBJECT p = &ball;
+	POBJECT s = &snake;
+	POBJECT pp2 = &p2;
 	POBJECT a = &apple;
+	pSnakeVec[0] = s;
+	pSnakeVec[1] = pp2;
+	
+	snakeLength = 2;
+	
 	init_app();
 	graphic_initialize();
 	ascii_init();
@@ -139,19 +178,35 @@ void main(void)
 	
 	while(1)
 	{
-		p->move(p);
-		draw_object(a);
+		s->move(s);
+		draw_object(s);
 		
-		collision(p,a);
+		for(int i = snakeLength -1; i>0; i--)
+		{
+			POBJECT px = pSnakeVec[i];
+			draw_object(pSnakeVec[i]);			
+		}
+		
+		for(int i = snakeLength -1; i>= 0; i--)
+		{
+			POBJECT px = pSnakeVec[i];
+			clear_object(pSnakeVec[i]);
+			if(i!=0){
+				move_snake(pSnakeVec[i], i);
+			}
+		}
+		
+		draw_object(a);
+		collision(pSnakeVec,a);
 		
 		delay_milli(40);
 		c = keyb();
 		switch(c)
 		{
-			case 6: p->set_speed(p,2,0); break;
-			case 4: p->set_speed(p,-2,0); break;
-			case 2: p->set_speed(p,0,-2); break;
-			case 8: p->set_speed(p,0,2); break;
+			case 6: s->set_speed(s,4,0); break;
+			case 4: s->set_speed(s,-4,0); break;
+			case 2: s->set_speed(s,0,-4); break;
+			case 8: s->set_speed(s,0,4); break;
 		}
 	}
 }

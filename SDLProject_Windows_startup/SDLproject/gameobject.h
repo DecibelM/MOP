@@ -16,6 +16,8 @@ typedef struct tGameObject{
 	float       frame;
     float       frameSpeed;
     int         numFrames;
+	int age;
+	int lifeTime;
 	void (*render) (struct tGameObject* g);
 	void (*update) (struct tGameObject* g);
 }GameObject;

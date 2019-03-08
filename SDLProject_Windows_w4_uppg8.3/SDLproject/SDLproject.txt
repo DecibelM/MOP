@@ -1,0 +1,1 @@
+./Debug/shots.c.o ./Debug/collision.c.o ./Debug/dynamicalloc.c.o ./Debug/aliens.c.o ./Debug/gameobject.c.o ./Debug/main.c.o ./Debug/player.c.o ./Debug/background.c.o ./Debug/coin.c.o ./Debug/renderer.c.o ./Debug/heart.c.o   

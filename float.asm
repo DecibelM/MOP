@@ -1,0 +1,13 @@
+.SYNTAX	unified
+.CPU	cortex-m4
+.FPU	fpv4-sp-d16
+.THUMB
+
+LDR	R0,=1
+
+VMOV	S0,R0
+VCVT.F32.U32	S0,S0
+
+VCVT.U32.F32	S0,S0
+
+

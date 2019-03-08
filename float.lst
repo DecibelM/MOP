@@ -1,0 +1,23 @@
+
+float.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+20000000 <.text>:
+.SYNTAX	unified
+.CPU	cortex-m4
+.FPU	fpv4-sp-d16
+.THUMB
+
+LDR	R0,=1
+20000000:	2001      	movs	r0, #1
+
+VMOV	S0,R0
+20000002:	ee00 0a10 	vmov	s0, r0
+VCVT.F32.U32	S0,S0
+20000006:	eeb8 0a40 	vcvt.f32.u32	s0, s0
+
+VCVT.U32.F32	S0,S0
+2000000a:	eebc 0ac0 	vcvt.u32.f32	s0, s0
+	...

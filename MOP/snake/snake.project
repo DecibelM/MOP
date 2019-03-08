@@ -130,6 +130,7 @@ monitor restart</PostConnectCommands>
     </Configuration>
   </Settings>
   <VirtualDirectory Name="src">
+    <File Name="structs.c"/>
     <File Name="ascii.h"/>
     <File Name="ascii.c"/>
     <File Name="keyb.h"/>

@@ -57,7 +57,7 @@ int main( int argc, char* args[] )
 	createBackground();
 	createShip();
 	createAliens();
-	createCoins();
+	//createCoins();
 	createHearts();
 	//Keyboard input
 	state = SDL_GetKeyboardState(NULL);
@@ -106,10 +106,8 @@ int main( int argc, char* args[] )
 		
 		if( (loopIter % 100) == 99 )
             flip(strang);
-        print(strang, 300, 150);
         
-		
-        renderText("Hello World!", 300, 150);
+        //renderText("Hello World!", 300, 150);
 		char s[] = "Hej Varld!";
 		flip(s);
 		

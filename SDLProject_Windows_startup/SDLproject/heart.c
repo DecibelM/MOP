@@ -12,6 +12,16 @@ static void update(GameObject* this)
     // update position
     this->pos.x += this->moveDir.x * this->speed;
 	this->pos.y += this->moveDir.y * this->speed;
+	/*
+	this->age++;
+	
+	if(this->age == this->lifeTime)
+	{
+		
+	}
+	 * 
+	 * */
+	
 }
 
 static void init(GameObject* pObj, GfxObject* pGfx, vec2f pos, float startFrame)
@@ -31,6 +41,8 @@ static void init(GameObject* pObj, GfxObject* pGfx, vec2f pos, float startFrame)
     pObj->frame = startFrame;
     pObj->frameSpeed = 0.5f;
     pObj->numFrames = 10;
+	pObj->age = 0;
+	pObj->lifeTime = 1000;
 }
 
 void createHearts()
@@ -49,7 +61,13 @@ void createHearts()
     init(&heart[0], &gfx, (vec2f){100, 100}, 0);
     init(&heart[1], &gfx, (vec2f){200, 100}, 3);
     init(&heart[2], &gfx, (vec2f){300, 100}, 6);
+	init(&heart[3], &gfx, (vec2f){400, 100}, 0);
+    init(&heart[4], &gfx, (vec2f){500, 100}, 3);
+    init(&heart[5], &gfx, (vec2f){600, 100}, 6);
     gameObjects[nGameObjects++] = &heart[0];
     gameObjects[nGameObjects++] = &heart[1];
     gameObjects[nGameObjects++] = &heart[2];
+	gameObjects[nGameObjects++] = &heart[3];
+    gameObjects[nGameObjects++] = &heart[4];
+    gameObjects[nGameObjects++] = &heart[5];
 }
