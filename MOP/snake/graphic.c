@@ -1,6 +1,6 @@
-#include <graphic.h>
-#include <delay.h>
-#include <gpio.h>
+#include "graphic.h"
+#include "delay.h"
+#include "gpio.h"
 
 static void graphic_wait_ready(void)
 {
